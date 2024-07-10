@@ -1,0 +1,74 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "a11y": {
+        "noSvgWithoutTitle": "off"
+      },
+      "correctness": {
+        "noUnusedVariables": "error",
+        "useExhaustiveDependencies": "off"
+      },
+      "security": {
+        "noDangerouslySetInnerHtml": "off"
+      },
+      "style": {
+        "useBlockStatements": "error",
+        "noNonNullAssertion": "off"
+      },
+      "performance": {
+        "noDelete": "off"
+      },
+      "suspicious": {
+        "noExplicitAny": "warn",
+        "noConsoleLog": "warn",
+        "noArrayIndexKey": "warn"
+      },
+      "complexity": {
+        "noForEach": "off"
+      }
+    },
+    "ignore": [
+      ".vitest",
+      "node_modules",
+      ".next",
+      "dist",
+      ".wrangler",
+      ".react-email",
+      ".contentlayer",
+      "./apps/www/src/data/**",
+      "build"
+    ]
+  },
+  "formatter": {
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "enabled": true,
+    "lineWidth": 100,
+    "ignore": [
+      "node_modules",
+      ".next",
+      "dist",
+      ".wrangler",
+      ".react-email",
+      ".contentlayer",
+      "./apps/www/src/data/**",
+      "build"
+    ]
+  },
+  "organizeImports": {
+    "enabled": true,
+    "ignore": [
+      "node_modules",
+      ".next",
+      "dist",
+      ".wrangler",
+      ".react-email",
+      ".contentlayer",
+      "./apps/www/src/data/**",
+      "build"
+    ]
+  }
+}
