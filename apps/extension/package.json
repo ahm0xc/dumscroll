@@ -1,6 +1,6 @@
 {
-  "name": "extension",
-  "displayName": "extension",
+  "name": "dumscroll",
+  "displayName": "Dumscroll",
   "version": "0.0.1",
   "author": "ahm0xc",
   "description": "",
@@ -18,6 +18,7 @@
     "zip": "pnpm run build && node src/zip.js"
   },
   "dependencies": {
+    "detect-url-change": "^1.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

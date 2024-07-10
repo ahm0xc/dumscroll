@@ -25,19 +25,20 @@ export default defineManifest({
     type: 'module',
   },
   content_scripts: [
+    // {
+    //   matches: ['http://*/*', 'https://*/*'],
+    //   js: ['src/contentScript/index.ts'],
+    // },
     {
-      matches: ['http://*/*', 'https://*/*'],
-      js: ['src/contentScript/index.ts'],
+      matches: ["*://*.youtube.com/*", "*://youtu.be/*"],
+      js: ['src/contentScript/youtube.ts'],
     },
   ],
-  side_panel: {
-    default_path: 'sidepanel.html',
-  },
   web_accessible_resources: [
     {
       resources: ['img/logo-16.png', 'img/logo-34.png', 'img/logo-48.png', 'img/logo-128.png'],
       matches: [],
     },
   ],
-  permissions: ['sidePanel', 'storage'],
+  permissions: ['storage', "tabs", "webNavigation", "webRequest"],
 })

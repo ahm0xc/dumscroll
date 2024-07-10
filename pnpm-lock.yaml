@@ -20,6 +20,9 @@ importers:
 
   apps/extension:
     dependencies:
+      detect-url-change:
+        specifier: ^1.0.2
+        version: 1.0.2
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -1341,6 +1344,12 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
+  /detect-url-change@1.0.2:
+    resolution: {integrity: sha512-kw8H5SvDszrszffxBpfJ0zYQWbqNMxBuxUxz4tVwZVQMhhZmVShiXrPgEZx30H+J+iXQmmm1U39Ti2nUmIlG5g==}
+    dependencies:
+      events: 3.3.0
+    dev: false
+
   /dom-serializer@2.0.0:
     resolution: {integrity: sha512-wIkAryiqt/nV5EQKqQpo3SToSOV9J0DnbJqwK7Wv/Trc92zIAYZ4FlMu+JPFW1DfGFt81ZTCGgDEabffXeLyJg==}
     dependencies:
@@ -1510,6 +1519,11 @@ packages:
       d: 1.0.2
       es5-ext: 0.10.64
     dev: true
+
+  /events@3.3.0:
+    resolution: {integrity: sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==}
+    engines: {node: '>=0.8.x'}
+    dev: false
 
   /expand-brackets@2.1.4:
     resolution: {integrity: sha512-w/ozOKR9Obk3qoWeY/WDi6MFta9AoMR+zud60mdnbniMcBxRuFJyDt2LdX/14A1UABeqk+Uk+LDfUpvoGKppZA==}
