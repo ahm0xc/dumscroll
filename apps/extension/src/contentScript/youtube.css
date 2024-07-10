@@ -1,3 +1,8 @@
+/* remove shorts link from the sidebar */
 a[title='Shorts'] {
+    display: none !important;
+}
+/* remove shorts section */
+ytd-rich-shelf-renderer[is-shorts] {
     display: none !important;
 }
