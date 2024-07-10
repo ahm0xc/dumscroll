@@ -1,17 +1,12 @@
 {
   "name": "extension",
   "displayName": "extension",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": "ahm0xc",
   "description": "",
   "type": "module",
   "license": "MIT",
-  "keywords": [
-    "chrome-extension",
-    "react",
-    "vite",
-    "create-chrome-ext"
-  ],
+  "keywords": [],
   "engines": {
     "node": ">=14.18.0"
   },
@@ -20,7 +15,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "fmt": "prettier --write '**/*.{tsx,ts,json,css,scss,md}'",
-    "zip": "npm run build && node src/zip.js"
+    "zip": "pnpm run build && node src/zip.js"
   },
   "dependencies": {
     "react": "^18.2.0",
