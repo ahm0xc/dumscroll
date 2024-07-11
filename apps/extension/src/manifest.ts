@@ -33,6 +33,10 @@ export default defineManifest({
       matches: ["*://*.youtube.com/*", "*://youtu.be/*"],
       js: ["src/contentScript/youtube.ts"],
     },
+    {
+      matches: ["https://*.instagram.com/*"],
+      js: ["src/contentScript/instagram.ts"],
+    },
   ],
   web_accessible_resources: [
     {
