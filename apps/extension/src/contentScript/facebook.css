@@ -1,0 +1,11 @@
+li:has(a[aria-label="Video"]) {
+    display: none !important;
+}
+
+li:has(a[href="https://www.facebook.com/watch/"]) {
+    display: none !important;
+}
+
+#watch_feed > div > div:nth-child(2) {
+    display: none !important;
+}

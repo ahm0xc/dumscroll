@@ -41,6 +41,10 @@ export default defineManifest({
       matches: ["https://*.tiktok.com/*", "https://*.vt.tiktok.com/*"],
       js: ["src/contentScript/tiktok.ts"],
     },
+    {
+      matches: ["*://*.facebook.com/*"],
+      js: ["src/contentScript/facebook.ts"],
+    },
   ],
   web_accessible_resources: [
     {
