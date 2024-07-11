@@ -2,7 +2,7 @@
 // https://orm.drizzle.team/docs/sql-schema-declaration
 
 import { sql } from "drizzle-orm";
-import { index, pgTableCreator, serial, timestamp, varchar } from "drizzle-orm/pg-core";
+import { boolean, index, pgTableCreator, serial, timestamp, varchar } from "drizzle-orm/pg-core";
 
 /**
  * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same
@@ -13,10 +13,11 @@ import { index, pgTableCreator, serial, timestamp, varchar } from "drizzle-orm/p
 export const createTable = pgTableCreator((name) => `dumscroll_${name}`);
 
 export const users = createTable("user", {
-  id: serial("id").primaryKey(),
+  id: varchar("id").primaryKey().notNull(),
   name: varchar("name", { length: 256 }),
   username: varchar("username", { length: 256 }).notNull(),
   email: varchar("email", { length: 256 }).notNull(),
+  isActive: boolean("is_active").default(false),
   createdAt: timestamp("created_at", { withTimezone: true })
     .default(sql`CURRENT_TIMESTAMP`)
     .notNull(),

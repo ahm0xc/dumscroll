@@ -5,6 +5,7 @@ import type { WebhookEvent } from "@clerk/nextjs/server";
 import { env } from "~/env";
 import { db } from "~/server/db";
 import { users } from "~/server/db/schema";
+import { eq } from "drizzle-orm";
 
 export async function POST(req: Request) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the endpoint
@@ -50,6 +51,7 @@ export async function POST(req: Request) {
   // For this guide, you simply log the payload to the console
   if (evt.type === "user.created") {
     await db.insert(users).values({
+      id: evt.data.id,
       name: `${evt.data.first_name} ${evt.data.last_name}`.trim(),
       username: evt.data.username!,
       email:
@@ -58,13 +60,16 @@ export async function POST(req: Request) {
     });
   }
   if (evt.type === "user.updated") {
-    await db.insert(users).values({
-      name: `${evt.data.first_name ?? ""} ${evt.data.last_name ?? ""}`.trim(),
-      username: evt.data.username!,
-      email:
-        evt.data.email_addresses.find((x) => x.id === evt.data.primary_email_address_id)
-          ?.email_address ?? evt.data.email_addresses[0]?.email_address!,
-    });
+    await db
+      .update(users)
+      .set({
+        name: `${evt.data.first_name ?? ""} ${evt.data.last_name ?? ""}`.trim(),
+        username: evt.data.username!,
+        email:
+          evt.data.email_addresses.find((x) => x.id === evt.data.primary_email_address_id)
+            ?.email_address ?? evt.data.email_addresses[0]?.email_address!,
+      })
+      .where(eq(users.id, evt.data.id));
   }
 
   return new Response("", { status: 200 });

@@ -1,6 +1,9 @@
+import { eq } from "drizzle-orm";
 import type { NextRequest } from "next/server";
 import crypto from "node:crypto";
 import { env } from "~/env";
+import { db } from "~/server/db";
+import { users } from "~/server/db/schema";
 
 export async function POST(req: NextRequest) {
   try {
@@ -17,13 +20,16 @@ export async function POST(req: NextRequest) {
       throw new Error("Invalid signature");
     }
 
-    console.log("BODY:", body);
-
     if (eventType === "order_created") {
       const userId = body.meta.custom_data.user_id;
       const isSuccessful = body.data.attributes.status === "paid";
 
-      console.log({ userId, isSuccessful });
+      await db
+        .update(users)
+        .set({
+          isActive: isSuccessful,
+        })
+        .where(eq(users.id, userId));
     }
 
     return new Response("Webhook processed successfully", { status: 200 });
