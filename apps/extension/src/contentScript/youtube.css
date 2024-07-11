@@ -6,3 +6,7 @@ a[title='Shorts'] {
 ytd-rich-shelf-renderer[is-shorts] {
     display: none !important;
 }
+
+ytd-reel-shelf-renderer {
+    display: none !important;
+}
