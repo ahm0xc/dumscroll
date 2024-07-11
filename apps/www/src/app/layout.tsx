@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 
 import { cn } from "~/lib/utils";
 import { TRPCReactProvider } from "~/trpc/react";
+import { ThemeProvider } from "~/components/theme-provider";
 
 export const metadata: Metadata = {
   title: "Dumscroll",
@@ -16,7 +17,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" className={cn("antialiased", GeistSans.variable)}>
       <body className="antialiased font-sans" suppressHydrationWarning>
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+        <TRPCReactProvider>
+          <ThemeProvider>{children}</ThemeProvider>
+        </TRPCReactProvider>
       </body>
     </html>
   );
