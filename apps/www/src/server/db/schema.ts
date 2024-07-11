@@ -15,8 +15,8 @@ export const createTable = pgTableCreator((name) => `dumscroll_${name}`);
 export const users = createTable("user", {
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 256 }),
-  username: varchar("username", { length: 256 }).unique().notNull(),
-  email: varchar("email", { length: 256 }).unique().notNull(),
+  username: varchar("username", { length: 256 }).notNull(),
+  email: varchar("email", { length: 256 }).notNull(),
   createdAt: timestamp("created_at", { withTimezone: true })
     .default(sql`CURRENT_TIMESTAMP`)
     .notNull(),
