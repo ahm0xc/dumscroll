@@ -1,11 +1,11 @@
-import Link from "next/link";
 import type { Metadata } from "next";
+import Link from "next/link";
 
+import Logo from "~/components/logo";
 import { Button } from "~/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
-import Logo from "~/components/logo";
-import UserNav from "./user-nav";
 import Nav from "./nav";
+import UserNav from "./user-nav";
 
 export const metadata: Metadata = {
   title: "Dashboard",
