@@ -37,6 +37,10 @@ export default defineManifest({
       matches: ["https://*.instagram.com/*"],
       js: ["src/contentScript/instagram.ts"],
     },
+    {
+      matches: ["https://*.tiktok.com/*", "https://*.vt.tiktok.com/*"],
+      js: ["src/contentScript/tiktok.ts"],
+    },
   ],
   web_accessible_resources: [
     {

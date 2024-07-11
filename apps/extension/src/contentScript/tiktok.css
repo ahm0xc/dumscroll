@@ -1,0 +1,15 @@
+body {
+    overflow: hidden !important;
+}
+
+body::before {
+  content: "This app isn't available";
+  position: fixed !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inset: 0;
+  background-color: black;
+  color: white !important;
+  z-index: 9999999999999999;
+}
