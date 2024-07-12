@@ -1,13 +1,51 @@
 import React from "react";
-import useLocalStorage from "use-local-storage";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/components/ui/card";
 import { Label } from "~/components/ui/label";
 import { Switch } from "~/components/ui/switch";
 
 export default function FacebookSettingsCard() {
-  const [isFacebookWatchSuggestionRemoved, setIsFacebookWatchSuggestionRemoved] =
-    useLocalStorage<boolean>("is-fb-watch-suggestion-removed", true);
+  const [isFacebookWatchBlocked, setIsFacebookWatchBlocked] = React.useState<
+    boolean | null
+  >(
+    // "is-fb-watch-blocked",
+    null,
+  );
+
+  React.useEffect(() => {
+    if (isFacebookWatchBlocked === null) {
+      return;
+    }
+
+    chrome.runtime.sendMessage(
+      {
+        action: "setStorageValue",
+        key: "is-fb-watch-blocked",
+        value: isFacebookWatchBlocked,
+      },
+      (_res) => {
+        if (chrome.runtime.lastError) {
+          console.error(chrome.runtime.lastError.message);
+        } else {
+          // console.log("Value from extension storage:", response.value);
+          // Use the retrieved value here
+        }
+      },
+    );
+  }, [isFacebookWatchBlocked]);
+
+  React.useEffect(() => {
+    chrome.runtime.sendMessage(
+      { action: "getStorageValue", key: "is-fb-watch-blocked" },
+      (res) => {
+        if (chrome.runtime.lastError) {
+          console.error(chrome.runtime.lastError.message);
+        } else {
+          setIsFacebookWatchBlocked(res.value);
+        }
+      },
+    );
+  }, []);
 
   return (
     <Card>
@@ -25,8 +63,8 @@ export default function FacebookSettingsCard() {
           </Label>
           <Switch
             id="yt-block-shorts"
-            checked={isFacebookWatchSuggestionRemoved}
-            onCheckedChange={setIsFacebookWatchSuggestionRemoved}
+            checked={!!isFacebookWatchBlocked}
+            onCheckedChange={setIsFacebookWatchBlocked}
             aria-label="yt-block-shorts"
           />
         </div>

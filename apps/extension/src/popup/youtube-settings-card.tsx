@@ -1,5 +1,4 @@
 import React from "react";
-import useLocalStorage from "use-local-storage";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/components/ui/card";
 import { Label } from "~/components/ui/label";
