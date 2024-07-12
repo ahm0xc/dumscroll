@@ -7,6 +7,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { cn } from "~/lib/utils";
 import { TRPCReactProvider } from "~/trpc/react";
 import { ThemeProvider } from "~/components/theme-provider";
+import { Toaster } from "~/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "Dumscroll",
@@ -20,7 +21,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <html lang="en" className={cn("antialiased", GeistSans.variable)}>
         <body className="antialiased font-sans" suppressHydrationWarning>
           <TRPCReactProvider>
-            <ThemeProvider>{children}</ThemeProvider>
+            <ThemeProvider>
+              {children}
+              <Toaster richColors position="top-right" />
+            </ThemeProvider>
           </TRPCReactProvider>
         </body>
       </html>
