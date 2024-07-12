@@ -1,3 +1,15 @@
+chrome.runtime.onInstalled.addListener((details) => {
+  if (details.reason === "install") {
+    const defaultStorage = {
+      "s-tiktok-blocked": true,
+      "is-ig-reels-blocked": true,
+      "is-fb-watch-blocked": true,
+      "is-yt-shorts-blocked": true
+    };
+    chrome.storage.local.set(defaultStorage);
+  }
+});
+
 chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
   if (request.action === "getStorageValue") {
     chrome.storage.local.get(request.key, (items) => {
@@ -15,27 +27,3 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
     return true; // Asynchronous response
   }
 });
-
-chrome.tabs.onUpdated.addListener((tabId, changeInfo, _tab) => {
-  if (changeInfo.url) {
-    handleChange(changeInfo.url, tabId);
-  }
-});
-
-chrome.webNavigation.onHistoryStateUpdated.addListener((details) => {
-  handleChange(details.url, details.tabId);
-});
-
-function handleChange(url: string, tabId: number) {
-  console.log({ url, tabId });
-}
-
-chrome.webRequest.onBeforeRequest.addListener(
-  (details) => {
-    if (details.url.includes("/shorts/")) {
-      return { redirectUrl: details.url.replace("/shorts/", "/watch?v=") };
-    }
-  },
-  { urls: ["https://*.youtube.com/*"] },
-  // ['blocking']
-);
