@@ -6,10 +6,41 @@ import { Label } from "~/components/ui/label";
 import { Switch } from "~/components/ui/switch";
 
 export default function YoutubeSettingsCard() {
-  const [isYoutubeShortsBlocked, setIsYoutubeShortsBlocked] = useLocalStorage<boolean>(
-    "is-yt-shorts-blocked",
-    true,
+  const [isYoutubeShortsBlocked, setIsYoutubeShortsBlocked] = React.useState<boolean | null>(
+    // "is-yt-shorts-blocked",
+    null,
   );
+
+  React.useEffect(() => {
+    if (isYoutubeShortsBlocked === null) {
+      return;
+    }
+    
+    chrome.runtime.sendMessage(
+      { action: "setStorageValue", key: "is-yt-shorts-blocked", value: isYoutubeShortsBlocked },
+      (_res) => {
+        if (chrome.runtime.lastError) {
+          console.error(chrome.runtime.lastError.message);
+        } else {
+          // console.log("Value from extension storage:", response.value);
+          // Use the retrieved value here
+        }
+      },
+    );
+  }, [isYoutubeShortsBlocked]);
+
+  React.useEffect(() => {
+    chrome.runtime.sendMessage(
+      { action: "getStorageValue", key: "is-yt-shorts-blocked" },
+      (res) => {
+        if (chrome.runtime.lastError) {
+          console.error(chrome.runtime.lastError.message);
+        } else {
+          setIsYoutubeShortsBlocked(res.value);
+        }
+      },
+    );
+  }, []);
 
   return (
     <Card>
@@ -28,7 +59,7 @@ export default function YoutubeSettingsCard() {
           </Label>
           <Switch
             id="yt-block-shorts"
-            checked={isYoutubeShortsBlocked}
+            checked={!!isYoutubeShortsBlocked}
             onCheckedChange={setIsYoutubeShortsBlocked}
             aria-label="yt-block-shorts"
           />

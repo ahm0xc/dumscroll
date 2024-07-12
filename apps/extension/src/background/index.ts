@@ -1,10 +1,20 @@
-// console.log('background is running')
+chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
+  if (request.action === "getStorageValue") {
+    chrome.storage.local.get(request.key, (items) => {
+      sendResponse({ value: items[request.key] });
+    });
+    return true; // Asynchronous response
+  }
+});
 
-// chrome.runtime.onMessage.addListener((request) => {
-//   if (request.type === 'COUNT') {
-//     console.log('background has received a message from popup, and count is ', request?.count)
-//   }
-// })
+chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
+  if (request.action === "setStorageValue") {
+    chrome.storage.local.set({ [request.key]: request.value }, () => {
+      sendResponse({});
+    });
+    return true; // Asynchronous response
+  }
+});
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, _tab) => {
   if (changeInfo.url) {
