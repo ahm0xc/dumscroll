@@ -7,6 +7,7 @@ import Nav from "./nav";
 import UserNav from "./user-nav";
 import ThemeToggle from "./theme-toggle";
 import UsesChart from "./uses-chart";
+import Overview from "./overview";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -41,7 +42,7 @@ export default function DashboardPage() {
               <TabsTrigger value="reports">Reports</TabsTrigger>
             </TabsList>
             <TabsContent value="overview" className="space-y-4">
-              <div>Overview</div>
+              <Overview />
             </TabsContent>
             <TabsContent value="analytics" className="space-y-4">
               <div>
