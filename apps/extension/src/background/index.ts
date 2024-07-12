@@ -1,15 +1,23 @@
+import "./track-time"
+
+// ****************************************************************
+// *********************** INSTALLATION ********************************
+// ****************************************************************
 chrome.runtime.onInstalled.addListener((details) => {
   if (details.reason === "install") {
     const defaultStorage = {
       "s-tiktok-blocked": true,
       "is-ig-reels-blocked": true,
       "is-fb-watch-blocked": true,
-      "is-yt-shorts-blocked": true
+      "is-yt-shorts-blocked": true,
     };
     chrome.storage.local.set(defaultStorage);
   }
 });
 
+// ****************************************************************
+// ******************** LOCAL STORAGE *****************************
+// ****************************************************************
 chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
   if (request.action === "getStorageValue") {
     chrome.storage.local.get(request.key, (items) => {

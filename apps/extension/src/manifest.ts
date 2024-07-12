@@ -52,5 +52,5 @@ export default defineManifest({
       matches: [],
     },
   ],
-  permissions: ["storage", "tabs", "webNavigation", "webRequest"],
+  permissions: ["storage", "tabs", "webNavigation", "webRequest", "activeTab"],
 });

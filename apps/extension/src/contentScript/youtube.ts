@@ -1,4 +1,5 @@
 import detectUrlChange from "detect-url-change";
+import { trackTime } from "./track-time";
 
 function main() {
   chrome.runtime.sendMessage(
@@ -18,6 +19,7 @@ function main() {
 }
 
 main();
+trackTime()
 
 function blockYoutubeShorts() {
   const style = document.createElement("style");
