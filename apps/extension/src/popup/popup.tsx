@@ -1,5 +1,9 @@
-import React from "react";
+import * as React from "react";
+
+import { Button } from "~/components/ui/button";
 
 export default function Popup() {
-  return <main className="w-[400px] p-6">Popup</main>;
+  return <main className="w-[400px] p-6">
+    <Button>Test</Button>
+  </main>;
 }
