@@ -3,13 +3,16 @@ import React from "react";
 import GithubCard from "./github-card";
 import SevenDaysAnalyticsCard from "./seven-days-analytics-card";
 import TimeSaved from "./time-saved";
+import DailyStats from "./daily-stats";
 
 export default function Overview() {
   return (
     <div className="h-screen">
       <div className="grid grid-cols-8 gap-4 grid-rows-8 w-full h-full">
-        <div className="col-span-2 row-span-3 bg-indigo-300 w-full h-full rounded-2xl max-w-full max-h-full border">
-          j
+        <div className="col-span-2 row-span-3 w-full h-full rounded-2xl max-w-full max-h-full border">
+          <React.Suspense>
+            <DailyStats />
+          </React.Suspense>
         </div>
         <div className="col-span-4 row-span-3 w-full h-full rounded-2xl max-w-full max-h-full border">
           <SevenDaysAnalyticsCard />

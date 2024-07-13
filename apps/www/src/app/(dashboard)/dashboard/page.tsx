@@ -1,8 +1,11 @@
+import React from 'react'
 import type { Metadata } from "next";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import Overview from "./overview";
 import UsesChart from "./uses-chart";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Dashboard",
