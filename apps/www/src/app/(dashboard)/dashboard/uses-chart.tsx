@@ -199,7 +199,8 @@ export default function UsesChart() {
               cursor={false}
               content={
                 <ChartTooltipContent
-                  labelFormatter={(value: any) => {
+                  // @ts-ignore
+                  labelFormatter={(value) => {
                     return new Date(value).toLocaleDateString("en-US", {
                       month: "short",
                       day: "numeric",

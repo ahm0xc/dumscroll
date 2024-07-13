@@ -21,17 +21,17 @@ export async function POST(req: NextRequest) {
     }
 
     if (eventType === "order_created") {
-      const userId = body.meta.custom_data.user_id;
-      const isSuccessful = body.data.attributes.status === "paid";
+      // const userId = body.meta.custom_data.user_id;
+      // const isSuccessful = body.data.attributes.status === "paid";
 
-      console.log(JSON.stringify(body, undefined, 2));
+      console.info(JSON.stringify(body, undefined, 2));
 
-      await db
-        .update(users)
-        .set({
-          isActive: isSuccessful,
-        })
-        .where(eq(users.id, userId));
+      // await db
+      //   .update(users)
+      //   .set({
+      //     isActive: isSuccessful,
+      //   })
+      //   .where(eq(users.id, userId));
     }
 
     return new Response("Webhook processed successfully", { status: 200 });
