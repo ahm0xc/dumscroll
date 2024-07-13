@@ -2,7 +2,7 @@
 // https://orm.drizzle.team/docs/sql-schema-declaration
 
 import { sql } from "drizzle-orm";
-import { pgTableCreator, timestamp, varchar } from "drizzle-orm/pg-core";
+import { index, pgTableCreator, timestamp, varchar } from "drizzle-orm/pg-core";
 import { v4 as uuid } from "uuid";
 
 /**
@@ -13,14 +13,22 @@ import { v4 as uuid } from "uuid";
  */
 export const createTable = pgTableCreator((name) => `dumscroll_${name}`);
 
-export const users = createTable("user", {
-  id: varchar("id").primaryKey().notNull(),
-  email: varchar("email", { length: 256 }).notNull(),
-  customerId: varchar("customer_id", { length: 256 })
-    .notNull()
-    .$defaultFn(() => uuid()),
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .default(sql`CURRENT_TIMESTAMP`)
-    .notNull(),
-  updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(() => new Date()),
-});
+export const users = createTable(
+  "user",
+  {
+    id: varchar("id").primaryKey().notNull(),
+    email: varchar("email", { length: 256 }).notNull(),
+    customerId: varchar("customer_id", { length: 256 })
+      .notNull()
+      .$defaultFn(() => uuid()),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(() => new Date()),
+  },
+  (table) => {
+    return {
+      customerIdIdx: index("customer_id_idx").on(table.customerId),
+    };
+  },
+);
