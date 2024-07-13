@@ -6,6 +6,7 @@ import { ChromeIcon, CopyIcon } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "~/components/ui/button";
+import Link from "next/link";
 
 interface Props {
   customerId: string;
@@ -92,7 +93,15 @@ export default function GetStarted({ customerId }: Props) {
             </span>
             <div className="ml-2">
               <h3 className="font-medium leading-tight text-foreground">Get going.</h3>
-              <p className="text-sm">Enjoy the extension 🎉</p>
+              <p className="text-sm">
+                Enjoy the extension 🎉. You can view analytics of you daily social media uses on
+                Dashboard.
+              </p>
+              <div className="mt-4">
+                <Button asChild>
+                  <Link href="/dashboard">View Dashboard</Link>
+                </Button>
+              </div>
             </div>
           </li>
         </ol>
