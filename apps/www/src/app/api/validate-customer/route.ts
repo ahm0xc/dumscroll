@@ -29,5 +29,5 @@ export async function POST(req: NextRequest) {
     });
   }
 
-  return new Response(JSON.stringify({ customerId: user.customerId }), { status: 201 });
+  return new Response(JSON.stringify({ customerId: user.customerId, email: user.email }), { status: 201 });
 }

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React from "react";
 
@@ -13,7 +13,7 @@ interface Props {
 
 export default function GetStarted({ customerId }: Props) {
   function copyKey() {
-    window.navigator.clipboard.writeText("hello world!");
+    window.navigator.clipboard.writeText(customerId);
     toast.success("Copied!");
   }
   return (
