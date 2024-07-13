@@ -8,18 +8,33 @@ export function trackTime() {
       return;
     }
 
-    timeSpent += 1;
-  }, 1000);
+    if (timeSpent === 10) {
+      updateTracking({ timeSpent });
+      timeSpent = 0;
+    }
 
-  setInterval(
-    () => {
-      console.info(chalk.bgBlueBright("Time spent"), `${(timeSpent / 60).toFixed(1)} minutes`);
+    timeSpent += 1;
+    console.info("🚀 ~ setInterval ~ timeSpent:", timeSpent);
+  }, 1000);
+}
+
+function updateTracking({ timeSpent }: { timeSpent: number }) {
+  chrome.runtime.sendMessage({ action: "getStorageValue", key: "customer-id" }, (res) => {
+    if (chrome.runtime.lastError) {
+      console.error(chrome.runtime.lastError.message);
+    } else {
+      const customerId = res.value;
+
+      if (!customerId) {
+        return;
+      }
+
       chrome.runtime.sendMessage({
         action: "trackTime",
         timeSpent,
-        domain: window.location.hostname,
+        platform: "youtube",
+        customerId,
       });
-    },
-    60_000, // run every minute
-  );
+    }
+  });
 }

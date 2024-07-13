@@ -1,8 +1,8 @@
 // Example model schema from the Drizzle docs
 // https://orm.drizzle.team/docs/sql-schema-declaration
 
-import { sql } from "drizzle-orm";
-import { index, pgTableCreator, timestamp, varchar } from "drizzle-orm/pg-core";
+import { relations, sql } from "drizzle-orm";
+import { index, integer, pgTableCreator, text, timestamp, varchar } from "drizzle-orm/pg-core";
 import { v4 as uuid } from "uuid";
 
 /**
@@ -32,3 +32,26 @@ export const users = createTable(
     };
   },
 );
+
+export const usersRelations = relations(users, ({ many }) => ({
+  tracks: many(tracks),
+}));
+
+export const tracks = createTable("tracks", {
+  id: varchar("id").primaryKey().notNull(), // this will be the date like YYYY-MM-DD e.g. 2024-11-25
+  userId: varchar("user_id").notNull(),
+  youtubeDuration: integer("youtube_duration").default(0), // in seconds
+  facebookDuration: integer("facebook_duration").default(0),
+  instagramDuration: integer("instagram_duration").default(0),
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(() => new Date()),
+});
+
+export const tracksRelations = relations(tracks, ({ one }) => ({
+  user: one(users, {
+    fields: [tracks.userId],
+    references: [users.id],
+  }),
+}));
