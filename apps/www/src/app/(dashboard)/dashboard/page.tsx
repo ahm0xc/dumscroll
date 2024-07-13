@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
-import UsesChart from "./uses-chart";
 import Overview from "./overview";
+import UsesChart from "./uses-chart";
 
 export const metadata: Metadata = {
   title: "Dashboard",

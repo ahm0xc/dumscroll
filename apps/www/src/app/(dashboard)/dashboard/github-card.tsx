@@ -24,7 +24,7 @@ export default async function GithubCard() {
   const owner = "ahm0xc";
   const repo = "dumscroll";
 
-  const data = await fetch(`https://api.github.com/repos/${owner}/${repo}`).then(r => r.json());
+  const data = await fetch(`https://api.github.com/repos/${owner}/${repo}`).then((r) => r.json());
 
   return (
     <Card className="border-none rounded-[inherit] h-full flex flex-col">

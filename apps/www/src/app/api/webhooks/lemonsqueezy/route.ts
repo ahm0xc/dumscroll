@@ -1,6 +1,6 @@
+import crypto from "node:crypto";
 import { eq } from "drizzle-orm";
 import type { NextRequest } from "next/server";
-import crypto from "node:crypto";
 import { env } from "~/env";
 import { db } from "~/server/db";
 import { users } from "~/server/db/schema";

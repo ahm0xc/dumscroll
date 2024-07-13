@@ -1,6 +1,6 @@
 import { lemonSqueezyConfig } from "~/config/lemon-squeezy";
-import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { lemonSqueezyApiInstance } from "~/lib/axios/lemon-squeezy";
+import { createTRPCRouter, protectedProcedure } from "../trpc";
 
 export const lemonSqueezyRouter = createTRPCRouter({
   getLifetimeCheckoutSession: protectedProcedure.query(async ({ ctx }) => {

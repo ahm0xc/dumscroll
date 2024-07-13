@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react";
 
 import { Button } from "~/components/ui/button";
 
 export default function SettingsFooter() {
-    const [userEmail, setUserEmail] = React.useState<string>("")
+  const [userEmail, setUserEmail] = React.useState<string>("");
   function logout() {
     chrome.runtime.sendMessage({ action: "setStorageValue", key: "customer-id", value: "" });
     window.location.reload();
@@ -17,7 +17,7 @@ export default function SettingsFooter() {
         setUserEmail(res.value);
       }
     });
-  }, [])
+  }, []);
   return (
     <footer className="flex items-center pt-3 border-t justify-between">
       <div>

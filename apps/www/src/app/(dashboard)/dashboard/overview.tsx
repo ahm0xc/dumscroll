@@ -1,8 +1,8 @@
 import React from "react";
 
-import TimeSaved from "./time-saved";
-import SevenDaysAnalyticsCard from "./seven-days-analytics-card";
 import GithubCard from "./github-card";
+import SevenDaysAnalyticsCard from "./seven-days-analytics-card";
+import TimeSaved from "./time-saved";
 
 export default function Overview() {
   return (

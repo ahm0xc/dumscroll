@@ -5,9 +5,7 @@ import { Label } from "~/components/ui/label";
 import { Switch } from "~/components/ui/switch";
 
 export default function FacebookSettingsCard() {
-  const [isFacebookWatchBlocked, setIsFacebookWatchBlocked] = React.useState<
-    boolean | null
-  >(
+  const [isFacebookWatchBlocked, setIsFacebookWatchBlocked] = React.useState<boolean | null>(
     // "is-fb-watch-blocked",
     null,
   );
@@ -35,16 +33,13 @@ export default function FacebookSettingsCard() {
   }, [isFacebookWatchBlocked]);
 
   React.useEffect(() => {
-    chrome.runtime.sendMessage(
-      { action: "getStorageValue", key: "is-fb-watch-blocked" },
-      (res) => {
-        if (chrome.runtime.lastError) {
-          console.error(chrome.runtime.lastError.message);
-        } else {
-          setIsFacebookWatchBlocked(res.value);
-        }
-      },
-    );
+    chrome.runtime.sendMessage({ action: "getStorageValue", key: "is-fb-watch-blocked" }, (res) => {
+      if (chrome.runtime.lastError) {
+        console.error(chrome.runtime.lastError.message);
+      } else {
+        setIsFacebookWatchBlocked(res.value);
+      }
+    });
   }, []);
 
   return (

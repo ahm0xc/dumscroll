@@ -1,5 +1,5 @@
-import type * as React from "react";
 import Link from "next/link";
+import type * as React from "react";
 import Logo from "~/components/logo";
 import Nav from "./dashboard/nav";
 import ThemeToggle from "./dashboard/theme-toggle";

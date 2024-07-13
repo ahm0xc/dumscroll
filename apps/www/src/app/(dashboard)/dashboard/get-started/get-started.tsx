@@ -5,8 +5,8 @@ import React from "react";
 import { ChromeIcon, CopyIcon } from "lucide-react";
 import { toast } from "sonner";
 
-import { Button } from "~/components/ui/button";
 import Link from "next/link";
+import { Button } from "~/components/ui/button";
 
 interface Props {
   customerId: string;

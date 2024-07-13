@@ -14,7 +14,7 @@ export default function YoutubeSettingsCard() {
     if (isYoutubeShortsBlocked === null) {
       return;
     }
-    
+
     chrome.runtime.sendMessage(
       { action: "setStorageValue", key: "is-yt-shorts-blocked", value: isYoutubeShortsBlocked },
       (_res) => {

@@ -1,8 +1,8 @@
-import YoutubeSettingsCard from "./youtube-settings-card";
 import FacebookSettingsCard from "./facebook-settings-card";
 import InstagramSettingsCard from "./instagram-settings-card";
-import TiktokSettingsCard from "./tiktok-settings-card";
 import SettingsFooter from "./settings-footer";
+import TiktokSettingsCard from "./tiktok-settings-card";
+import YoutubeSettingsCard from "./youtube-settings-card";
 
 export default function Settings() {
   return (
