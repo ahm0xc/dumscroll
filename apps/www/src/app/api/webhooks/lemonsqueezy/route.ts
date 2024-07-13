@@ -24,6 +24,8 @@ export async function POST(req: NextRequest) {
       const userId = body.meta.custom_data.user_id;
       const isSuccessful = body.data.attributes.status === "paid";
 
+      console.log(JSON.stringify(body, undefined, 2));
+
       await db
         .update(users)
         .set({

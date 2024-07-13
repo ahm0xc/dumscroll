@@ -47,30 +47,21 @@ export async function POST(req: Request) {
     });
   }
 
-  // Do something with the payload
-  // For this guide, you simply log the payload to the console
-  if (evt.type === "user.created") {
-    await db.insert(users).values({
-      id: evt.data.id,
-      name: `${evt.data.first_name} ${evt.data.last_name}`.trim(),
-      username: evt.data.username!,
-      email:
+  try {
+    if (evt.type === "user.created") {
+      const emailAddress =
         evt.data.email_addresses.find((x) => x.id === evt.data.primary_email_address_id)
-          ?.email_address ?? evt.data.email_addresses[0]?.email_address!,
-    });
-  }
-  if (evt.type === "user.updated") {
-    await db
-      .update(users)
-      .set({
-        name: `${evt.data.first_name ?? ""} ${evt.data.last_name ?? ""}`.trim(),
-        username: evt.data.username!,
-        email:
-          evt.data.email_addresses.find((x) => x.id === evt.data.primary_email_address_id)
-            ?.email_address ?? evt.data.email_addresses[0]?.email_address!,
-      })
-      .where(eq(users.id, evt.data.id));
-  }
+          ?.email_address ?? evt.data.email_addresses[0]?.email_address!;
 
-  return new Response("", { status: 200 });
+      await db.insert(users).values({
+        id: evt.data.id,
+        email: emailAddress,
+      });
+    }
+
+    return new Response(`USER/CREATED:${evt.data.id}`, { status: 200 });
+  } catch (error) {
+    console.error("Error creating user in the database:", error);
+    return new Response("Internal server error", { status: 500 });
+  }
 }
