@@ -38,7 +38,7 @@ export const usersRelations = relations(users, ({ many }) => ({
 }));
 
 export const tracks = createTable("tracks", {
-  id: varchar("id").primaryKey().notNull(), // this will be the date like YYYY-MM-DD e.g. 2024-11-25
+  id: varchar("id").primaryKey().notNull(), // this will be the date like YYYY-MM-DD followed by their userID e.g. 2024-11-25#user_789asf98sf
   userId: varchar("user_id").notNull(),
   youtubeDuration: integer("youtube_duration").default(0), // in seconds
   facebookDuration: integer("facebook_duration").default(0),
