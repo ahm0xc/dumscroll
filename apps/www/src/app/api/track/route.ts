@@ -23,9 +23,6 @@ export async function POST(req: NextRequest) {
 
   const parsedBody = parsedResult.data;
 
-  const dateNow = new Date();
-  const dateID = `${dateNow.getFullYear()}-${dateNow.getMonth().toString().padStart(2, "0")}-${dateNow.getDate().toString().padStart(2, "0")}`;
-
   try {
     const user = await db.query.users.findFirst({
       where: (users, { eq }) => eq(users.customerId, parsedBody.customerId),
@@ -37,12 +34,15 @@ export async function POST(req: NextRequest) {
       });
     }
 
+    const dateNow = new Date();
+    const genID = `${dateNow.getFullYear()}-${dateNow.getMonth().toString().padStart(2, "0")}-${dateNow.getDate().toString().padStart(2, "0")}#${user.id}`;
+
     switch (parsedBody.platform.toLowerCase()) {
       case "youtube":
         await db
           .insert(tracks)
           .values({
-            id: dateID,
+            id: genID,
             userId: user.id,
             youtubeDuration: parsedBody.duration,
           })
@@ -57,7 +57,7 @@ export async function POST(req: NextRequest) {
         await db
           .insert(tracks)
           .values({
-            id: dateID,
+            id: genID,
             userId: user.id,
             facebookDuration: parsedBody.duration,
           })
@@ -72,7 +72,7 @@ export async function POST(req: NextRequest) {
         await db
           .insert(tracks)
           .values({
-            id: dateID,
+            id: genID,
             userId: user.id,
             instagramDuration: parsedBody.duration,
           })
@@ -88,7 +88,9 @@ export async function POST(req: NextRequest) {
         break;
     }
 
-    return new Response(JSON.stringify(parsedBody), { status: 201 });
+    return new Response(JSON.stringify({ userId: user.id, customerId: parsedBody.customerId }), {
+      status: 201,
+    });
   } catch (error) {
     console.error("Error processing request:", error);
     return new Response(JSON.stringify(error), { status: 500 });
