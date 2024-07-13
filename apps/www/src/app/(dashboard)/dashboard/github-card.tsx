@@ -1,7 +1,7 @@
 import { CircleIcon, StarIcon } from "@radix-ui/react-icons";
 import axios from "axios";
 
-import { Button, buttonVariants } from "~/components/ui/button";
+import { buttonVariants } from "~/components/ui/button";
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "~/components/ui/card";
 import { cn, formatNumber } from "~/lib/utils";
 
@@ -24,7 +24,7 @@ export default async function GithubCard() {
   const owner = "ahm0xc";
   const repo = "dumscroll";
 
-  const { data } = await axios.get(`https://api.github.com/repos/${owner}/${repo}`);
+  const data = await fetch(`https://api.github.com/repos/${owner}/${repo}`).then(r => r.json());
 
   return (
     <Card className="border-none rounded-[inherit] h-full flex flex-col">
