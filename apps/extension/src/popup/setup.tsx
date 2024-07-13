@@ -13,7 +13,7 @@ export default function Setup() {
 
     try {
       setIsLoading(true);
-      const { data } = await axios.post("http://localhost:3000/api/validate-customer", {
+      const { data } = await axios.post("https://dumscroll.vercel.app/api/validate-customer", {
         customerId: inputValue.trim(),
       });
       if (data.customerId) {
