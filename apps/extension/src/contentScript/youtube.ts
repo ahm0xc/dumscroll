@@ -19,7 +19,7 @@ function main() {
 }
 
 main();
-trackTime()
+trackTime({ platform: "youtube" });
 
 function blockYoutubeShorts() {
   const style = document.createElement("style");

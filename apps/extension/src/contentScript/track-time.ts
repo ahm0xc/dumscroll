@@ -1,6 +1,6 @@
 import chalk from "chalk";
 
-export function trackTime() {
+export function trackTime({ platform }: { platform: string }) {
   let timeSpent = 0;
 
   setInterval(() => {
@@ -8,17 +8,16 @@ export function trackTime() {
       return;
     }
 
-    if (timeSpent === 10) {
-      updateTracking({ timeSpent });
+    if (timeSpent === 60) {
+      updateTracking({ timeSpent, platform });
       timeSpent = 0;
     }
 
     timeSpent += 1;
-    console.info("🚀 ~ setInterval ~ timeSpent:", timeSpent);
   }, 1000);
 }
 
-function updateTracking({ timeSpent }: { timeSpent: number }) {
+function updateTracking({ timeSpent, platform }: { timeSpent: number; platform: string }) {
   chrome.runtime.sendMessage({ action: "getStorageValue", key: "customer-id" }, (res) => {
     if (chrome.runtime.lastError) {
       console.error(chrome.runtime.lastError.message);
@@ -32,7 +31,7 @@ function updateTracking({ timeSpent }: { timeSpent: number }) {
       chrome.runtime.sendMessage({
         action: "trackTime",
         timeSpent,
-        platform: "youtube",
+        platform,
         customerId,
       });
     }

@@ -1,4 +1,5 @@
 import detectUrlChange from "detect-url-change";
+import { trackTime } from "./track-time";
 
 // import "./facebook.css";
 
@@ -19,6 +20,7 @@ function main() {
   );
 }
 main();
+trackTime({ platform: "facebook" });
 
 function removeFBWatch() {
   const style = document.createElement("style");

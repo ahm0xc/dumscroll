@@ -1,5 +1,3 @@
-import axios from "axios";
-
 chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
   if (request.action === "trackTime") {
     const timeSpent = request.timeSpent as number;
@@ -11,7 +9,7 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
     //   return true;
     // }
 
-    fetch("http://localhost:3000/api/track", {
+    fetch("https://dumscroll.vercel.app/api/track", {
       method: "POST",
       body: JSON.stringify({
         platform,

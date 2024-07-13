@@ -1,23 +1,22 @@
 import detectUrlChange from "detect-url-change";
+import { trackTime } from "./track-time";
 
 function main() {
-  chrome.runtime.sendMessage(
-    { action: "getStorageValue", key: "is-ig-reels-blocked" },
-    (res) => {
-      if (chrome.runtime.lastError) {
-        console.error(chrome.runtime.lastError.message);
-      } else {
-        const isIGReelsBlocked = res.value;
+  chrome.runtime.sendMessage({ action: "getStorageValue", key: "is-ig-reels-blocked" }, (res) => {
+    if (chrome.runtime.lastError) {
+      console.error(chrome.runtime.lastError.message);
+    } else {
+      const isIGReelsBlocked = res.value;
 
-        if (isIGReelsBlocked) {
-          removeIGReels();
-        }
+      if (isIGReelsBlocked) {
+        removeIGReels();
       }
-    },
-  );
+    }
+  });
 }
 
 main();
+trackTime({ platform: "instagram" });
 
 function removeIGReels() {
   const style = document.createElement("style");
