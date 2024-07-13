@@ -23,7 +23,7 @@ interface Props {
 
 export default function DailyStatsChart({ chartData }: Props) {
   return (
-    <ChartContainer config={chartConfig}>
+    <ChartContainer config={chartConfig} className="aspect-auto h-[145px] w-full">
       <BarChart
         accessibilityLayer
         data={chartData}
