@@ -32,7 +32,8 @@ const months = [
 export default async function DailyStats() {
   const { userId } = auth();
   const today = dayjs();
-  const genID = `${today.get("year").toString().padStart(4, "0")}-${(today.get("month") + 1).toString().padStart(2, "0")}-${today.get("date").toString().padStart(2, "0")}#${userId}`;
+  const date = `${today.get("year")}-${(today.get("month") + 1).toString().padStart(2, "0")}-${today.get("date").toString().padStart(2, "0")}`;
+  const genID = `${date}#${userId}`;
 
   const data = await db.query.tracks.findFirst({
     where: (tracks, { eq }) => eq(tracks.id, genID),
