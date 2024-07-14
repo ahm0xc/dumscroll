@@ -34,11 +34,17 @@ function removeFBWatch() {
     #watch_feed > div > div:nth-child(2) {
         display: none !important;
     }
-  `;
+    div.x78zum5.x1n2onr6.xh8yej3:has(div > div > div > div[aria-label='Reels']) {
+        display: none !important;
+    }
+`;
   document.head.appendChild(style);
 
   detectUrlChange.on("change", (newUrl) => {
     if (newUrl.includes("/watch")) {
+      window.location.replace("https://facebook.com");
+    }
+    if (newUrl.includes("reel")) {
       window.location.replace("https://facebook.com");
     }
   });
