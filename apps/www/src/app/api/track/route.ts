@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
     }
 
     const dateNow = new Date();
-    const genID = `${dateNow.getFullYear()}-${dateNow.getMonth().toString().padStart(2, "0")}-${dateNow.getDate().toString().padStart(2, "0")}#${user.id}`;
+    const genID = `${dateNow.getFullYear()}-${(dateNow.getMonth() + 1).toString().padStart(2, "0")}-${dateNow.getDate().toString().padStart(2, "0")}#${user.id}`;
 
     switch (parsedBody.platform.toLowerCase()) {
       case "youtube":

@@ -1,9 +1,8 @@
-import React from 'react'
 import type { Metadata } from "next";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import Overview from "./overview";
-import UsesChart from "./uses-chart";
+import Uses from "./uses";
 
 export const revalidate = 60;
 
@@ -24,18 +23,14 @@ export default function DashboardPage() {
             <TabsList>
               <TabsTrigger value="overview">Overview</TabsTrigger>
               <TabsTrigger value="analytics">Uses</TabsTrigger>
-              <TabsTrigger value="reports">Reports</TabsTrigger>
             </TabsList>
             <TabsContent value="overview" className="space-y-4">
               <Overview />
             </TabsContent>
             <TabsContent value="analytics" className="space-y-4">
               <div>
-                <UsesChart />
+                <Uses />
               </div>
-            </TabsContent>
-            <TabsContent value="reports" className="space-y-4">
-              reports
             </TabsContent>
           </Tabs>
         </div>
