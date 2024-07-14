@@ -32,7 +32,7 @@ const months = [
 export default async function DailyStats() {
   const { userId } = auth();
   const today = dayjs();
-  const genID = `${today.get("year")}-${(today.get("month") + 1).toString().padStart(2, "0")}-${today.get("date").toString().padStart(2, "0")}#${userId}`;
+  const genID = `${today.get("year").toString().padStart(4, "0")}-${(today.get("month") + 1).toString().padStart(2, "0")}-${today.get("date").toString().padStart(2, "0")}#${userId}`;
 
   const data = await db.query.tracks.findFirst({
     where: (tracks, { eq }) => eq(tracks.id, genID),
@@ -41,15 +41,15 @@ export default async function DailyStats() {
   const chartData = [
     {
       platform: "Youtube",
-      duration: Number.parseFloat(((data?.youtubeDuration ?? 0) / (60 * 60)).toFixed(1)),
+      duration: Number.parseFloat(((data?.youtubeDuration ?? 0) / (60 * 60)).toFixed(2)),
     },
     {
       platform: "Facebook",
-      duration: Number.parseFloat(((data?.facebookDuration ?? 0) / (60 * 60)).toFixed(1)),
+      duration: Number.parseFloat(((data?.facebookDuration ?? 0) / (60 * 60)).toFixed(2)),
     },
     {
       platform: "Instagram",
-      duration: Number.parseFloat(((data?.instagramDuration ?? 0) / (60 * 60)).toFixed(1)),
+      duration: Number.parseFloat(((data?.instagramDuration ?? 0) / (60 * 60)).toFixed(2)),
     },
   ];
 

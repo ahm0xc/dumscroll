@@ -46,13 +46,17 @@ interface UsesChartProps {
 export default function UsesChart({ chartData }: UsesChartProps) {
   const [timeRange, setTimeRange] = React.useState("30");
 
-  const filteredData = chartData.filter((item) => {
-    const today = dayjs();
-    const ranged = today.subtract(Number.parseInt(timeRange), "day");
+  const filteredData = chartData
+    .filter((item) => {
+      const today = dayjs();
+      const ranged = today.subtract(Number.parseInt(timeRange), "day");
 
-    const itemDate = dayjs(item.date);
-    return itemDate.isAfter(ranged);
-  });
+      const itemDate = dayjs(item.date);
+      return itemDate.isAfter(ranged);
+    })
+    .sort((a, b) => {
+      return dayjs(a.date).isAfter(dayjs(b.date)) ? 1 : -1;
+    });
 
   return (
     <Card>
