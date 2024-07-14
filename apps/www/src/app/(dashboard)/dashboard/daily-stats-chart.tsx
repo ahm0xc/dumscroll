@@ -12,7 +12,7 @@ import {
 
 const chartConfig = {
   duration: {
-    label: "Time (m)",
+    label: "Time (h)",
     color: "hsl(var(--chart-2))",
   },
 } satisfies ChartConfig;

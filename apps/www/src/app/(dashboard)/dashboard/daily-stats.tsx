@@ -12,6 +12,7 @@ import {
 
 import DailyStatsChart from "./daily-stats-chart";
 import { db } from "~/server/db";
+import dayjs from "dayjs";
 
 const months = [
   "January",
@@ -30,17 +31,26 @@ const months = [
 
 export default async function DailyStats() {
   const { userId } = auth();
-  const dateNow = new Date();
-  const genID = `${dateNow.getFullYear()}-${(dateNow.getMonth() + 1).toString().padStart(2, "0")}-${dateNow.getDate().toString().padStart(2, "0")}#${userId}`;
+  const today = dayjs();
+  const genID = `${today.get("year")}-${(today.get("month") + 1).toString().padStart(2, "0")}-${today.get("date").toString().padStart(2, "0")}#${userId}`;
 
   const data = await db.query.tracks.findFirst({
     where: (tracks, { eq }) => eq(tracks.id, genID),
   });
 
   const chartData = [
-    { platform: "Youtube", duration: Number.parseFloat(((data?.youtubeDuration ?? 0) / 60).toFixed(1)) },
-    { platform: "Facebook", duration: Number.parseFloat(((data?.facebookDuration ?? 0) / 60).toFixed(1)) },
-    { platform: "Instagram", duration: Number.parseFloat(((data?.instagramDuration ?? 0) / 60).toFixed(1)) },
+    {
+      platform: "Youtube",
+      duration: Number.parseFloat(((data?.youtubeDuration ?? 0) / (60 * 60)).toFixed(1)),
+    },
+    {
+      platform: "Facebook",
+      duration: Number.parseFloat(((data?.facebookDuration ?? 0) / (60 * 60)).toFixed(1)),
+    },
+    {
+      platform: "Instagram",
+      duration: Number.parseFloat(((data?.instagramDuration ?? 0) / (60 * 60)).toFixed(1)),
+    },
   ];
 
   return (
@@ -48,7 +58,8 @@ export default async function DailyStats() {
       <CardHeader className="pb-3">
         <CardTitle className="text-xl">Daily uses</CardTitle>
         <CardDescription className="text-sm">
-          Showing stats for {new Date().getDate()} {months[new Date().getMonth()]} {new Date().getFullYear()}
+          Showing stats for {new Date().getDate()} {months[new Date().getMonth()]}{" "}
+          {new Date().getFullYear()}
         </CardDescription>
       </CardHeader>
       <CardContent>
