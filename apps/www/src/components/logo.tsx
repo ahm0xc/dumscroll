@@ -14,7 +14,7 @@ export default function Logo({ className }: Props) {
       viewBox="0 0 200 200"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={cn("h-6 w-6", className)}
+      className={cn("h-6 w-6 invert dark:invert-0", className)}
     >
       {" "}
       <g clipPath="url(#clip0_231_648)">

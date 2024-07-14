@@ -15,7 +15,7 @@ export default function Layout({ children }: Props) {
       <div className="border-b">
         <div className="flex h-16 items-center px-4">
           <Link href="/dashboard" className="flex items-center gap-2">
-            <Logo className="h-6 w-6 invert dark:invert-0" />
+            <Logo />
             <p className="text-lg tracking-tight font-semibold hidden md:block">Dumscroll</p>
           </Link>
           <Nav className="mx-6" />
