@@ -21,3 +21,11 @@ export function formatNumber(num: number): string {
   }
   return formattedNumber;
 }
+
+export function getRandomNumberInRange(min: number, max: number) {
+  // Ensure min and max are integers
+  const minCeil = Math.ceil(min);
+  const maxFloor = Math.floor(max);
+  // Generate a random number between min (inclusive) and max (inclusive)
+  return Math.floor(Math.random() * (maxFloor - minCeil + 1)) + minCeil;
+}

@@ -45,13 +45,13 @@ interface UsesChartProps {
 
 export default function UsesChart({ chartData }: UsesChartProps) {
   const [timeRange, setTimeRange] = React.useState("30");
-  
+
   const filteredData = chartData.filter((item) => {
     const today = dayjs();
     const ranged = today.subtract(Number.parseInt(timeRange), "day");
 
     const itemDate = dayjs(item.date);
-    return itemDate.isAfter(ranged)
+    return itemDate.isAfter(ranged);
   });
 
   return (
@@ -111,17 +111,18 @@ export default function UsesChart({ chartData }: UsesChartProps) {
               }}
             />
             <ChartTooltip
-              cursor={false}
+              cursor={true}
               content={
                 <ChartTooltipContent
                   // @ts-ignore
                   labelFormatter={(value) => {
-                    return new Date(value).toLocaleDateString("en-US", {
+                    return `${new Date(value).toLocaleDateString("en-US", {
                       month: "short",
                       day: "numeric",
-                    });
+                    })} (Hour)`;
                   }}
                   indicator="line"
+                  className="min-w-[10rem]"
                 />
               }
             />

@@ -186,6 +186,9 @@ importers:
       dayjs:
         specifier: ^1.11.11
         version: 1.11.11
+      dotenv:
+        specifier: ^16.4.5
+        version: 16.4.5
       drizzle-orm:
         specifier: ^0.30.10
         version: 0.30.10(@types/react@18.3.3)(postgres@3.4.4)(react@18.3.1)
@@ -268,6 +271,9 @@ importers:
       drizzle-kit:
         specifier: ^0.21.4
         version: 0.21.4
+      esbuild-register:
+        specifier: ^3.5.0
+        version: 3.5.0(esbuild@0.19.12)
       eslint:
         specifier: ^8.57.0
         version: 8.57.0
@@ -4120,6 +4126,11 @@ packages:
     dependencies:
       no-case: 3.0.4
       tslib: 2.6.2
+    dev: false
+
+  /dotenv@16.4.5:
+    resolution: {integrity: sha512-ZmdL2rui+eB2YwhsWzjInR8LldtZHGDoQ1ugH85ppHKwpUHL7j7rN0Ti9NCnGiQbhaZ11FpR+7ao1dNsmduNUg==}
+    engines: {node: '>=12'}
     dev: false
 
   /dreamopt@0.8.0:
