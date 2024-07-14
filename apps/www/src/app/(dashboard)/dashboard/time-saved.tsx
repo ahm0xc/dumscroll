@@ -28,7 +28,7 @@ const chartConfig = {
 
 export default function TimeSaved() {
   return (
-    <Card className="border-none rounded-[inherit] h-full">
+    <Card className="border-none rounded-[inherit] h-full shadow-none">
       <CardHeader className="p-4">
         <CardTitle className="text-center text-xl">Time Saved</CardTitle>
         <CardDescription className="text-center text-sm">

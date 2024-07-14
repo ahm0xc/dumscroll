@@ -54,7 +54,7 @@ export default async function DailyStats() {
   ];
 
   return (
-    <Card className="border-none rounded-[inherit]">
+    <Card className="border-none rounded-[inherit] shadow-none">
       <CardHeader className="pb-3">
         <CardTitle className="text-xl">Daily uses</CardTitle>
         <CardDescription className="text-sm">

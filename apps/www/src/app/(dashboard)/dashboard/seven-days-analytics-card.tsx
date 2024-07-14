@@ -39,7 +39,7 @@ const chartConfig = {
 
 export default function SevenDaysAnalyticsCard() {
   return (
-    <Card className="border-none rounded-[inherit]">
+    <Card className="border-none rounded-[inherit] shadow-none">
       <CardHeader>
         <CardTitle className="text-xl">7 Days analytics</CardTitle>
         <CardDescription className="text-sm">
