@@ -10,9 +10,7 @@ export default function Overview() {
     <div className="h-screen">
       <div className="grid grid-cols-8 gap-4 grid-rows-8 w-full h-full">
         <div className="col-span-2 row-span-3 w-full h-full rounded-2xl max-w-full max-h-full border">
-          <React.Suspense>
-            <DailyStats />
-          </React.Suspense>
+          <DailyStats />
         </div>
         <div className="col-span-4 row-span-3 w-full h-full rounded-2xl max-w-full max-h-full border">
           <SevenDaysAnalyticsCard />
