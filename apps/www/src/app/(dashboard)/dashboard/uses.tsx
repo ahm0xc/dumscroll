@@ -10,7 +10,7 @@ export default async function Uses() {
   const data = await db.query.tracks.findMany({
     where: (tracks, { eq }) => eq(tracks.userId, userId!),
     limit: 3 * 30, // 3 months
-    orderBy: (tracks, { asc }) => asc(tracks.createdAt),
+    orderBy: (tracks, { desc }) => desc(tracks.createdAt),
   });
 
   const chartData = data.map((track) => ({

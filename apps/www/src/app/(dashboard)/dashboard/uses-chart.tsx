@@ -45,13 +45,13 @@ interface UsesChartProps {
 
 export default function UsesChart({ chartData }: UsesChartProps) {
   const [timeRange, setTimeRange] = React.useState("30");
-
+  
   const filteredData = chartData.filter((item) => {
-    const today = dayjs();
+    const today = dayjs("2024-07-14");
     const ranged = today.subtract(Number.parseInt(timeRange), "day");
 
     const itemDate = dayjs(item.date);
-    itemDate.isAfter(ranged) && itemDate.isBefore(today);
+    return itemDate.isAfter(ranged)
   });
 
   return (
