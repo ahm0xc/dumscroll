@@ -24,6 +24,14 @@ const config = {
       },
     ];
   },
+  async rewrites() {
+    return [
+      {
+        source: "/",
+        destination: "/home",
+      },
+    ];
+  },
 };
 
 export default config;

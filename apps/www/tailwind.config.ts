@@ -1,3 +1,4 @@
+import themer from "@tailus/themer";
 import type { Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 
@@ -5,6 +6,7 @@ const config = {
   darkMode: ["class"],
   content: ["./src/**/*.{ts,tsx}"],
   prefix: "",
+  safelist: ["isToggled"],
   theme: {
     container: {
       center: true,
@@ -66,6 +68,11 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        loop: {
+          to: {
+            "offset-distance": "100%",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -73,7 +80,24 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("@tailwindcss/typography"),
+    themer({
+      palette: {
+        extend: "nature",
+      },
+      radius: "smoothest",
+      background: "light",
+      border: "light",
+      padding: "large",
+      components: {
+        button: {
+          rounded: "2xl",
+        },
+      },
+    }),
+  ],
 } satisfies Config;
 
 export default config;

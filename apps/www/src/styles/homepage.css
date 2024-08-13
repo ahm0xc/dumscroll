@@ -1,0 +1,13 @@
+.swiper-pagination-bullet {
+  @apply !bg-gray-200 !opacity-100 dark:!bg-gray-700;
+}
+
+.swiper-pagination-bullet-active {
+  @apply !bg-gray-950 dark:!bg-white;
+}
+
+@keyframes loop {
+  to {
+    offset-distance: 100%;
+  }
+}
