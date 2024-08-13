@@ -2,7 +2,7 @@
 // https://orm.drizzle.team/docs/sql-schema-declaration
 
 import { relations, sql } from "drizzle-orm";
-import { index, integer, pgTableCreator, text, timestamp, varchar } from "drizzle-orm/pg-core";
+import { index, integer, pgTableCreator, timestamp, varchar } from "drizzle-orm/pg-core";
 import { v4 as uuid } from "uuid";
 
 /**
@@ -18,7 +18,7 @@ export const users = createTable(
   {
     id: varchar("id").primaryKey().notNull(),
     email: varchar("email", { length: 256 }).notNull(),
-    customerId: varchar("customer_id", { length: 256 })
+    licenseKey: varchar("license_key", { length: 256 })
       .notNull()
       .$defaultFn(() => uuid()),
     createdAt: timestamp("created_at", { withTimezone: true })
@@ -28,7 +28,7 @@ export const users = createTable(
   },
   (table) => {
     return {
-      customerIdIdx: index("customer_id_idx").on(table.customerId),
+      licenseKeyIdx: index("license_key_idx").on(table.licenseKey),
     };
   },
 );
@@ -40,9 +40,8 @@ export const usersRelations = relations(users, ({ many }) => ({
 export const tracks = createTable("tracks", {
   id: varchar("id").primaryKey().notNull(), // this will be the date like YYYY-MM-DD followed by their userID e.g. 2024-11-25#user_789asf98sf
   userId: varchar("user_id").notNull(),
-  youtubeDuration: integer("youtube_duration").default(0), // in seconds
-  facebookDuration: integer("facebook_duration").default(0),
-  instagramDuration: integer("instagram_duration").default(0),
+  url: varchar("url").notNull(), // this will be the origin (e.g. https://facebook.com)
+  duration: integer("duration").notNull(),
   createdAt: timestamp("created_at", { withTimezone: true })
     .default(sql`CURRENT_TIMESTAMP`)
     .notNull(),

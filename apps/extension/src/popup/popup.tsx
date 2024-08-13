@@ -15,5 +15,6 @@ export default function Popup() {
       }
     });
   }, []);
+
   return <main className="p-6">{customerId ? <Settings /> : <Setup />}</main>;
 }

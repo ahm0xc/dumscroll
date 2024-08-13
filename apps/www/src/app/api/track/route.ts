@@ -1,14 +1,14 @@
-import { auth } from "@clerk/nextjs/server";
 import { sql } from "drizzle-orm";
 import type { NextRequest } from "next/server";
 import * as z from "zod";
+
 import { db } from "~/server/db";
 import { tracks } from "~/server/db/schema";
 
 const postRequestParser = z.object({
-  platform: z.enum(["youtube", "facebook", "instagram"]),
+  url: z.string(),
   duration: z.number(),
-  customerId: z.string().uuid(),
+  licenseKey: z.string().uuid(),
 });
 
 export async function POST(req: NextRequest) {
@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
 
   try {
     const user = await db.query.users.findFirst({
-      where: (users, { eq }) => eq(users.customerId, parsedBody.customerId),
+      where: (users, { eq }) => eq(users.licenseKey, parsedBody.licenseKey),
     });
 
     if (!user) {
@@ -37,58 +37,22 @@ export async function POST(req: NextRequest) {
     const dateNow = new Date();
     const genID = `${dateNow.getFullYear()}-${(dateNow.getMonth() + 1).toString().padStart(2, "0")}-${dateNow.getDate().toString().padStart(2, "0")}#${user.id}`;
 
-    switch (parsedBody.platform.toLowerCase()) {
-      case "youtube":
-        await db
-          .insert(tracks)
-          .values({
-            id: genID,
-            userId: user.id,
-            youtubeDuration: parsedBody.duration,
-          })
-          .onConflictDoUpdate({
-            target: tracks.id,
-            set: {
-              youtubeDuration: sql`${tracks.youtubeDuration} + ${parsedBody.duration}`,
-            },
-          });
-        break;
-      case "facebook":
-        await db
-          .insert(tracks)
-          .values({
-            id: genID,
-            userId: user.id,
-            facebookDuration: parsedBody.duration,
-          })
-          .onConflictDoUpdate({
-            target: tracks.id,
-            set: {
-              facebookDuration: sql`${tracks.facebookDuration} + ${parsedBody.duration}`,
-            },
-          });
-        break;
-      case "instagram":
-        await db
-          .insert(tracks)
-          .values({
-            id: genID,
-            userId: user.id,
-            instagramDuration: parsedBody.duration,
-          })
-          .onConflictDoUpdate({
-            target: tracks.id,
-            set: {
-              instagramDuration: sql`${tracks.instagramDuration} + ${parsedBody.duration}`,
-            },
-          });
-        break;
+    await db
+      .insert(tracks)
+      .values({
+        id: genID,
+        userId: user.id,
+        url: parsedBody.url,
+        duration: parsedBody.duration,
+      })
+      .onConflictDoUpdate({
+        target: tracks.id,
+        set: {
+          duration: sql`${tracks.duration} + ${parsedBody.duration}`,
+        },
+      });
 
-      default:
-        break;
-    }
-
-    return new Response(JSON.stringify({ userId: user.id, customerId: parsedBody.customerId }), {
+    return new Response(JSON.stringify({ userId: user.id, licenseKey: parsedBody.licenseKey }), {
       status: 201,
     });
   } catch (error) {

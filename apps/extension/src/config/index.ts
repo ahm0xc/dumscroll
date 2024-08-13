@@ -24,6 +24,11 @@ export const settings = {
     key: "bed-time-reminder",
     default: true,
   },
+  activation: {
+    license: {
+      key: "license-key",
+    },
+  },
 };
 
 export const blockSchema = z.object({

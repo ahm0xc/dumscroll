@@ -4,7 +4,7 @@ import * as z from "zod";
 import { db } from "~/server/db";
 
 const postRequestParser = z.object({
-  customerId: z.string().uuid(),
+  licenseKey: z.string().uuid(),
 });
 
 export async function POST(req: NextRequest) {
@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
   const parsedBody = parsedResult.data;
 
   const user = await db.query.users.findFirst({
-    where: (users, { eq }) => eq(users.customerId, parsedBody.customerId),
+    where: (users, { eq }) => eq(users.licenseKey, parsedBody.licenseKey),
   });
 
   if (!user) {
@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
     });
   }
 
-  return new Response(JSON.stringify({ customerId: user.customerId, email: user.email }), {
+  return new Response(JSON.stringify({ licenseKey: user.licenseKey, email: user.email }), {
     status: 201,
   });
 }

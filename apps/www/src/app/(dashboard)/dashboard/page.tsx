@@ -1,9 +1,5 @@
 import type { Metadata } from "next";
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
-import Overview from "./overview";
-import Uses from "./uses";
-
 export const metadata: Metadata = {
   title: "Dashboard",
   description: "",
@@ -12,7 +8,7 @@ export const metadata: Metadata = {
 export default function DashboardPage() {
   return (
     <main>
-      <div className="flex-col flex">
+      {/* <div className="flex-col flex">
         <div className="flex-1 space-y-4 p-8 pt-6">
           <div className="flex items-center justify-between space-y-2">
             <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>{" "}
@@ -32,7 +28,7 @@ export default function DashboardPage() {
             </TabsContent>
           </Tabs>
         </div>
-      </div>
+      </div> */}
     </main>
   );
 }

@@ -20,7 +20,7 @@ export default async function GetStartedPage() {
   }
   return (
     <div className="p-8 pb-20">
-      <GetStarted customerId={user.customerId} />
+      <GetStarted licenseKey={user.licenseKey} />
     </div>
   );
 }

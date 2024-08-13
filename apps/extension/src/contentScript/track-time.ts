@@ -20,22 +20,23 @@ export function trackTime({ url }: { url: string }) {
 }
 
 async function updateTracking({ timeSpent, url }: { timeSpent: number; url: string }) {
-  const customerId = await GlobalStorage.get("customer-id");
+  const licenseKey = await GlobalStorage.get("license-key");
   const payload = {
     action: "trackTime",
     timeSpent,
     url,
-    customerId,
+    licenseKey,
   };
 
   console.info({ payload });
 
-  if (customerId) {
+  if (licenseKey) {
+    console.info(chalk.blue("Updating data..."));
     chrome.runtime.sendMessage({
       action: "trackTime",
       timeSpent,
       url,
-      customerId,
+      licenseKey,
     });
   }
 }

@@ -1,8 +1,30 @@
 import { motion } from "framer-motion";
+import { useRef } from "react";
+
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
+import { settings } from "~/config";
+import useGlobalStorage from "~/hooks/globalstorage";
 
 export default function ApiKeysSetupForm() {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const { value: licenseKey, set: setLicenseKey } = useGlobalStorage<string>("", {
+    key: settings.activation.license.key,
+  });
+
+  function handleActivate() {
+    const key = inputRef.current?.value.trim();
+
+    if (!key) return;
+
+    setLicenseKey(key);
+  }
+
+  function handleRemove() {
+    setLicenseKey("");
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, filter: "blur(8px)" }}
@@ -28,10 +50,22 @@ export default function ApiKeysSetupForm() {
         <div className="space-y-3">
           <div className="space-y-1.5">
             <p className="text-xs">Api keys</p>
-            <Input placeholder="XXXX-XXXX-XXXX-XXXX" />
+            <Input
+              ref={inputRef}
+              readOnly={Boolean(licenseKey)}
+              placeholder="XXXX-XXXX-XXXX-XXXX"
+            />
           </div>
           <div>
-            <Button className="w-full">Validate</Button>
+            {licenseKey ? (
+              <Button className="w-full" variant="destructive" onClick={handleRemove}>
+                Remove
+              </Button>
+            ) : (
+              <Button className="w-full" onClick={handleActivate}>
+                Activate
+              </Button>
+            )}
           </div>
         </div>
       </div>
