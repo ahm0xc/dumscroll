@@ -1,7 +1,7 @@
-import React from "react";
-import Link from "next/link";
 import { auth } from "@clerk/nextjs/server";
 import { ChromeIcon } from "lucide-react";
+import Link from "next/link";
+import React from "react";
 
 import Logo from "~/components/logo";
 import { Button } from "~/components/ui/button";

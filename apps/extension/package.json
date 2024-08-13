@@ -12,13 +12,16 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "rimraf build && tsc && vite build",
     "preview": "vite preview",
     "fmt": "prettier --write '**/*.{tsx,ts,json,css,scss,md}'",
     "zip": "pnpm run build && node src/zip.js"
   },
   "dependencies": {
+    "@headlessui/react": "^2.1.2",
+    "@radix-ui/react-alert-dialog": "^1.1.1",
     "@radix-ui/react-label": "^2.1.0",
+    "@radix-ui/react-scroll-area": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-switch": "^1.1.0",
     "axios": "^1.7.2",
@@ -26,12 +29,16 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "detect-url-change": "^1.0.2",
+    "framer-motion": "^11.3.24",
     "lucide-react": "^0.407.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "sonner": "^1.5.0",
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7",
-    "use-local-storage": "^3.0.0"
+    "use-local-storage": "^3.0.0",
+    "zod": "^3.23.8",
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
     "@crxjs/vite-plugin": "^2.0.0-beta.19",
@@ -44,6 +51,7 @@
     "gulp-zip": "^6.0.0",
     "postcss": "^8.4.39",
     "prettier": "^3.0.3",
+    "rimraf": "^6.0.1",
     "tailwindcss": "^3.4.3",
     "typescript": "^5.2.2",
     "vite": "^4.4.11",

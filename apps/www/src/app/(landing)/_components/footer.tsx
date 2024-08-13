@@ -1,11 +1,11 @@
+import { GithubIcon, TwitterIcon } from "lucide-react";
 import Link from "next/link";
 import Balancer from "react-wrap-balancer";
-import { GithubIcon, TwitterIcon } from "lucide-react";
 
 import { Button } from "~/components/ui/button";
 
 // Local component imports
-import { Section, Container } from "~/components/base";
+import { Container, Section } from "~/components/base";
 import Logo from "~/components/logo";
 
 export default function Footer() {

@@ -1,5 +1,5 @@
-import React from "react";
 import { auth } from "@clerk/nextjs/server";
+import React from "react";
 
 import {
   Card,
@@ -10,9 +10,9 @@ import {
   CardTitle,
 } from "~/components/ui/card";
 
-import DailyStatsChart from "./daily-stats-chart";
-import { db } from "~/server/db";
 import dayjs from "dayjs";
+import { db } from "~/server/db";
+import DailyStatsChart from "./daily-stats-chart";
 
 const months = [
   "January",

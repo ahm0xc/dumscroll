@@ -1,9 +1,9 @@
+import dayjs from "dayjs";
+import * as dotenv from "dotenv";
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
-import * as schema from "./schema";
-import * as dotenv from "dotenv";
-import dayjs from "dayjs";
 import { getRandomNumberInRange } from "~/lib/utils";
+import * as schema from "./schema";
 dotenv.config();
 
 // const userID = "user_2jBuFeoRpScQC5TE9vT2JWNV7oC"; // abid

@@ -1,18 +1,14 @@
 chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
   if (request.action === "trackTime") {
     const timeSpent = request.timeSpent as number;
-    const platform = request.platform as string;
+    const url = request.url as string;
     const customerId = request.customerId as string;
-    console.info({ timeSpent, platform, customerId });
-    // if (!platform || !timeSpent) {
-    //   sendResponse({});
-    //   return true;
-    // }
+    console.info({ timeSpent, url, customerId });
 
     fetch("https://dumscroll.vercel.app/api/track", {
       method: "POST",
       body: JSON.stringify({
-        platform,
+        url,
         duration: timeSpent,
         customerId,
       }),

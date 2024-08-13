@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import UsesChart from "./uses-chart";
-import { db } from "~/server/db";
 import { auth } from "@clerk/nextjs/server";
+import { db } from "~/server/db";
+import UsesChart from "./uses-chart";
 
 export default async function Uses() {
   const { userId } = auth();

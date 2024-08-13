@@ -1,43 +1,43 @@
-import detectUrlChange from "detect-url-change";
-import { trackTime } from "./track-time";
+// import detectUrlChange from "detect-url-change";
+// import { trackTime } from "./track-time";
 
-function main() {
-  chrome.runtime.sendMessage({ action: "getStorageValue", key: "is-ig-reels-blocked" }, (res) => {
-    if (chrome.runtime.lastError) {
-      console.error(chrome.runtime.lastError.message);
-    } else {
-      const isIGReelsBlocked = res.value;
+// function main() {
+//   chrome.runtime.sendMessage({ action: "getStorageValue", key: "is-ig-reels-blocked" }, (res) => {
+//     if (chrome.runtime.lastError) {
+//       console.error(chrome.runtime.lastError.message);
+//     } else {
+//       const isIGReelsBlocked = res.value;
 
-      if (isIGReelsBlocked) {
-        removeIGReels();
-      }
-    }
-  });
-}
+//       if (isIGReelsBlocked) {
+//         removeIGReels();
+//       }
+//     }
+//   });
+// }
 
-main();
-trackTime({ platform: "instagram" });
+// main();
+// trackTime({ platform: "instagram" });
 
-function removeIGReels() {
-  const style = document.createElement("style");
-  style.textContent = `
-    a[href="/reels/"] {
-      display: none !important;
-    }
-    body[data-lock-scroll="true"] main .x1odjw0f {
-      overflow-y: hidden !important;
-    }
-  `;
-  document.head.appendChild(style);
+// function removeIGReels() {
+//   const style = document.createElement("style");
+//   style.textContent = `
+//     a[href="/reels/"] {
+//       display: none !important;
+//     }
+//     body[data-lock-scroll="true"] main .x1odjw0f {
+//       overflow-y: hidden !important;
+//     }
+//   `;
+//   document.head.appendChild(style);
 
-  detectUrlChange.on("change", (newUrl) => {
-    if (newUrl.includes("/reels/")) {
-      const url = new URL(newUrl);
-      if (url.pathname.includes("/reels/")) {
-        document.body.setAttribute("data-lock-scroll", "true");
-      } else {
-        document.body.setAttribute("data-lock-scroll", "false");
-      }
-    }
-  });
-}
+//   detectUrlChange.on("change", (newUrl) => {
+//     if (newUrl.includes("/reels/")) {
+//       const url = new URL(newUrl);
+//       if (url.pathname.includes("/reels/")) {
+//         document.body.setAttribute("data-lock-scroll", "true");
+//       } else {
+//         document.body.setAttribute("data-lock-scroll", "false");
+//       }
+//     }
+//   });
+// }

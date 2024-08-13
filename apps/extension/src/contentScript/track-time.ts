@@ -1,6 +1,8 @@
 import chalk from "chalk";
+import { GlobalStorage } from "~/helpers/globalstorage";
 
-export function trackTime({ platform }: { platform: string }) {
+export function trackTime({ url }: { url: string }) {
+  console.info(chalk.blue(`Tracking time for ${url}...`));
   let timeSpent = 0;
 
   setInterval(() => {
@@ -9,7 +11,7 @@ export function trackTime({ platform }: { platform: string }) {
     }
 
     if (timeSpent === 60) {
-      updateTracking({ timeSpent, platform });
+      updateTracking({ timeSpent, url });
       timeSpent = 0;
     }
 
@@ -17,23 +19,23 @@ export function trackTime({ platform }: { platform: string }) {
   }, 1000);
 }
 
-function updateTracking({ timeSpent, platform }: { timeSpent: number; platform: string }) {
-  chrome.runtime.sendMessage({ action: "getStorageValue", key: "customer-id" }, (res) => {
-    if (chrome.runtime.lastError) {
-      console.error(chrome.runtime.lastError.message);
-    } else {
-      const customerId = res.value;
+async function updateTracking({ timeSpent, url }: { timeSpent: number; url: string }) {
+  const customerId = await GlobalStorage.get("customer-id");
+  const payload = {
+    action: "trackTime",
+    timeSpent,
+    url,
+    customerId,
+  };
 
-      if (!customerId) {
-        return;
-      }
+  console.info({ payload });
 
-      chrome.runtime.sendMessage({
-        action: "trackTime",
-        timeSpent,
-        platform,
-        customerId,
-      });
-    }
-  });
+  if (customerId) {
+    chrome.runtime.sendMessage({
+      action: "trackTime",
+      timeSpent,
+      url,
+      customerId,
+    });
+  }
 }

@@ -1,9 +1,9 @@
 import React from "react";
 
+import DailyStats from "./daily-stats";
 import GithubCard from "./github-card";
 import SevenDaysAnalyticsCard from "./seven-days-analytics-card";
 import TimeSaved from "./time-saved";
-import DailyStats from "./daily-stats";
 
 export default function Overview() {
   return (

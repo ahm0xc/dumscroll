@@ -1,9 +1,9 @@
 import Link from "next/link";
 import Balancer from "react-wrap-balancer";
 
-import { Button } from "~/components/ui/button";
-import { Section, Container } from "~/components/base";
 import { ChromeIcon } from "lucide-react";
+import { Container, Section } from "~/components/base";
+import { Button } from "~/components/ui/button";
 
 const CTA = () => {
   return (

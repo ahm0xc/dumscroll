@@ -1,7 +1,7 @@
-import Balancer from "react-wrap-balancer";
 import { LineChartIcon, PencilRulerIcon, ShieldIcon, VenetianMaskIcon } from "lucide-react";
+import Balancer from "react-wrap-balancer";
 
-import { Section, Container } from "~/components/base";
+import { Container, Section } from "~/components/base";
 
 type FeatureText = {
   icon: JSX.Element;

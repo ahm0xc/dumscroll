@@ -1,15 +1,15 @@
-import React from "react";
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import React from "react";
 import Balancer from "react-wrap-balancer";
-import { ArrowRight } from "lucide-react";
 
-import { Section, Container } from "~/components/base";
+import { Container, Section } from "~/components/base";
 import { Button } from "~/components/ui/button";
 
+import { GitHubLogoIcon } from "@radix-ui/react-icons";
 // Asset imports
 import Placeholder from "~/../public/hero.jpg";
-import { GitHubLogoIcon } from "@radix-ui/react-icons";
 
 export default function Hero() {
   return (
