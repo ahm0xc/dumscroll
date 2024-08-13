@@ -1,28 +1,48 @@
 import { motion } from "framer-motion";
-import { useRef } from "react";
+import { Loader2Icon } from "lucide-react";
+import { useRef, useState } from "react";
+import { toast } from "sonner";
 
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
-import { settings } from "~/config";
+import { APP_URL, settings } from "~/config";
+import { validateLicenseKey } from "~/helpers/validate-license";
 import useGlobalStorage from "~/hooks/globalstorage";
 
 export default function ApiKeysSetupForm() {
   const inputRef = useRef<HTMLInputElement>(null);
+  const [isValidating, setIsValidating] = useState(false);
 
   const { value: licenseKey, set: setLicenseKey } = useGlobalStorage<string>("", {
     key: settings.activation.license.key,
   });
 
-  function handleActivate() {
+  async function handleActivate() {
     const key = inputRef.current?.value.trim();
 
     if (!key) return;
 
-    setLicenseKey(key);
+    setIsValidating(true);
+    const isKeyValid = await validateLicenseKey(key);
+    setIsValidating(false);
+
+    if (isKeyValid) {
+      setLicenseKey(key);
+      window.location.reload();
+    } else {
+      toast.error("Invalid license key", {
+        action: (
+          <Button size="sm" className="text-[11px] h-8" variant="secondary" asChild>
+            <a href={`${APP_URL}/dashboard/get-started`}>Get key</a>
+          </Button>
+        ),
+      });
+    }
   }
 
   function handleRemove() {
     setLicenseKey("");
+    window.location.reload();
   }
 
   return (
@@ -52,6 +72,7 @@ export default function ApiKeysSetupForm() {
             <p className="text-xs">Api keys</p>
             <Input
               ref={inputRef}
+              defaultValue={licenseKey}
               readOnly={Boolean(licenseKey)}
               placeholder="XXXX-XXXX-XXXX-XXXX"
             />
@@ -62,8 +83,8 @@ export default function ApiKeysSetupForm() {
                 Remove
               </Button>
             ) : (
-              <Button className="w-full" onClick={handleActivate}>
-                Activate
+              <Button className="w-full items-center gap-1.5" onClick={handleActivate}>
+                {isValidating && <Loader2Icon size={15} className="animate-spin" />} Activate
               </Button>
             )}
           </div>

@@ -1,4 +1,5 @@
 import type React from "react";
+import ActivationBanner from "./activation-banner";
 import Sidebar from "./sidebar";
 
 export default function OptionsLayout({ children }: React.PropsWithChildren) {
@@ -7,7 +8,10 @@ export default function OptionsLayout({ children }: React.PropsWithChildren) {
       <div className="h-screen">
         <Sidebar />
       </div>
-      <div>{children}</div>
+      <div>
+        <ActivationBanner />
+        {children}
+      </div>
     </div>
   );
 }

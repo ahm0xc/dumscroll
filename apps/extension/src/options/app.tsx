@@ -1,7 +1,6 @@
 import { create } from "zustand";
 
 import { useEffect } from "react";
-import useGlobalStorage from "~/hooks/globalstorage";
 import Activation from "./activation";
 import Settings from "./settings";
 

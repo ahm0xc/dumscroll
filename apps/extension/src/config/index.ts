@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+export const APP_URL = "http://localhost:3000";
+
 export const settings = {
   "uses-tracking": {
     key: "uses-tracking",

@@ -1,3 +1,5 @@
+import { APP_URL } from "~/config";
+
 chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
   if (request.action === "trackTime") {
     const timeSpent = request.timeSpent as number;
@@ -5,8 +7,7 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
     const licenseKey = request.licenseKey as string;
     console.info({ timeSpent, url, licenseKey: licenseKey });
 
-    // fetch("https://dumscroll.vercel.app/api/track", {
-    fetch("http://localhost:3000/api/track", {
+    fetch(`${APP_URL}/api/track`, {
       method: "POST",
       body: JSON.stringify({
         url,
