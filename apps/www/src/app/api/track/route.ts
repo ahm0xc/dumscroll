@@ -2,6 +2,8 @@ import { sql } from "drizzle-orm";
 import type { NextRequest } from "next/server";
 import * as z from "zod";
 
+import { generateTrackId } from "~/lib/utils";
+
 import { db } from "~/server/db";
 import { tracks } from "~/server/db/schema";
 
@@ -34,13 +36,10 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    const dateNow = new Date();
-    const genID = `${dateNow.getFullYear()}-${(dateNow.getMonth() + 1).toString().padStart(2, "0")}-${dateNow.getDate().toString().padStart(2, "0")}#${user.id}`;
-
     await db
       .insert(tracks)
       .values({
-        id: genID,
+        id: generateTrackId({ userId: user.id, websiteUrl: parsedBody.url }),
         userId: user.id,
         url: parsedBody.url,
         duration: parsedBody.duration,

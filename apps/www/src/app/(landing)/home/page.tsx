@@ -55,11 +55,7 @@ function Header() {
         <div className="m-auto max-w-6xl px-6 2xl:px-0">
           <div className="flex flex-wrap items-center justify-between py-2 sm:py-4">
             <div className="flex w-full items-center justify-between lg:w-auto">
-              <Link
-                href="/"
-                aria-label="Dumscroll"
-                className="flex items-center gap-1.5"
-              >
+              <Link href="/" aria-label="Dumscroll" className="flex items-center gap-1.5">
                 <Logo /> <span className="text-xl font-medium">Dumscroll</span>
               </Link>
               <div className="flex lg:hidden">
@@ -156,27 +152,21 @@ function Main() {
                       stroke="currentColor"
                       strokeWidth={2}
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M9 5l7 7-7 7"
-                      />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                     </svg>
                   </div>
                 </span>
               </a>
               <h1 className="mt-8 text-wrap text-4xl font-semibold text-gray-950 dark:text-white md:text-5xl xl:text-5xl xl:[line-height:1.125]">
-                Tame the Wild West <br className="hidden sm:block" /> of
-                Frontend Development
+                Tame the Wild West <br className="hidden sm:block" /> of Frontend Development
               </h1>
               <p className="mx-auto mt-8 hidden max-w-2xl text-wrap text-lg text-gray-700 dark:text-gray-300 sm:block">
-                Tailwindcss highly customizable components for building modern
-                websites and applications that look and feel the way you mean
-                it.
+                Tailwindcss highly customizable components for building modern websites and
+                applications that look and feel the way you mean it.
               </p>
               <p className="mx-auto mt-6 max-w-2xl text-wrap text-gray-700 dark:text-gray-300 sm:hidden">
-                Highly customizable components for building modern websites and
-                applications, with your personal spark.
+                Highly customizable components for building modern websites and applications, with
+                your personal spark.
               </p>
               <div className="mt-8 flex flex-col items-center justify-center gap-4">
                 <div className="rounded-[calc(var(--btn-border-radius)+4px)] border bg-gray-950/5 p-1 dark:border-white/10 dark:bg-white/5">
@@ -594,8 +584,8 @@ function Main() {
                         Secure by default
                       </h2>
                       <p className="text-gray-700 dark:text-gray-300">
-                        Provident fugit and vero voluptate. magnam magni
-                        doloribus dolores voluptates a sapiente nisi.
+                        Provident fugit and vero voluptate. magnam magni doloribus dolores
+                        voluptates a sapiente nisi.
                       </p>
                     </div>
                   </div>
@@ -691,8 +681,8 @@ function Main() {
                         Faster than light
                       </h2>
                       <p className="text-gray-700 dark:text-gray-300">
-                        Provident fugit vero voluptate. magnam magni doloribus
-                        dolores voluptates inventore nisi.
+                        Provident fugit vero voluptate. magnam magni doloribus dolores voluptates
+                        inventore nisi.
                       </p>
                     </div>
                   </div>
@@ -721,8 +711,7 @@ function Main() {
                           Faster than light
                         </h2>
                         <p className="text-gray-700 dark:text-gray-300">
-                          Provident fugit vero voluptate. Voluptates a sapiente
-                          inventore nisi.
+                          Provident fugit vero voluptate. Voluptates a sapiente inventore nisi.
                         </p>
                       </div>
                     </div>
@@ -805,8 +794,8 @@ function Main() {
                           Keep your loved ones safe
                         </h2>
                         <p className="text-gray-700 dark:text-gray-300">
-                          Voluptate. magnam magni doloribus dolores voluptates a
-                          sapiente inventore nisi.
+                          Voluptate. magnam magni doloribus dolores voluptates a sapiente inventore
+                          nisi.
                         </p>
                       </div>
                     </div>
@@ -1062,10 +1051,7 @@ function Main() {
                           result="shadowBlurInner1"
                           stdDeviation="17.5"
                         />
-                        <feOffset
-                          in="shadowBlurInner1"
-                          result="shadowOffsetInner1"
-                        />
+                        <feOffset in="shadowBlurInner1" result="shadowOffsetInner1" />
                         <feComposite
                           in="shadowOffsetInner1"
                           in2="SourceAlpha"
@@ -1124,21 +1110,13 @@ function Main() {
                       fill="#ffc24a"
                       d="m0 282.998l2.123-2.972L102.527 89.512l.212-2.017L58.48 4.358C54.77-2.606 44.33-.845 43.114 6.951z"
                     />
-                    <use
-                      fill="#ffa712"
-                      fillRule="evenodd"
-                      href="#logosFirebase2"
-                    />
+                    <use fill="#ffa712" fillRule="evenodd" href="#logosFirebase2" />
                     <use filter="url(#logosFirebase0)" href="#logosFirebase2" />
                     <path
                       fill="#f4bd62"
                       d="m135.005 150.38l32.955-33.75l-32.965-62.93c-3.129-5.957-11.866-5.975-14.962 0L102.42 87.287v2.86z"
                     />
-                    <use
-                      fill="#ffa50e"
-                      fillRule="evenodd"
-                      href="#logosFirebase3"
-                    />
+                    <use fill="#ffa50e" fillRule="evenodd" href="#logosFirebase3" />
                     <use filter="url(#logosFirebase1)" href="#logosFirebase3" />
                     <path
                       fill="#f6820c"
@@ -1275,11 +1253,7 @@ function Main() {
                         y2="68.21%"
                       >
                         <stop offset="0%" stopColor="#ff31d9" />
-                        <stop
-                          offset="100%"
-                          stopColor="#ff5be1"
-                          stopOpacity={0}
-                        />
+                        <stop offset="100%" stopColor="#ff5be1" stopOpacity={0} />
                       </linearGradient>
                     </defs>
                     <path
@@ -1511,9 +1485,8 @@ function Main() {
                     All your favorite dev tools work with Ada
                   </h2>
                   <p className="mt-6 text-gray-700 dark:text-gray-300">
-                    Harum quae dolore inventore repudiandae? orrupti aut
-                    temporibus assumenda atque ab, accusamus sit, molestiae
-                    veniam laboriosam pariatur.
+                    Harum quae dolore inventore repudiandae? orrupti aut temporibus assumenda atque
+                    ab, accusamus sit, molestiae veniam laboriosam pariatur.
                   </p>
                 </div>
                 <ul className="mt-8 divide-y divide-[--ui-light-border-color] border-y border-[--ui-light-border-color] text-gray-700 *:flex *:items-center *:gap-3 *:py-3 dark:divide-[--ui-dark-border-color] dark:border-[--ui-dark-border-color] dark:text-gray-300">
@@ -1526,11 +1499,7 @@ function Main() {
                       viewBox="0 0 24 24"
                     >
                       <g fill="none" stroke="currentColor" strokeWidth="1.5">
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="m7 9l5 3.5L17 9"
-                        />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="m7 9l5 3.5L17 9" />
                         <path d="M2 17V7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2Z" />
                       </g>
                     </svg>
@@ -1696,8 +1665,7 @@ function Main() {
                 Quickstart with boilerplates
               </h2>
               <p className="mt-6 text-gray-700 dark:text-gray-300">
-                Harum quae dolore inventore repudiandae? orrupti aut temporibus
-                ariatur.
+                Harum quae dolore inventore repudiandae? orrupti aut temporibus ariatur.
               </p>
             </div>
             <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -1738,11 +1706,7 @@ function Main() {
                           gradientUnits="userSpaceOnUse"
                         >
                           <stop offset={0} stopColor="#ff1639" />
-                          <stop
-                            offset={1}
-                            stopColor="#ff1639"
-                            stopOpacity={0}
-                          />
+                          <stop offset={1} stopColor="#ff1639" stopOpacity={0} />
                         </linearGradient>
                       </defs>
                       <path
@@ -1761,8 +1725,7 @@ function Main() {
                   </div>
                   <div className="mt-6 rounded-b-[--card-border-radius] pb-6">
                     <p className="text-gray-700 dark:text-gray-300">
-                      Amet praesentium deserunt ex commodi tempore fuga
-                      voluptatem. Sit, sapiente.
+                      Amet praesentium deserunt ex commodi tempore fuga voluptatem. Sit, sapiente.
                     </p>
                   </div>
                   <div className="-mb-[--card-padding] flex gap-3 border-t border-[--ui-light-border-color] py-4 dark:border-[--ui-dark-border-color]">
@@ -1861,8 +1824,7 @@ function Main() {
                   </div>
                   <div className="mt-6 rounded-b-[--card-border-radius] pb-6">
                     <p className="text-gray-700 dark:text-gray-300">
-                      Amet praesentium deserunt ex commodi tempore fuga
-                      voluptatem. Sit, sapiente.
+                      Amet praesentium deserunt ex commodi tempore fuga voluptatem. Sit, sapiente.
                     </p>
                   </div>
                   <div className="-mb-[--card-padding] flex gap-3 border-t border-[--ui-light-border-color] py-4 dark:border-[--ui-dark-border-color]">
@@ -1945,11 +1907,7 @@ function Main() {
                           y2="68.21%"
                         >
                           <stop offset="0%" stopColor="#ff31d9" />
-                          <stop
-                            offset="100%"
-                            stopColor="#ff5be1"
-                            stopOpacity={0}
-                          />
+                          <stop offset="100%" stopColor="#ff5be1" stopOpacity={0} />
                         </linearGradient>
                       </defs>
                       <path
@@ -1964,8 +1922,7 @@ function Main() {
                   </div>
                   <div className="mt-6 rounded-b-[--card-border-radius] pb-6">
                     <p className="text-gray-700 dark:text-gray-300">
-                      Amet praesentium deserunt ex commodi tempore fuga
-                      voluptatem. Sit, sapiente.
+                      Amet praesentium deserunt ex commodi tempore fuga voluptatem. Sit, sapiente.
                     </p>
                   </div>
                   <div className="-mb-[--card-padding] flex gap-3 border-t border-[--ui-light-border-color] py-4 dark:border-[--ui-dark-border-color]">
@@ -2033,8 +1990,7 @@ function Main() {
                   </div>
                   <div className="mt-6 rounded-b-[--card-border-radius] pb-6">
                     <p className="text-gray-700 dark:text-gray-300">
-                      Amet praesentium deserunt ex commodi tempore fuga
-                      voluptatem. Sit, sapiente.
+                      Amet praesentium deserunt ex commodi tempore fuga voluptatem. Sit, sapiente.
                     </p>
                   </div>
                   <div className="-mb-[--card-padding] flex gap-3 border-t border-[--ui-light-border-color] py-4 dark:border-[--ui-dark-border-color]">
@@ -2108,10 +2064,7 @@ function Main() {
                             result="shadowBlurInner1"
                             stdDeviation="17.5"
                           />
-                          <feOffset
-                            in="shadowBlurInner1"
-                            result="shadowOffsetInner1"
-                          />
+                          <feOffset in="shadowBlurInner1" result="shadowOffsetInner1" />
                           <feComposite
                             in="shadowOffsetInner1"
                             in2="SourceAlpha"
@@ -2170,28 +2123,14 @@ function Main() {
                         fill="#ffc24a"
                         d="m0 282.998l2.123-2.972L102.527 89.512l.212-2.017L58.48 4.358C54.77-2.606 44.33-.845 43.114 6.951z"
                       />
-                      <use
-                        fill="#ffa712"
-                        fillRule="evenodd"
-                        href="#logosFirebase2"
-                      />
-                      <use
-                        filter="url(#logosFirebase0)"
-                        href="#logosFirebase2"
-                      />
+                      <use fill="#ffa712" fillRule="evenodd" href="#logosFirebase2" />
+                      <use filter="url(#logosFirebase0)" href="#logosFirebase2" />
                       <path
                         fill="#f4bd62"
                         d="m135.005 150.38l32.955-33.75l-32.965-62.93c-3.129-5.957-11.866-5.975-14.962 0L102.42 87.287v2.86z"
                       />
-                      <use
-                        fill="#ffa50e"
-                        fillRule="evenodd"
-                        href="#logosFirebase3"
-                      />
-                      <use
-                        filter="url(#logosFirebase1)"
-                        href="#logosFirebase3"
-                      />
+                      <use fill="#ffa50e" fillRule="evenodd" href="#logosFirebase3" />
+                      <use filter="url(#logosFirebase1)" href="#logosFirebase3" />
                       <path
                         fill="#f6820c"
                         d="m0 282.998l.962-.968l3.496-1.42l128.477-128l1.628-4.431l-32.05-61.074z"
@@ -2212,8 +2151,7 @@ function Main() {
                   </div>
                   <div className="mt-6 rounded-b-[--card-border-radius] pb-6">
                     <p className="text-gray-700 dark:text-gray-300">
-                      Amet praesentium deserunt ex commodi tempore fuga
-                      voluptatem. Sit, sapiente.
+                      Amet praesentium deserunt ex commodi tempore fuga voluptatem. Sit, sapiente.
                     </p>
                   </div>
                   <div className="-mb-[--card-padding] flex gap-3 border-t border-[--ui-light-border-color] py-4 dark:border-[--ui-dark-border-color]">
@@ -2281,8 +2219,7 @@ function Main() {
                   </div>
                   <div className="mt-6 rounded-b-[--card-border-radius] pb-6">
                     <p className="text-gray-700 dark:text-gray-300">
-                      Amet praesentium deserunt ex commodi tempore fuga
-                      voluptatem. Sit, sapiente.
+                      Amet praesentium deserunt ex commodi tempore fuga voluptatem. Sit, sapiente.
                     </p>
                   </div>
                   <div className="-mb-[--card-padding] flex gap-3 border-t border-[--ui-light-border-color] py-4 dark:border-[--ui-dark-border-color]">
@@ -2359,16 +2296,14 @@ function Main() {
                       />
                     </span>
                     <div className="w-[calc(100%-3.25rem)]">
-                      <h3 className="font-medium text-gray-950 dark:text-white">
-                        Jonathan Yombo
-                      </h3>
+                      <h3 className="font-medium text-gray-950 dark:text-white">Jonathan Yombo</h3>
                       <span className="block text-sm tracking-wide text-gray-600 dark:text-gray-400">
                         Software Ingeneer
                       </span>
                       <blockquote className="mt-3">
                         <p className="text-gray-700 dark:text-gray-300">
-                          Tailus is really extraordinary and very practical, no
-                          need to break your head. A real gold mine.
+                          Tailus is really extraordinary and very practical, no need to break your
+                          head. A real gold mine.
                         </p>
                       </blockquote>
                     </div>
@@ -2387,17 +2322,14 @@ function Main() {
                       />
                     </span>
                     <div className="w-[calc(100%-3.25rem)]">
-                      <h3 className="font-medium text-gray-950 dark:text-white">
-                        Yves Kalume
-                      </h3>
+                      <h3 className="font-medium text-gray-950 dark:text-white">Yves Kalume</h3>
                       <span className="block text-sm tracking-wide text-gray-600 dark:text-gray-400">
                         GDE - Android
                       </span>
                       <blockquote className="mt-3">
                         <p className="text-gray-700 dark:text-gray-300">
-                          With no experience in webdesign I just redesigned my
-                          entire website in a few minutes with tailwindcss
-                          thanks to Tailus.
+                          With no experience in webdesign I just redesigned my entire website in a
+                          few minutes with tailwindcss thanks to Tailus.
                         </p>
                       </blockquote>
                     </div>
@@ -2424,8 +2356,8 @@ function Main() {
                       </span>
                       <blockquote className="mt-3">
                         <p className="text-gray-700 dark:text-gray-300">
-                          Great work on tailfolio template. This is one of the
-                          best personal website that I have seen so far :)
+                          Great work on tailfolio template. This is one of the best personal website
+                          that I have seen so far :)
                         </p>
                       </blockquote>
                     </div>
@@ -2452,14 +2384,12 @@ function Main() {
                       </span>
                       <blockquote className="mt-3">
                         <p className="text-gray-700 dark:text-gray-300">
-                          I am really new to Tailwind and I want to give a go to
-                          make some page on my own. I searched a lot of hero
-                          pages and blocks online. However, most of them are not
-                          giving me a clear view or needed some HTML/CSS coding
-                          background to make some changes from the original or
-                          too expensive to have. I downloaded the one of Tailus
-                          template which is very clear to understand at the
-                          start and you could modify the codes/blocks to fit
+                          I am really new to Tailwind and I want to give a go to make some page on
+                          my own. I searched a lot of hero pages and blocks online. However, most of
+                          them are not giving me a clear view or needed some HTML/CSS coding
+                          background to make some changes from the original or too expensive to
+                          have. I downloaded the one of Tailus template which is very clear to
+                          understand at the start and you could modify the codes/blocks to fit
                           perfectly on your purpose of the page.
                         </p>
                       </blockquote>
@@ -2490,11 +2420,9 @@ function Main() {
                       </span>
                       <blockquote className="mt-3">
                         <p className="text-gray-700 dark:text-gray-300">
-                          Tailus is redefining the standard of web design, with
-                          these blocks it provides an easy and efficient way for
-                          those who love beauty but may lack the time to
-                          implement it. I can only recommend this incredible
-                          wonder.
+                          Tailus is redefining the standard of web design, with these blocks it
+                          provides an easy and efficient way for those who love beauty but may lack
+                          the time to implement it. I can only recommend this incredible wonder.
                         </p>
                       </blockquote>
                     </div>
@@ -2514,17 +2442,14 @@ function Main() {
                       />
                     </span>
                     <div className="w-[calc(100%-3.25rem)]">
-                      <h3 className="font-medium text-gray-950 dark:text-white">
-                        Oketa Fred
-                      </h3>
+                      <h3 className="font-medium text-gray-950 dark:text-white">Oketa Fred</h3>
                       <span className="block text-sm tracking-wide text-gray-600 dark:text-gray-400">
                         Fullstack Developer
                       </span>
                       <blockquote className="mt-3">
                         <p className="text-gray-700 dark:text-gray-300">
-                          I absolutely love Tailus! The component blocks are
-                          beautifully designed and easy to use, which makes
-                          creating a great-looking website a breeze.
+                          I absolutely love Tailus! The component blocks are beautifully designed
+                          and easy to use, which makes creating a great-looking website a breeze.
                         </p>
                       </blockquote>
                     </div>
@@ -2541,18 +2466,15 @@ function Main() {
                       />
                     </span>
                     <div className="w-[calc(100%-3.25rem)]">
-                      <h3 className="font-medium text-gray-950 dark:text-white">
-                        Zeki
-                      </h3>
+                      <h3 className="font-medium text-gray-950 dark:text-white">Zeki</h3>
                       <span className="block text-sm tracking-wide text-gray-600 dark:text-gray-400">
                         Founder of ChatExtend
                       </span>
                       <blockquote className="mt-3">
                         <p className="text-gray-700 dark:text-gray-300">
-                          Using TailsUI has been like unlocking a secret design
-                          superpower. It's the perfect fusion of simplicity and
-                          versatility, enabling us to create UIs that are as
-                          stunning as they are user-friendly.
+                          Using TailsUI has been like unlocking a secret design superpower. It's the
+                          perfect fusion of simplicity and versatility, enabling us to create UIs
+                          that are as stunning as they are user-friendly.
                         </p>
                       </blockquote>
                     </div>
@@ -2571,21 +2493,17 @@ function Main() {
                       />
                     </span>
                     <div className="w-[calc(100%-3.25rem)]">
-                      <h3 className="font-medium text-gray-950 dark:text-white">
-                        Joseph Kitheka
-                      </h3>
+                      <h3 className="font-medium text-gray-950 dark:text-white">Joseph Kitheka</h3>
                       <span className="block text-sm tracking-wide text-gray-600 dark:text-gray-400">
                         Fullstack Developer
                       </span>
                       <blockquote className="mt-3">
                         <p className="text-gray-700 dark:text-gray-300">
-                          Tailus has transformed the way I develop web
-                          applications. Their extensive collection of UI
-                          components, blocks, and templates has significantly
-                          accelerated my workflow. The flexibility to customize
-                          every aspect allows me to create unique user
-                          experiences. Tailus is a game-changer for modern web
-                          development!
+                          Tailus has transformed the way I develop web applications. Their extensive
+                          collection of UI components, blocks, and templates has significantly
+                          accelerated my workflow. The flexibility to customize every aspect allows
+                          me to create unique user experiences. Tailus is a game-changer for modern
+                          web development!
                         </p>
                       </blockquote>
                     </div>
@@ -2606,17 +2524,14 @@ function Main() {
                       />
                     </span>
                     <div className="w-[calc(100%-3.25rem)]">
-                      <h3 className="font-medium text-gray-950 dark:text-white">
-                        Khatab Wedaa
-                      </h3>
+                      <h3 className="font-medium text-gray-950 dark:text-white">Khatab Wedaa</h3>
                       <span className="block text-sm tracking-wide text-gray-600 dark:text-gray-400">
                         MerakiUI Creator
                       </span>
                       <blockquote className="mt-3">
                         <p className="text-gray-700 dark:text-gray-300">
-                          Tailus is an elegant, clean, and responsive tailwind
-                          css components it's very helpfull to start fast with
-                          your project.
+                          Tailus is an elegant, clean, and responsive tailwind css components it's
+                          very helpfull to start fast with your project.
                         </p>
                       </blockquote>
                     </div>
@@ -2635,18 +2550,15 @@ function Main() {
                       />
                     </span>
                     <div className="w-[calc(100%-3.25rem)]">
-                      <h3 className="font-medium text-gray-950 dark:text-white">
-                        Rodrigo Aguilar
-                      </h3>
+                      <h3 className="font-medium text-gray-950 dark:text-white">Rodrigo Aguilar</h3>
                       <span className="block text-sm tracking-wide text-gray-600 dark:text-gray-400">
                         TailwindAwesome Creator
                       </span>
                       <blockquote className="mt-3">
                         <p className="text-gray-700 dark:text-gray-300">
-                          I love Tailus ❤️. The component blocks are
-                          well-structured, simple to use, and beautifully
-                          designed. It makes it really easy to have a
-                          good-looking website in no time.
+                          I love Tailus ❤️. The component blocks are well-structured, simple to use,
+                          and beautifully designed. It makes it really easy to have a good-looking
+                          website in no time.
                         </p>
                       </blockquote>
                     </div>
@@ -2665,22 +2577,17 @@ function Main() {
                       />
                     </span>
                     <div className="w-[calc(100%-3.25rem)]">
-                      <h3 className="font-medium text-gray-950 dark:text-white">
-                        Eric Ampire
-                      </h3>
+                      <h3 className="font-medium text-gray-950 dark:text-white">Eric Ampire</h3>
                       <span className="block text-sm tracking-wide text-gray-600 dark:text-gray-400">
-                        Mobile Engineer at @BRPNews • @GoogleDevExpert for
-                        Android{" "}
+                        Mobile Engineer at @BRPNews • @GoogleDevExpert for Android{" "}
                       </span>
                       <blockquote className="mt-3">
                         <p className="text-gray-700 dark:text-gray-300">
-                          Tailus templates are the perfect solution for anyone
-                          who wants to create a beautiful and functional website
-                          without any web design experience. The templates are
-                          easy to use, customizable, and responsive, and the
-                          support team is always available to help. I highly
-                          recommend Tailus templates to anyone who is looking to
-                          create a website.
+                          Tailus templates are the perfect solution for anyone who wants to create a
+                          beautiful and functional website without any web design experience. The
+                          templates are easy to use, customizable, and responsive, and the support
+                          team is always available to help. I highly recommend Tailus templates to
+                          anyone who is looking to create a website.
                         </p>
                       </blockquote>
                     </div>
@@ -2699,17 +2606,14 @@ function Main() {
                       />
                     </span>
                     <div className="w-[calc(100%-3.25rem)]">
-                      <h3 className="font-medium text-gray-950 dark:text-white">
-                        Roland Tubonge
-                      </h3>
+                      <h3 className="font-medium text-gray-950 dark:text-white">Roland Tubonge</h3>
                       <span className="block text-sm tracking-wide text-gray-600 dark:text-gray-400">
                         Software Engineer
                       </span>
                       <blockquote className="mt-3">
                         <p className="text-gray-700 dark:text-gray-300">
-                          Tailus is so well designed that even with a very poor
-                          knowledge of web design you can do miracles. Let
-                          yourself be seduced!
+                          Tailus is so well designed that even with a very poor knowledge of web
+                          design you can do miracles. Let yourself be seduced!
                         </p>
                       </blockquote>
                     </div>
@@ -3028,9 +2932,7 @@ function Footer() {
         </div>
         <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
           <div>
-            <span className="font-medium text-gray-950 dark:text-white">
-              Enterprise
-            </span>
+            <span className="font-medium text-gray-950 dark:text-white">Enterprise</span>
             <ul className="mt-4 list-inside space-y-4">
               <li>
                 <a
@@ -3075,9 +2977,7 @@ function Footer() {
             </ul>
           </div>
           <div>
-            <span className="text-sm font-medium text-gray-950 dark:text-white">
-              Product
-            </span>
+            <span className="text-sm font-medium text-gray-950 dark:text-white">Product</span>
             <ul className="mt-4 list-inside space-y-4">
               <li>
                 <a
@@ -3114,9 +3014,7 @@ function Footer() {
             </ul>
           </div>
           <div>
-            <span className="text-sm font-medium text-gray-950 dark:text-white">
-              Docs
-            </span>
+            <span className="text-sm font-medium text-gray-950 dark:text-white">Docs</span>
             <ul className="mt-4 list-inside space-y-4">
               <li>
                 <a
@@ -3185,9 +3083,7 @@ function Footer() {
             </ul>
           </div>
           <div>
-            <span className="text-sm font-medium text-gray-950 dark:text-white">
-              Community
-            </span>
+            <span className="text-sm font-medium text-gray-950 dark:text-white">Community</span>
             <ul className="mt-4 list-inside space-y-4">
               <li>
                 <a
@@ -3249,9 +3145,7 @@ function Footer() {
           </div>
         </div>
         <div className="flex items-center justify-between rounded-md bg-gray-100 px-6 py-3 dark:bg-gray-900">
-          <span className="text-gray-600 dark:text-gray-400">
-            © tailus 2021 - Present
-          </span>
+          <span className="text-gray-600 dark:text-gray-400">© tailus 2021 - Present</span>
           <a
             href="/"
             className="text-sm text-gray-600 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-500"
