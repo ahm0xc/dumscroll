@@ -3,7 +3,9 @@
 
 import { relations, sql } from "drizzle-orm";
 import { index, integer, pgTableCreator, timestamp, varchar } from "drizzle-orm/pg-core";
+import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { v4 as uuid } from "uuid";
+import type { z } from "zod";
 
 /**
  * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same
@@ -33,6 +35,10 @@ export const users = createTable(
   },
 );
 
+export const insertUserSchema = createInsertSchema(users);
+export const selectUserSchema = createSelectSchema(users);
+export type User = z.infer<typeof selectUserSchema>;
+
 export const usersRelations = relations(users, ({ many }) => ({
   tracks: many(tracks),
 }));
@@ -47,6 +53,10 @@ export const tracks = createTable("tracks", {
     .notNull(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(() => new Date()),
 });
+
+export const insertTrackSchema = createInsertSchema(tracks);
+export const selectTrackSchema = createSelectSchema(tracks);
+export type Track = z.infer<typeof selectTrackSchema>;
 
 export const tracksRelations = relations(tracks, ({ one }) => ({
   user: one(users, {

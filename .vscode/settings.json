@@ -4,5 +4,14 @@
       "mode": "auto"
     }
   ],
-  "cSpell.words": ["ampm", "Dumscroll", "globalstorage", "Squeezy", "tiktok", "webstore", "zustand"]
+  "cSpell.words": [
+    "ampm",
+    "Dumscroll",
+    "globalstorage",
+    "Squeezy",
+    "tiktok",
+    "webstore",
+    "zustand"
+  ],
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

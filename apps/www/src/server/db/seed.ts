@@ -3,11 +3,11 @@ import * as dotenv from "dotenv";
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 
-import { getRandomItemFromArray, getRandomNumberInRange } from "~/lib/utils";
+import { generateTrackId, getRandomItemFromArray, getRandomNumberInRange } from "~/lib/utils";
 import * as schema from "./schema";
 dotenv.config();
 
-const userID = "user_2kepQzzL9nnXaWJzmpuofgosvzg"; // ahmed
+const userId = "user_2kepQzzL9nnXaWJzmpuofgosvzg"; // ahmed
 
 const allowedWebsites = [
   "https://facebook.com",
@@ -32,20 +32,31 @@ async function main() {
 
   const today = dayjs();
 
-  const data: (typeof schema.tracks.$inferInsert)[] = Array.from({
-    length: 100,
-  }).map((_, i) => {
-    const r = today.subtract(i, "days");
-    const url = getRandomItemFromArray(allowedWebsites) as string;
+  // const data: (typeof schema.tracks.$inferInsert)[] = Array.from({
+  //   length: 100,
+  // }).map((_, i) => {
+  //   const r = today.subtract(i, "days");
+  //   const url = getRandomItemFromArray(allowedWebsites) as string;
+  //   return {
+  //     id: `${r.get("year").toString().padStart(4, "0")}-${(r.get("month") + 1).toString().padStart(2, "0")}-${r.get("date").toString().padStart(2, "0")}#${userID}#${url}`,
+  //     userId: userID,
+  //     duration: getRandomNumberInRange(120, 2000),
+  //     url,
+  //   };
+  // });
+
+  const data: (typeof schema.tracks.$inferInsert)[] = allowedWebsites.map((url) => {
     return {
-      id: `${r.get("year").toString().padStart(4, "0")}-${(r.get("month") + 1).toString().padStart(2, "0")}-${r.get("date").toString().padStart(2, "0")}#${userID}#${url}`,
-      userId: userID,
+      id: generateTrackId({ userId, websiteUrl: url, today }),
+      url: url,
+      userId: userId,
       duration: getRandomNumberInRange(120, 2000),
-      url,
     };
   });
 
   await db.insert(schema.tracks).values(data);
 }
 
-main();
+main().then(() => {
+  console.info("Done");
+});

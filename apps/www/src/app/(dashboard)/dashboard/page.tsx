@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -6,6 +7,7 @@ export const metadata: Metadata = {
 };
 
 export default function DashboardPage() {
+  redirect("/dashboard/v2");
   return (
     <main>
       {/* <div className="flex-col flex">
