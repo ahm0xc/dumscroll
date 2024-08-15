@@ -1,10 +1,87 @@
 import { SignedIn, SignedOut } from "@clerk/nextjs";
-import { ChevronRightIcon } from "lucide-react";
+import {
+  CalendarCheck2Icon,
+  ChevronRightIcon,
+  ShieldHalfIcon,
+  SirenIcon,
+} from "lucide-react";
 import Link from "next/link";
 import type React from "react";
 import Logo from "~/components/logo";
 
 import "~/styles/homepage.css";
+
+const communityComments = [
+  {
+    userImage: "https://randomuser.me/api/portraits/women/5.jpg",
+    name: "Anna Thompson",
+    userTitle: "Product Manager",
+    comment:
+      "This extension is a game-changer. I've regained control over my time.",
+  },
+  {
+    userImage: "https://randomuser.me/api/portraits/men/6.jpg",
+    name: "Liam Johnson",
+    userTitle: "Engineer",
+    comment:
+      "I can't believe how much more productive I've become. Highly recommend!",
+  },
+  {
+    userImage: "https://randomuser.me/api/portraits/women/7.jpg",
+    name: "Emily Smith",
+    userTitle: "Marketing Specialist",
+    comment: "No more mindless scrolling. This extension is a lifesaver.",
+  },
+  {
+    userImage: "https://randomuser.me/api/portraits/men/8.jpg",
+    name: "Michael Brown",
+    userTitle: "Designer",
+    comment:
+      "Amazing tool. My focus has improved dramatically since I started using it.",
+  },
+  {
+    userImage: "https://randomuser.me/api/portraits/women/9.jpg",
+    name: "Sophia Wilson",
+    userTitle: "Writer",
+    comment:
+      "I love it! My productivity has soared, and I have more time for creative work.",
+  },
+  {
+    userImage: "https://randomuser.me/api/portraits/men/10.jpg",
+    name: "James Davis",
+    userTitle: "Analyst",
+    comment:
+      "This extension is exactly what I needed to stay on track. Fantastic!",
+  },
+  {
+    userImage: "https://randomuser.me/api/portraits/women/11.jpg",
+    name: "Olivia Taylor",
+    userTitle: "Manager",
+    comment:
+      "It's incredible how much time I was wasting. Now I can focus on what matters.",
+  },
+  {
+    userImage: "https://randomuser.me/api/portraits/men/12.jpg",
+    name: "Ethan Martinez",
+    userTitle: "Entrepreneur",
+    comment:
+      "The best extension I've ever used. My days are so much more productive now.",
+  },
+  {
+    userImage: "https://randomuser.me/api/portraits/women/13.jpg",
+    name: "Isabella Anderson",
+    userTitle: "Coordinator",
+    comment:
+      "I feel so much more in control of my time. This extension is a must-have!",
+  },
+  {
+    userImage: "https://randomuser.me/api/portraits/men/14.jpg",
+    name: "Alexander Lee",
+    userTitle: "Creator",
+    comment:
+      "A fantastic tool for anyone looking to reclaim their time. Highly effective!",
+  },
+];
 
 export default function HomePage() {
   return (
@@ -55,7 +132,11 @@ function Header() {
         <div className="m-auto max-w-6xl px-6 2xl:px-0">
           <div className="flex flex-wrap items-center justify-between py-2 sm:py-4">
             <div className="flex w-full items-center justify-between lg:w-auto">
-              <Link href="/" aria-label="Dumscroll" className="flex items-center gap-1.5">
+              <Link
+                href="/"
+                aria-label="Dumscroll"
+                className="flex items-center gap-1.5"
+              >
                 <Logo /> <span className="text-xl font-medium">Dumscroll</span>
               </Link>
               <div className="flex lg:hidden">
@@ -152,21 +233,28 @@ function Main() {
                       stroke="currentColor"
                       strokeWidth={2}
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9 5l7 7-7 7"
+                      />
                     </svg>
                   </div>
                 </span>
               </a>
               <h1 className="mt-8 text-wrap text-4xl font-semibold text-gray-950 dark:text-white md:text-5xl xl:text-5xl xl:[line-height:1.125]">
-                Tame the Wild West <br className="hidden sm:block" /> of Frontend Development
+                Stop Endless Scrolling <br className="hidden sm:block" />{" "}
+                Reclaim your time with Dumscroll
               </h1>
               <p className="mx-auto mt-8 hidden max-w-2xl text-wrap text-lg text-gray-700 dark:text-gray-300 sm:block">
-                Tailwindcss highly customizable components for building modern websites and
-                applications that look and feel the way you mean it.
+                DumScroll is here to help you break the cycle of endless social
+                media scrolling. Stay focused, reduce distractions, and take
+                charge of your digital habits.
               </p>
               <p className="mx-auto mt-6 max-w-2xl text-wrap text-gray-700 dark:text-gray-300 sm:hidden">
-                Highly customizable components for building modern websites and applications, with
-                your personal spark.
+                DumScroll is here to help you break the cycle of endless social
+                media scrolling. Stay focused, reduce distractions, and take
+                charge of your digital habits.
               </p>
               <div className="mt-8 flex flex-col items-center justify-center gap-4">
                 <div className="rounded-[calc(var(--btn-border-radius)+4px)] border bg-gray-950/5 p-1 dark:border-white/10 dark:bg-white/5">
@@ -516,7 +604,7 @@ function Main() {
                       </span>
                     </div>
                     <h2 className="mt-6 text-center text-3xl font-semibold text-gray-950 dark:text-white">
-                      Customizable
+                      Controllable
                     </h2>
                   </div>
                 </div>
@@ -584,8 +672,8 @@ function Main() {
                         Secure by default
                       </h2>
                       <p className="text-gray-700 dark:text-gray-300">
-                        Provident fugit and vero voluptate. magnam magni doloribus dolores
-                        voluptates a sapiente nisi.
+                        We will not send any data to any third party or any
+                        other place.
                       </p>
                     </div>
                   </div>
@@ -681,8 +769,7 @@ function Main() {
                         Faster than light
                       </h2>
                       <p className="text-gray-700 dark:text-gray-300">
-                        Provident fugit vero voluptate. magnam magni doloribus dolores voluptates
-                        inventore nisi.
+                        Lower your scroll and distraction. Time up to 2+ hours
                       </p>
                     </div>
                   </div>
@@ -708,10 +795,11 @@ function Main() {
                       </div>
                       <div className="space-y-2">
                         <h2 className="text-lg font-medium text-gray-800 transition group-hover:text-secondary-950 dark:text-white">
-                          Faster than light
+                          Daily Analytics
                         </h2>
                         <p className="text-gray-700 dark:text-gray-300">
-                          Provident fugit vero voluptate. Voluptates a sapiente inventore nisi.
+                          Daily analytics for Better understanding how much time
+                          savings
                         </p>
                       </div>
                     </div>
@@ -791,11 +879,11 @@ function Main() {
                       </div>
                       <div className="space-y-2">
                         <h2 className="text-lg font-medium text-gray-800 transition group-hover:text-secondary-950 dark:text-white">
-                          Keep your loved ones safe
+                          Anti block system
                         </h2>
                         <p className="text-gray-700 dark:text-gray-300">
-                          Voluptate. magnam magni doloribus dolores voluptates a sapiente inventore
-                          nisi.
+                          It will show you warning + annoying popup so you
+                          resist yourself
                         </p>
                       </div>
                     </div>
@@ -851,11 +939,13 @@ function Main() {
           <div className="mx-auto max-w-6xl px-6 text-gray-500">
             <div className="text-center">
               <h2 className="text-3xl font-semibold text-gray-950 dark:text-white">
-                Seamlessly integrates with <br /> your favorite frontend tools
+                These are the time hunger
+                <br />
+                Social Medias taking you time
               </h2>
-              <p className="mt-6 text-gray-700 dark:text-gray-300">
+              {/* <p className="mt-6 text-gray-700 dark:text-gray-300">
                 Orrupti aut temporibus ariatur.
-              </p>
+              </p> */}
             </div>
             <div className="relative -mx-6 mt-12 h-fit w-fit overflow-x-auto px-6 sm:mx-auto sm:px-0">
               <div className="mx-auto mb-3 flex w-fit gap-3 text-gray-950 dark:text-white">
@@ -1051,7 +1141,10 @@ function Main() {
                           result="shadowBlurInner1"
                           stdDeviation="17.5"
                         />
-                        <feOffset in="shadowBlurInner1" result="shadowOffsetInner1" />
+                        <feOffset
+                          in="shadowBlurInner1"
+                          result="shadowOffsetInner1"
+                        />
                         <feComposite
                           in="shadowOffsetInner1"
                           in2="SourceAlpha"
@@ -1110,13 +1203,21 @@ function Main() {
                       fill="#ffc24a"
                       d="m0 282.998l2.123-2.972L102.527 89.512l.212-2.017L58.48 4.358C54.77-2.606 44.33-.845 43.114 6.951z"
                     />
-                    <use fill="#ffa712" fillRule="evenodd" href="#logosFirebase2" />
+                    <use
+                      fill="#ffa712"
+                      fillRule="evenodd"
+                      href="#logosFirebase2"
+                    />
                     <use filter="url(#logosFirebase0)" href="#logosFirebase2" />
                     <path
                       fill="#f4bd62"
                       d="m135.005 150.38l32.955-33.75l-32.965-62.93c-3.129-5.957-11.866-5.975-14.962 0L102.42 87.287v2.86z"
                     />
-                    <use fill="#ffa50e" fillRule="evenodd" href="#logosFirebase3" />
+                    <use
+                      fill="#ffa50e"
+                      fillRule="evenodd"
+                      href="#logosFirebase3"
+                    />
                     <use filter="url(#logosFirebase1)" href="#logosFirebase3" />
                     <path
                       fill="#f6820c"
@@ -1253,7 +1354,11 @@ function Main() {
                         y2="68.21%"
                       >
                         <stop offset="0%" stopColor="#ff31d9" />
-                        <stop offset="100%" stopColor="#ff5be1" stopOpacity={0} />
+                        <stop
+                          offset="100%"
+                          stopColor="#ff5be1"
+                          stopOpacity={0}
+                        />
                       </linearGradient>
                     </defs>
                     <path
@@ -1482,86 +1587,29 @@ function Main() {
               <div className="lg:col-span-2">
                 <div className="md:pr-6 lg:pr-0">
                   <h2 className="text-3xl font-semibold text-gray-950 dark:text-white">
-                    All your favorite dev tools work with Ada
+                    Create your own distraction free workspace.
                   </h2>
                   <p className="mt-6 text-gray-700 dark:text-gray-300">
-                    Harum quae dolore inventore repudiandae? orrupti aut temporibus assumenda atque
-                    ab, accusamus sit, molestiae veniam laboriosam pariatur.
+                    Create, customize, schedule blocking rules on any website as
+                    you want.
                   </p>
                 </div>
                 <ul className="mt-8 divide-y divide-[--ui-light-border-color] border-y border-[--ui-light-border-color] text-gray-700 *:flex *:items-center *:gap-3 *:py-3 dark:divide-[--ui-dark-border-color] dark:border-[--ui-dark-border-color] dark:text-gray-300">
                   <li>
-                    <svg
-                      className="size-5"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width={24}
-                      height={24}
-                      viewBox="0 0 24 24"
-                    >
-                      <g fill="none" stroke="currentColor" strokeWidth="1.5">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="m7 9l5 3.5L17 9" />
-                        <path d="M2 17V7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2Z" />
-                      </g>
-                    </svg>
-                    Email and web support
+                    <ShieldHalfIcon size={18} />
+                    More than 10000+ porn website block
                   </li>
                   <li>
-                    <svg
-                      className="size-5"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width={24}
-                      height={24}
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M8 9.5A1.25 1.25 0 1 0 8 12a1.25 1.25 0 0 0 0-2.5m4 0a1.25 1.25 0 1 0 0 2.5a1.25 1.25 0 0 0 0-2.5m2.75 1.25a1.25 1.25 0 1 1 2.5 0a1.25 1.25 0 0 1-2.5 0"
-                      />
-                      <path
-                        fill="currentColor"
-                        fillRule="evenodd"
-                        d="M16.1 4.593a50.577 50.577 0 0 0-8.098-.04l-.193.015A4.93 4.93 0 0 0 3.25 9.483V18a.75.75 0 0 0 1.105.66l3.91-2.101a1.25 1.25 0 0 1 .593-.149h8.976c1.132 0 2.102-.81 2.305-1.923c.412-2.257.444-4.567.096-6.835l-.102-.669a2.666 2.666 0 0 0-2.408-2.252zM8.116 6.049a49.078 49.078 0 0 1 7.858.038l1.624.139c.536.046.972.453 1.053.985l.103.668a19.165 19.165 0 0 1-.09 6.339a.843.843 0 0 1-.829.692H8.858a2.75 2.75 0 0 0-1.302.328L4.75 16.746V9.483a3.43 3.43 0 0 1 3.171-3.42z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                    Fast response time
+                    <SirenIcon size={18} />
+                    Easily Turn on emergency Mode
                   </li>
                   <li>
-                    <svg
-                      className="size-5"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="1em"
-                      height="1em"
-                      viewBox="0 0 14 14"
-                    >
-                      <path
-                        fill="none"
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M.5 7.08h2.19a.52.52 0 0 0 .45-.27l1.8-3.6a.49.49 0 0 1 .49-.27a.48.48 0 0 1 .43.35l2.23 7.42a.5.5 0 0 0 .46.36a.5.5 0 0 0 .45-.32l1.37-3.35a.51.51 0 0 1 .47-.32h2.66"
-                      />
-                    </svg>
-                    Menitoring and analytics
-                  </li>
-                  <li>
-                    <svg
-                      className="size-5"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width={24}
-                      height={24}
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="m6.75 21l-.25-2.2l2.85-7.85q.375.35.813.588t.937.362l-2.75 7.55zm10.5 0l-1.6-1.55l-2.75-7.55q.5-.125.938-.363t.812-.587l2.85 7.85zM12 11q-1.25 0-2.125-.875T9 8q0-.975.563-1.737T11 5.2V3h2v2.2q.875.3 1.438 1.063T15 8q0 1.25-.875 2.125T12 11m0-2q.425 0 .713-.288T13 8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8q0 .425.288.713T12 9"
-                      />
-                    </svg>
-                    Architectural review
+                    <CalendarCheck2Icon size={18} />
+                    Add schedule to your distracting website
                   </li>
                 </ul>
               </div>
-              <div className="overflow-hidden rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg] lg:col-span-3">
+              {/* <div className="overflow-hidden rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg] lg:col-span-3">
                 <div className="flex gap-2 px-[--card-padding] py-6 *:size-2.5 *:rounded-full">
                   <div className="bg-[#f87171]" />
                   <div className="bg-[#fbbf24]" />
@@ -1652,7 +1700,7 @@ function Main() {
                     </pre>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -1662,610 +1710,30 @@ function Main() {
           <div className="mx-auto max-w-6xl px-6 text-gray-500">
             <div className="text-center">
               <h2 className="text-3xl font-semibold text-gray-950 dark:text-white">
-                Quickstart with boilerplates
+                These are not always distracting
               </h2>
               <p className="mt-6 text-gray-700 dark:text-gray-300">
-                Harum quae dolore inventore repudiandae? orrupti aut temporibus ariatur.
+                Restriction and lower the distraction so you can study, work,
+                research without getting distracted by watching nonsense videos.
               </p>
             </div>
             <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              <div className="group relative overflow-hidden rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white p-[--card-padding] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg]">
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-0 aspect-video -translate-y-1/2 rounded-full border bg-gradient-to-b from-warning-500 to-white opacity-25 blur-2xl duration-300 group-hover:-translate-y-1/4 dark:from-white dark:to-white dark:opacity-0 dark:group-hover:opacity-5"
-                />
-                <div className="relative">
-                  <div className="relative flex size-12 rounded-[calc(var(--card-border-radius)/2)] border border-warning-500/10 *:relative *:m-auto *:size-6 before:absolute before:inset-0 before:rounded-[calc((var(--card-border-radius)/2)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-warning-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/10 dark:before:to-transparent dark:before:shadow-gray-950">
-                    <svg
-                      className="text-[#000014] dark:text-white"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="1em"
-                      height="1em"
-                      viewBox="0 0 128 128"
-                    >
-                      <defs>
-                        <linearGradient
-                          id="deviconAstro0"
-                          x1="882.997"
-                          x2="638.955"
-                          y1="27.113"
-                          y2="866.902"
-                          gradientTransform="scale(.1)"
-                          gradientUnits="userSpaceOnUse"
-                        >
-                          <stop offset={0} stopColor="currentColor" />
-                          <stop offset={1} stopColor="currentColor" />
-                        </linearGradient>
-                        <linearGradient
-                          id="deviconAstro1"
-                          x1="1001.68"
-                          x2="790.326"
-                          y1="652.45"
-                          y2="1094.91"
-                          gradientTransform="scale(.1)"
-                          gradientUnits="userSpaceOnUse"
-                        >
-                          <stop offset={0} stopColor="#ff1639" />
-                          <stop offset={1} stopColor="#ff1639" stopOpacity={0} />
-                        </linearGradient>
-                      </defs>
-                      <path
-                        fill="url(#deviconAstro0)"
-                        d="M81.504 9.465c.973 1.207 1.469 2.836 2.457 6.09l21.656 71.136a90.079 90.079 0 0 0-25.89-8.765L65.629 30.28a1.833 1.833 0 0 0-3.52.004L48.18 77.902a90.104 90.104 0 0 0-26.003 8.778l21.758-71.14c.996-3.25 1.492-4.876 2.464-6.083a8.023 8.023 0 0 1 3.243-2.398c1.433-.575 3.136-.575 6.535-.575H71.72c3.402 0 5.105 0 6.543.579a7.988 7.988 0 0 1 3.242 2.402Zm0 0"
-                      />
-                      <path
-                        fill="#ff5d01"
-                        d="M84.094 90.074c-3.57 3.055-10.696 5.137-18.903 5.137c-10.07 0-18.515-3.137-20.754-7.356c-.8 2.418-.98 5.184-.98 6.954c0 0-.527 8.675 5.508 14.71a5.671 5.671 0 0 1 5.672-5.671c5.37 0 5.367 4.683 5.363 8.488v.336c0 5.773 3.527 10.719 8.543 12.805a11.62 11.62 0 0 1-1.172-5.098c0-5.508 3.23-7.555 6.988-9.938c2.989-1.894 6.309-4 8.594-8.222a15.513 15.513 0 0 0 1.875-7.41a15.55 15.55 0 0 0-.734-4.735m0 0"
-                      />
-                      <path
-                        fill="url(#deviconAstro1)"
-                        d="M84.094 90.074c-3.57 3.055-10.696 5.137-18.903 5.137c-10.07 0-18.515-3.137-20.754-7.356c-.8 2.418-.98 5.184-.98 6.954c0 0-.527 8.675 5.508 14.71a5.671 5.671 0 0 1 5.672-5.671c5.37 0 5.367 4.683 5.363 8.488v.336c0 5.773 3.527 10.719 8.543 12.805a11.62 11.62 0 0 1-1.172-5.098c0-5.508 3.23-7.555 6.988-9.938c2.989-1.894 6.309-4 8.594-8.222a15.513 15.513 0 0 0 1.875-7.41a15.55 15.55 0 0 0-.734-4.735m0 0"
-                      />
-                    </svg>
-                  </div>
-                  <div className="mt-6 rounded-b-[--card-border-radius] pb-6">
-                    <p className="text-gray-700 dark:text-gray-300">
-                      Amet praesentium deserunt ex commodi tempore fuga voluptatem. Sit, sapiente.
-                    </p>
-                  </div>
-                  <div className="-mb-[--card-padding] flex gap-3 border-t border-[--ui-light-border-color] py-4 dark:border-[--ui-dark-border-color]">
-                    <a
-                      href="/"
-                      download="/"
-                      className="group flex h-8 items-center justify-center gap-1.5 rounded-[--btn-border-radius] bg-gray-100 px-3.5 text-sm text-gray-950 *:select-none hover:bg-gray-200/75 active:bg-gray-100 disabled:border disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-950 *:disabled:opacity-20 dark:bg-gray-500/10 dark:text-white dark:hover:bg-gray-500/15 dark:active:bg-gray-500/10 dark:disabled:border-gray-800/50 disabled:dark:bg-gray-900 dark:*:disabled:!text-white [&>*:not(.sr-only)]:relative"
-                    >
-                      <span>Download</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="1em"
-                        height="1em"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          fill="none"
-                          stroke="currentColor"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="m17 13l-5 5m0 0l-5-5m5 5V6"
-                        />
-                      </svg>
-                    </a>
-                    <a
-                      href="https://github.com/tailus-ui"
-                      className="group flex size-8 items-center justify-center rounded-[--btn-border-radius] bg-gray-100 text-gray-950 *:select-none hover:bg-gray-200/75 active:bg-gray-100 disabled:border disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-950 *:disabled:opacity-20 dark:bg-gray-500/10 dark:text-white dark:hover:bg-gray-500/15 dark:active:bg-gray-500/10 dark:disabled:border-gray-800/50 disabled:dark:bg-gray-900 dark:*:disabled:!text-white [&>*:not(.sr-only)]:relative"
-                    >
-                      <span className="sr-only">Source Code</span>
-                      <svg
-                        className="size-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="1em"
-                        height="1em"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33c.85 0 1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"
-                        />
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="group relative overflow-hidden rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white p-[--card-padding] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg]">
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-0 aspect-video -translate-y-1/2 rounded-full border bg-gradient-to-b from-success-500 to-white opacity-25 blur-2xl duration-300 group-hover:-translate-y-1/4 dark:from-white dark:to-white dark:opacity-0 dark:group-hover:opacity-5"
-                />
-                <div className="relative">
-                  <div className="relative flex size-12 rounded-[calc(var(--card-border-radius)/2)] border border-success-500/10 *:relative *:m-auto *:size-6 before:absolute before:inset-0 before:rounded-[calc((var(--card-border-radius)/2)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-success-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/10 dark:before:to-transparent dark:before:shadow-gray-950">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="0.98em"
-                      height="1em"
-                      viewBox="0 0 256 263"
-                    >
-                      <defs>
-                        <linearGradient
-                          id="logosSupabaseIcon0"
-                          x1="20.862%"
-                          x2="63.426%"
-                          y1="20.687%"
-                          y2="44.071%"
-                        >
-                          <stop offset="0%" stopColor="#249361" />
-                          <stop offset="100%" stopColor="#3ecf8e" />
-                        </linearGradient>
-                        <linearGradient
-                          id="logosSupabaseIcon1"
-                          x1="1.991%"
-                          x2="21.403%"
-                          y1="-13.158%"
-                          y2="34.708%"
-                        >
-                          <stop offset="0%" />
-                          <stop offset="100%" stopOpacity={0} />
-                        </linearGradient>
-                      </defs>
-                      <path
-                        fill="url(#logosSupabaseIcon0)"
-                        d="M149.602 258.579c-6.718 8.46-20.338 3.824-20.5-6.977l-2.367-157.984h106.229c19.24 0 29.971 22.223 18.007 37.292z"
-                      />
-                      <path
-                        fill="url(#logosSupabaseIcon1)"
-                        fillOpacity="0.2"
-                        d="M149.602 258.579c-6.718 8.46-20.338 3.824-20.5-6.977l-2.367-157.984h106.229c19.24 0 29.971 22.223 18.007 37.292z"
-                      />
-                      <path
-                        fill="#3ecf8e"
-                        d="M106.399 4.37c6.717-8.461 20.338-3.826 20.5 6.976l1.037 157.984H23.037c-19.241 0-29.973-22.223-18.008-37.292z"
-                      />
-                    </svg>
-                  </div>
-                  <div className="mt-6 rounded-b-[--card-border-radius] pb-6">
-                    <p className="text-gray-700 dark:text-gray-300">
-                      Amet praesentium deserunt ex commodi tempore fuga voluptatem. Sit, sapiente.
-                    </p>
-                  </div>
-                  <div className="-mb-[--card-padding] flex gap-3 border-t border-[--ui-light-border-color] py-4 dark:border-[--ui-dark-border-color]">
-                    <a
-                      href="/"
-                      download="/"
-                      className="group flex h-8 items-center justify-center gap-1.5 rounded-[--btn-border-radius] bg-gray-100 px-3.5 text-sm text-gray-950 *:select-none hover:bg-gray-200/75 active:bg-gray-100 disabled:border disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-950 *:disabled:opacity-20 dark:bg-gray-500/10 dark:text-white dark:hover:bg-gray-500/15 dark:active:bg-gray-500/10 dark:disabled:border-gray-800/50 disabled:dark:bg-gray-900 dark:*:disabled:!text-white [&>*:not(.sr-only)]:relative"
-                    >
-                      <span>Download</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="1em"
-                        height="1em"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          fill="none"
-                          stroke="currentColor"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="m17 13l-5 5m0 0l-5-5m5 5V6"
-                        />
-                      </svg>
-                    </a>
-                    <a
-                      href="https://github.com/tailus-ui"
-                      className="group flex size-8 items-center justify-center rounded-[--btn-border-radius] bg-gray-100 text-gray-950 *:select-none hover:bg-gray-200/75 active:bg-gray-100 disabled:border disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-950 *:disabled:opacity-20 dark:bg-gray-500/10 dark:text-white dark:hover:bg-gray-500/15 dark:active:bg-gray-500/10 dark:disabled:border-gray-800/50 disabled:dark:bg-gray-900 dark:*:disabled:!text-white [&>*:not(.sr-only)]:relative"
-                    >
-                      <span className="sr-only">Source Code</span>
-                      <svg
-                        className="size-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="1em"
-                        height="1em"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33c.85 0 1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"
-                        />
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="group relative overflow-hidden rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white p-[--card-padding] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg]">
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-0 aspect-video -translate-y-1/2 rounded-full border bg-gradient-to-b from-danger-500 to-white opacity-25 blur-2xl duration-300 group-hover:-translate-y-1/4 dark:from-white dark:to-white dark:opacity-0 dark:group-hover:opacity-5"
-                />
-                <div className="relative">
-                  <div className="relative flex size-12 rounded-[calc(var(--card-border-radius)/2)] border border-danger-500/10 *:relative *:m-auto *:size-6 before:absolute before:inset-0 before:rounded-[calc((var(--card-border-radius)/2)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-danger-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/10 dark:before:to-transparent dark:before:shadow-gray-950">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="0.95em"
-                      height="1em"
-                      viewBox="0 0 256 271"
-                    >
-                      <defs>
-                        <linearGradient
-                          id="logosAngularIcon0"
-                          x1="25.071%"
-                          x2="96.132%"
-                          y1="90.929%"
-                          y2="55.184%"
-                        >
-                          <stop offset="0%" stopColor="#e40035" />
-                          <stop offset="24%" stopColor="#f60a48" />
-                          <stop offset="35.2%" stopColor="#f20755" />
-                          <stop offset="49.4%" stopColor="#dc087d" />
-                          <stop offset="74.5%" stopColor="#9717e7" />
-                          <stop offset="100%" stopColor="#6c00f5" />
-                        </linearGradient>
-                        <linearGradient
-                          id="logosAngularIcon1"
-                          x1="21.863%"
-                          x2="68.367%"
-                          y1="12.058%"
-                          y2="68.21%"
-                        >
-                          <stop offset="0%" stopColor="#ff31d9" />
-                          <stop offset="100%" stopColor="#ff5be1" stopOpacity={0} />
-                        </linearGradient>
-                      </defs>
-                      <path
-                        fill="url(#logosAngularIcon0)"
-                        d="m256 45.179l-9.244 145.158L158.373 0zm-61.217 187.697l-66.782 38.105l-66.784-38.105L74.8 199.958h106.4zM128.001 72.249l34.994 85.076h-69.99zM9.149 190.337L0 45.179L97.627 0z"
-                      />
-                      <path
-                        fill="url(#logosAngularIcon1)"
-                        d="m256 45.179l-9.244 145.158L158.373 0zm-61.217 187.697l-66.782 38.105l-66.784-38.105L74.8 199.958h106.4zM128.001 72.249l34.994 85.076h-69.99zM9.149 190.337L0 45.179L97.627 0z"
-                      />
-                    </svg>
-                  </div>
-                  <div className="mt-6 rounded-b-[--card-border-radius] pb-6">
-                    <p className="text-gray-700 dark:text-gray-300">
-                      Amet praesentium deserunt ex commodi tempore fuga voluptatem. Sit, sapiente.
-                    </p>
-                  </div>
-                  <div className="-mb-[--card-padding] flex gap-3 border-t border-[--ui-light-border-color] py-4 dark:border-[--ui-dark-border-color]">
-                    <a
-                      href="/"
-                      download="/"
-                      className="group flex h-8 items-center justify-center gap-1.5 rounded-[--btn-border-radius] bg-gray-100 px-3.5 text-sm text-gray-950 *:select-none hover:bg-gray-200/75 active:bg-gray-100 disabled:border disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-950 *:disabled:opacity-20 dark:bg-gray-500/10 dark:text-white dark:hover:bg-gray-500/15 dark:active:bg-gray-500/10 dark:disabled:border-gray-800/50 disabled:dark:bg-gray-900 dark:*:disabled:!text-white [&>*:not(.sr-only)]:relative"
-                    >
-                      <span>Download</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="1em"
-                        height="1em"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          fill="none"
-                          stroke="currentColor"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="m17 13l-5 5m0 0l-5-5m5 5V6"
-                        />
-                      </svg>
-                    </a>
-                    <a
-                      href="https://github.com/tailus-ui"
-                      className="group flex size-8 items-center justify-center rounded-[--btn-border-radius] bg-gray-100 text-gray-950 *:select-none hover:bg-gray-200/75 active:bg-gray-100 disabled:border disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-950 *:disabled:opacity-20 dark:bg-gray-500/10 dark:text-white dark:hover:bg-gray-500/15 dark:active:bg-gray-500/10 dark:disabled:border-gray-800/50 disabled:dark:bg-gray-900 dark:*:disabled:!text-white [&>*:not(.sr-only)]:relative"
-                    >
-                      <span className="sr-only">Source Code</span>
-                      <svg
-                        className="size-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="1em"
-                        height="1em"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33c.85 0 1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"
-                        />
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="group relative overflow-hidden rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white p-[--card-padding] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg]">
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-0 aspect-video -translate-y-1/2 rounded-full border bg-gradient-to-b from-gray-500 to-white opacity-25 blur-2xl duration-300 group-hover:-translate-y-1/4 dark:from-white dark:to-white dark:opacity-0 dark:group-hover:opacity-5"
-                />
-                <div className="relative">
-                  <div className="relative flex size-12 rounded-[calc(var(--card-border-radius)/2)] border border-gray-500/10 text-gray-950 *:relative *:m-auto *:size-6 before:absolute before:inset-0 before:rounded-[calc((var(--card-border-radius)/2)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-gray-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:text-white dark:before:border-white/20 dark:before:from-white/10 dark:before:to-transparent dark:before:shadow-gray-950">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="1em"
-                      height="1em"
-                      viewBox="0 0 15 15"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="m4.5 4.5l.405-.293A.5.5 0 0 0 4 4.5zm3 9.5A6.5 6.5 0 0 1 1 7.5H0A7.5 7.5 0 0 0 7.5 15zM14 7.5A6.5 6.5 0 0 1 7.5 14v1A7.5 7.5 0 0 0 15 7.5zM7.5 1A6.5 6.5 0 0 1 14 7.5h1A7.5 7.5 0 0 0 7.5 0zm0-1A7.5 7.5 0 0 0 0 7.5h1A6.5 6.5 0 0 1 7.5 1zM5 12V4.5H4V12zm-.905-7.207l6.5 9l.81-.586l-6.5-9zM10 4v6h1V4z"
-                      />
-                    </svg>
-                  </div>
-                  <div className="mt-6 rounded-b-[--card-border-radius] pb-6">
-                    <p className="text-gray-700 dark:text-gray-300">
-                      Amet praesentium deserunt ex commodi tempore fuga voluptatem. Sit, sapiente.
-                    </p>
-                  </div>
-                  <div className="-mb-[--card-padding] flex gap-3 border-t border-[--ui-light-border-color] py-4 dark:border-[--ui-dark-border-color]">
-                    <a
-                      href="/"
-                      download="/"
-                      className="group flex h-8 items-center justify-center gap-1.5 rounded-[--btn-border-radius] bg-gray-100 px-3.5 text-sm text-gray-950 *:select-none hover:bg-gray-200/75 active:bg-gray-100 disabled:border disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-950 *:disabled:opacity-20 dark:bg-gray-500/10 dark:text-white dark:hover:bg-gray-500/15 dark:active:bg-gray-500/10 dark:disabled:border-gray-800/50 disabled:dark:bg-gray-900 dark:*:disabled:!text-white [&>*:not(.sr-only)]:relative"
-                    >
-                      <span>Download</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="1em"
-                        height="1em"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          fill="none"
-                          stroke="currentColor"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="m17 13l-5 5m0 0l-5-5m5 5V6"
-                        />
-                      </svg>
-                    </a>
-                    <a
-                      href="https://github.com/tailus-ui"
-                      className="group flex size-8 items-center justify-center rounded-[--btn-border-radius] bg-gray-100 text-gray-950 *:select-none hover:bg-gray-200/75 active:bg-gray-100 disabled:border disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-950 *:disabled:opacity-20 dark:bg-gray-500/10 dark:text-white dark:hover:bg-gray-500/15 dark:active:bg-gray-500/10 dark:disabled:border-gray-800/50 disabled:dark:bg-gray-900 dark:*:disabled:!text-white [&>*:not(.sr-only)]:relative"
-                    >
-                      <span className="sr-only">Source Code</span>
-                      <svg
-                        className="size-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="1em"
-                        height="1em"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33c.85 0 1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"
-                        />
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="group relative overflow-hidden rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white p-[--card-padding] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg]">
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-0 aspect-video -translate-y-1/2 rounded-full border bg-gradient-to-b from-warning-500 to-white opacity-25 blur-2xl duration-300 group-hover:-translate-y-1/4 dark:from-white dark:to-white dark:opacity-0 dark:group-hover:opacity-5"
-                />
-                <div className="relative">
-                  <div className="relative flex size-12 rounded-[calc(var(--card-border-radius)/2)] border border-warning-500/10 *:relative *:m-auto *:size-6 before:absolute before:inset-0 before:rounded-[calc((var(--card-border-radius)/2)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-warning-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/10 dark:before:to-transparent dark:before:shadow-gray-950">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="0.73em"
-                      height="1em"
-                      viewBox="0 0 256 351"
-                    >
-                      <defs>
-                        <filter
-                          id="logosFirebase0"
-                          width="200%"
-                          height="200%"
-                          x="-50%"
-                          y="-50%"
-                          filterUnits="objectBoundingBox"
-                        >
-                          <feGaussianBlur
-                            in="SourceAlpha"
-                            result="shadowBlurInner1"
-                            stdDeviation="17.5"
-                          />
-                          <feOffset in="shadowBlurInner1" result="shadowOffsetInner1" />
-                          <feComposite
-                            in="shadowOffsetInner1"
-                            in2="SourceAlpha"
-                            k2={-1}
-                            k3={1}
-                            operator="arithmetic"
-                            result="shadowInnerInner1"
-                          />
-                          <feColorMatrix
-                            in="shadowInnerInner1"
-                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"
-                          />
-                        </filter>
-                        <filter
-                          id="logosFirebase1"
-                          width="200%"
-                          height="200%"
-                          x="-50%"
-                          y="-50%"
-                          filterUnits="objectBoundingBox"
-                        >
-                          <feGaussianBlur
-                            in="SourceAlpha"
-                            result="shadowBlurInner1"
-                            stdDeviation="3.5"
-                          />
-                          <feOffset
-                            dx={1}
-                            dy={-9}
-                            in="shadowBlurInner1"
-                            result="shadowOffsetInner1"
-                          />
-                          <feComposite
-                            in="shadowOffsetInner1"
-                            in2="SourceAlpha"
-                            k2={-1}
-                            k3={1}
-                            operator="arithmetic"
-                            result="shadowInnerInner1"
-                          />
-                          <feColorMatrix
-                            in="shadowInnerInner1"
-                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.09 0"
-                          />
-                        </filter>
-                        <path
-                          id="logosFirebase2"
-                          d="m1.253 280.732l1.605-3.131l99.353-188.518l-44.15-83.475C54.392-1.283 45.074.474 43.87 8.188z"
-                        />
-                        <path
-                          id="logosFirebase3"
-                          d="m134.417 148.974l32.039-32.812l-32.039-61.007c-3.042-5.791-10.433-6.398-13.443-.59l-17.705 34.109l-.53 1.744z"
-                        />
-                      </defs>
-                      <path
-                        fill="#ffc24a"
-                        d="m0 282.998l2.123-2.972L102.527 89.512l.212-2.017L58.48 4.358C54.77-2.606 44.33-.845 43.114 6.951z"
-                      />
-                      <use fill="#ffa712" fillRule="evenodd" href="#logosFirebase2" />
-                      <use filter="url(#logosFirebase0)" href="#logosFirebase2" />
-                      <path
-                        fill="#f4bd62"
-                        d="m135.005 150.38l32.955-33.75l-32.965-62.93c-3.129-5.957-11.866-5.975-14.962 0L102.42 87.287v2.86z"
-                      />
-                      <use fill="#ffa50e" fillRule="evenodd" href="#logosFirebase3" />
-                      <use filter="url(#logosFirebase1)" href="#logosFirebase3" />
-                      <path
-                        fill="#f6820c"
-                        d="m0 282.998l.962-.968l3.496-1.42l128.477-128l1.628-4.431l-32.05-61.074z"
-                      />
-                      <path
-                        fill="#fde068"
-                        d="m139.121 347.551l116.275-64.847l-33.204-204.495c-1.039-6.398-8.888-8.927-13.468-4.34L0 282.998l115.608 64.548a24.126 24.126 0 0 0 23.513.005"
-                      />
-                      <path
-                        fill="#fcca3f"
-                        d="M254.354 282.16L221.402 79.218c-1.03-6.35-7.558-8.977-12.103-4.424L1.29 282.6l114.339 63.908a23.943 23.943 0 0 0 23.334.006z"
-                      />
-                      <path
-                        fill="#eeab37"
-                        d="M139.12 345.64a24.126 24.126 0 0 1-23.512-.005L.931 282.015l-.93.983l115.607 64.548a24.126 24.126 0 0 0 23.513.005l116.275-64.847l-.285-1.752z"
-                      />
-                    </svg>
-                  </div>
-                  <div className="mt-6 rounded-b-[--card-border-radius] pb-6">
-                    <p className="text-gray-700 dark:text-gray-300">
-                      Amet praesentium deserunt ex commodi tempore fuga voluptatem. Sit, sapiente.
-                    </p>
-                  </div>
-                  <div className="-mb-[--card-padding] flex gap-3 border-t border-[--ui-light-border-color] py-4 dark:border-[--ui-dark-border-color]">
-                    <a
-                      href="/"
-                      download="/"
-                      className="group flex h-8 items-center justify-center gap-1.5 rounded-[--btn-border-radius] bg-gray-100 px-3.5 text-sm text-gray-950 *:select-none hover:bg-gray-200/75 active:bg-gray-100 disabled:border disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-950 *:disabled:opacity-20 dark:bg-gray-500/10 dark:text-white dark:hover:bg-gray-500/15 dark:active:bg-gray-500/10 dark:disabled:border-gray-800/50 disabled:dark:bg-gray-900 dark:*:disabled:!text-white [&>*:not(.sr-only)]:relative"
-                    >
-                      <span>Download</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="1em"
-                        height="1em"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          fill="none"
-                          stroke="currentColor"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="m17 13l-5 5m0 0l-5-5m5 5V6"
-                        />
-                      </svg>
-                    </a>
-                    <a
-                      href="https://github.com/tailus-ui"
-                      className="group flex size-8 items-center justify-center rounded-[--btn-border-radius] bg-gray-100 text-gray-950 *:select-none hover:bg-gray-200/75 active:bg-gray-100 disabled:border disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-950 *:disabled:opacity-20 dark:bg-gray-500/10 dark:text-white dark:hover:bg-gray-500/15 dark:active:bg-gray-500/10 dark:disabled:border-gray-800/50 disabled:dark:bg-gray-900 dark:*:disabled:!text-white [&>*:not(.sr-only)]:relative"
-                    >
-                      <span className="sr-only">Source Code</span>
-                      <svg
-                        className="size-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="1em"
-                        height="1em"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33c.85 0 1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"
-                        />
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="group relative overflow-hidden rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white p-[--card-padding] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg]">
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-0 aspect-video -translate-y-1/2 rounded-full border bg-gradient-to-b from-info-500 to-white opacity-25 blur-2xl duration-300 group-hover:-translate-y-1/4 dark:from-white dark:to-white dark:opacity-0 dark:group-hover:opacity-5"
-                />
-                <div className="relative">
-                  <div className="relative flex size-12 rounded-[calc(var(--card-border-radius)/2)] border border-info-500/10 *:relative *:m-auto *:size-6 before:absolute before:inset-0 before:rounded-[calc((var(--card-border-radius)/2)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-info-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/10 dark:before:to-transparent dark:before:shadow-gray-950">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="1em"
-                      height="1em"
-                      viewBox="0 0 128 128"
-                    >
-                      <path
-                        fill="#0080ff"
-                        d="M64.142 102.96H39.24V78.522h24.903ZM39.24 122.131H20.373v-19.173H39.24Zm-18.866-19.173H4.53V87.167h15.843Zm43.394 24.814v-24.814c26.41 0 46.784-25.94 36.597-53.388c-3.775-10.15-11.694-18.42-22.26-22.181c-27.167-9.772-53.2 10.527-53.2 36.468H0c0-41.354 40.37-74.064 84.52-60.53c19.242 6.017 34.334 21.055 40.37 40.23c13.581 43.985-19.245 84.214-61.123 84.214Zm0 0"
-                      />
-                    </svg>
-                  </div>
-                  <div className="mt-6 rounded-b-[--card-border-radius] pb-6">
-                    <p className="text-gray-700 dark:text-gray-300">
-                      Amet praesentium deserunt ex commodi tempore fuga voluptatem. Sit, sapiente.
-                    </p>
-                  </div>
-                  <div className="-mb-[--card-padding] flex gap-3 border-t border-[--ui-light-border-color] py-4 dark:border-[--ui-dark-border-color]">
-                    <a
-                      href="/"
-                      download="/"
-                      className="group flex h-8 items-center justify-center gap-1.5 rounded-[--btn-border-radius] bg-gray-100 px-3.5 text-sm text-gray-950 *:select-none hover:bg-gray-200/75 active:bg-gray-100 disabled:border disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-950 *:disabled:opacity-20 dark:bg-gray-500/10 dark:text-white dark:hover:bg-gray-500/15 dark:active:bg-gray-500/10 dark:disabled:border-gray-800/50 disabled:dark:bg-gray-900 dark:*:disabled:!text-white [&>*:not(.sr-only)]:relative"
-                    >
-                      <span>Download</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="1em"
-                        height="1em"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          fill="none"
-                          stroke="currentColor"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="m17 13l-5 5m0 0l-5-5m5 5V6"
-                        />
-                      </svg>
-                    </a>
-                    <a
-                      href="https://github.com/tailus-ui"
-                      className="group flex size-8 items-center justify-center rounded-[--btn-border-radius] bg-gray-100 text-gray-950 *:select-none hover:bg-gray-200/75 active:bg-gray-100 disabled:border disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-950 *:disabled:opacity-20 dark:bg-gray-500/10 dark:text-white dark:hover:bg-gray-500/15 dark:active:bg-gray-500/10 dark:disabled:border-gray-800/50 disabled:dark:bg-gray-900 dark:*:disabled:!text-white [&>*:not(.sr-only)]:relative"
-                    >
-                      <span className="sr-only">Source Code</span>
-                      <svg
-                        className="size-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="1em"
-                        height="1em"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33c.85 0 1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"
-                        />
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
+              <QuickStartCard
+                imageUrl="/yt-shorts-logo.png"
+                description="Shorts can really distractive and can waste your time infinitely."
+              />
+              <QuickStartCard
+                imageUrl="/facebook-logo.png"
+                description="Reels are another modern way of wasting hours from your daily life."
+              />
+              <QuickStartCard
+                imageUrl="/tiktok-logo.png"
+                description="We remove tiktok totally to protect you from being distracted and from wasting countless hours"
+              />
+              {/* <QuickStartCard
+                imageUrl="/tiktok-logo.png"
+                description="We remove tiktok totally to protect you from being distracted and from wasting countless hours"
+              /> */}
             </div>
           </div>
         </div>
@@ -2278,348 +1746,20 @@ function Main() {
                 Loved by the Community
               </h2>
               <p className="mt-6 text-gray-700 dark:text-gray-300">
-                Harum quae dolore orrupti aut temporibus ariatur.
+                Here's what people have to say about what benefited them.
               </p>
             </div>
-            <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              <div className="space-y-3">
-                <div className="group rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white p-[--card-padding] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg]">
-                  <div className="flex gap-3">
-                    <span className="relative block size-10 rounded-[--avatar-border-radius] text-lg">
-                      <img
-                        className="h-full w-full rounded-[--avatar-border-radius] object-cover"
-                        alt="John Doe"
-                        src="https://randomuser.me/api/portraits/men/1.jpg"
-                        loading="lazy"
-                        width={120}
-                        height={120}
-                      />
-                    </span>
-                    <div className="w-[calc(100%-3.25rem)]">
-                      <h3 className="font-medium text-gray-950 dark:text-white">Jonathan Yombo</h3>
-                      <span className="block text-sm tracking-wide text-gray-600 dark:text-gray-400">
-                        Software Ingeneer
-                      </span>
-                      <blockquote className="mt-3">
-                        <p className="text-gray-700 dark:text-gray-300">
-                          Tailus is really extraordinary and very practical, no need to break your
-                          head. A real gold mine.
-                        </p>
-                      </blockquote>
-                    </div>
-                  </div>
+            <div className="mt-12 gap-3 sm:columns-2 lg:columns-3">
+              {communityComments.map((comment) => (
+                <div className="mt-3 break-inside-avoid-column first:mt-0" key={comment.comment}>
+                  <CommunityCard
+                    userImage={comment.userImage}
+                    userTitle={comment.userTitle}
+                    name={comment.name}
+                    comment={comment.comment}
+                  />
                 </div>
-                <div className="group rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white p-[--card-padding] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg]">
-                  <div className="flex gap-3">
-                    <span className="relative block size-10 rounded-[--avatar-border-radius] text-lg">
-                      <img
-                        className="h-full w-full rounded-[--avatar-border-radius] object-cover"
-                        alt="John Doe"
-                        src="https://randomuser.me/api/portraits/men/6.jpg"
-                        loading="lazy"
-                        width={120}
-                        height={120}
-                      />
-                    </span>
-                    <div className="w-[calc(100%-3.25rem)]">
-                      <h3 className="font-medium text-gray-950 dark:text-white">Yves Kalume</h3>
-                      <span className="block text-sm tracking-wide text-gray-600 dark:text-gray-400">
-                        GDE - Android
-                      </span>
-                      <blockquote className="mt-3">
-                        <p className="text-gray-700 dark:text-gray-300">
-                          With no experience in webdesign I just redesigned my entire website in a
-                          few minutes with tailwindcss thanks to Tailus.
-                        </p>
-                      </blockquote>
-                    </div>
-                  </div>
-                </div>
-                <div className="group rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white p-[--card-padding] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg]">
-                  <div className="flex gap-3">
-                    <span className="relative block size-10 rounded-[--avatar-border-radius] text-lg">
-                      <img
-                        className="h-full w-full rounded-[--avatar-border-radius] object-cover"
-                        alt="John Doe"
-                        src="https://randomuser.me/api/portraits/men/7.jpg"
-                        loading="lazy"
-                        width={120}
-                        height={120}
-                      />
-                    </span>
-                    <div className="w-[calc(100%-3.25rem)]">
-                      <h3 className="font-medium text-gray-950 dark:text-white">
-                        Yucel Faruksahan
-                      </h3>
-                      <span className="block text-sm tracking-wide text-gray-600 dark:text-gray-400">
-                        Tailkits Creator
-                      </span>
-                      <blockquote className="mt-3">
-                        <p className="text-gray-700 dark:text-gray-300">
-                          Great work on tailfolio template. This is one of the best personal website
-                          that I have seen so far :)
-                        </p>
-                      </blockquote>
-                    </div>
-                  </div>
-                </div>
-                <div className="group rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white p-[--card-padding] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg]">
-                  <div className="flex gap-3">
-                    <span className="relative block size-10 rounded-[--avatar-border-radius] text-lg">
-                      <img
-                        className="h-full w-full rounded-[--avatar-border-radius] object-cover"
-                        alt="John Doe"
-                        src="https://randomuser.me/api/portraits/men/8.jpg"
-                        loading="lazy"
-                        width={120}
-                        height={120}
-                      />
-                    </span>
-                    <div className="w-[calc(100%-3.25rem)]">
-                      <h3 className="font-medium text-gray-950 dark:text-white">
-                        Anonymous author
-                      </h3>
-                      <span className="block text-sm tracking-wide text-gray-600 dark:text-gray-400">
-                        Doing something
-                      </span>
-                      <blockquote className="mt-3">
-                        <p className="text-gray-700 dark:text-gray-300">
-                          I am really new to Tailwind and I want to give a go to make some page on
-                          my own. I searched a lot of hero pages and blocks online. However, most of
-                          them are not giving me a clear view or needed some HTML/CSS coding
-                          background to make some changes from the original or too expensive to
-                          have. I downloaded the one of Tailus template which is very clear to
-                          understand at the start and you could modify the codes/blocks to fit
-                          perfectly on your purpose of the page.
-                        </p>
-                      </blockquote>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="space-y-3">
-                {/* Start of Testimonial 3 */}
-                <div className="group rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white p-[--card-padding] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg]">
-                  <div className="flex gap-3">
-                    <span className="relative block size-10 rounded-[--avatar-border-radius] text-lg">
-                      <img
-                        className="h-full w-full rounded-[--avatar-border-radius] object-cover"
-                        alt="John Doe"
-                        src="https://randomuser.me/api/portraits/men/4.jpg"
-                        loading="lazy"
-                        width={120}
-                        height={120}
-                      />
-                    </span>
-                    <div className="w-[calc(100%-3.25rem)]">
-                      <h3 className="font-medium text-gray-950 dark:text-white">
-                        Shekinah Tshiokufila
-                      </h3>
-                      <span className="block text-sm tracking-wide text-gray-600 dark:text-gray-400">
-                        Senior Software Ingeneer
-                      </span>
-                      <blockquote className="mt-3">
-                        <p className="text-gray-700 dark:text-gray-300">
-                          Tailus is redefining the standard of web design, with these blocks it
-                          provides an easy and efficient way for those who love beauty but may lack
-                          the time to implement it. I can only recommend this incredible wonder.
-                        </p>
-                      </blockquote>
-                    </div>
-                  </div>
-                </div>
-                {/* Start of Testimonial 4 */}
-                <div className="group rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white p-[--card-padding] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg]">
-                  <div className="flex gap-3">
-                    <span className="relative block size-10 rounded-[--avatar-border-radius] text-lg">
-                      <img
-                        className="h-full w-full rounded-[--avatar-border-radius] object-cover"
-                        alt="John Doe"
-                        src="https://randomuser.me/api/portraits/men/2.jpg"
-                        loading="lazy"
-                        width={120}
-                        height={120}
-                      />
-                    </span>
-                    <div className="w-[calc(100%-3.25rem)]">
-                      <h3 className="font-medium text-gray-950 dark:text-white">Oketa Fred</h3>
-                      <span className="block text-sm tracking-wide text-gray-600 dark:text-gray-400">
-                        Fullstack Developer
-                      </span>
-                      <blockquote className="mt-3">
-                        <p className="text-gray-700 dark:text-gray-300">
-                          I absolutely love Tailus! The component blocks are beautifully designed
-                          and easy to use, which makes creating a great-looking website a breeze.
-                        </p>
-                      </blockquote>
-                    </div>
-                  </div>
-                </div>
-                {/* Start of Testimonial 5 */}
-                <div className="group rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white p-[--card-padding] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg]">
-                  <div className="flex gap-3">
-                    <span className="relative block size-10 rounded-[--avatar-border-radius] text-lg">
-                      <img
-                        className="h-full w-full rounded-[--avatar-border-radius] object-cover"
-                        alt="John Doe"
-                        src="https://randomuser.me/api/portraits/men/5.jpg"
-                      />
-                    </span>
-                    <div className="w-[calc(100%-3.25rem)]">
-                      <h3 className="font-medium text-gray-950 dark:text-white">Zeki</h3>
-                      <span className="block text-sm tracking-wide text-gray-600 dark:text-gray-400">
-                        Founder of ChatExtend
-                      </span>
-                      <blockquote className="mt-3">
-                        <p className="text-gray-700 dark:text-gray-300">
-                          Using TailsUI has been like unlocking a secret design superpower. It's the
-                          perfect fusion of simplicity and versatility, enabling us to create UIs
-                          that are as stunning as they are user-friendly.
-                        </p>
-                      </blockquote>
-                    </div>
-                  </div>
-                </div>
-                <div className="group rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white p-[--card-padding] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg]">
-                  <div className="flex gap-3">
-                    <span className="relative block size-10 rounded-[--avatar-border-radius] text-lg">
-                      <img
-                        className="h-full w-full rounded-[--avatar-border-radius] object-cover"
-                        alt="John Doe"
-                        src="https://randomuser.me/api/portraits/men/9.jpg"
-                        loading="lazy"
-                        width={120}
-                        height={120}
-                      />
-                    </span>
-                    <div className="w-[calc(100%-3.25rem)]">
-                      <h3 className="font-medium text-gray-950 dark:text-white">Joseph Kitheka</h3>
-                      <span className="block text-sm tracking-wide text-gray-600 dark:text-gray-400">
-                        Fullstack Developer
-                      </span>
-                      <blockquote className="mt-3">
-                        <p className="text-gray-700 dark:text-gray-300">
-                          Tailus has transformed the way I develop web applications. Their extensive
-                          collection of UI components, blocks, and templates has significantly
-                          accelerated my workflow. The flexibility to customize every aspect allows
-                          me to create unique user experiences. Tailus is a game-changer for modern
-                          web development!
-                        </p>
-                      </blockquote>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="space-y-3">
-                <div className="group rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white p-[--card-padding] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg]">
-                  <div className="flex gap-3">
-                    <span className="relative block size-10 rounded-[--avatar-border-radius] text-lg">
-                      <img
-                        className="h-full w-full rounded-[--avatar-border-radius] object-cover"
-                        alt="John Doe"
-                        src="https://randomuser.me/api/portraits/men/10.jpg"
-                        loading="lazy"
-                        width={120}
-                        height={120}
-                      />
-                    </span>
-                    <div className="w-[calc(100%-3.25rem)]">
-                      <h3 className="font-medium text-gray-950 dark:text-white">Khatab Wedaa</h3>
-                      <span className="block text-sm tracking-wide text-gray-600 dark:text-gray-400">
-                        MerakiUI Creator
-                      </span>
-                      <blockquote className="mt-3">
-                        <p className="text-gray-700 dark:text-gray-300">
-                          Tailus is an elegant, clean, and responsive tailwind css components it's
-                          very helpfull to start fast with your project.
-                        </p>
-                      </blockquote>
-                    </div>
-                  </div>
-                </div>
-                <div className="group rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white p-[--card-padding] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg]">
-                  <div className="flex gap-3">
-                    <span className="relative block size-10 rounded-[--avatar-border-radius] text-lg">
-                      <img
-                        className="h-full w-full rounded-[--avatar-border-radius] object-cover"
-                        alt="John Doe"
-                        src="https://randomuser.me/api/portraits/men/11.jpg"
-                        loading="lazy"
-                        width={120}
-                        height={120}
-                      />
-                    </span>
-                    <div className="w-[calc(100%-3.25rem)]">
-                      <h3 className="font-medium text-gray-950 dark:text-white">Rodrigo Aguilar</h3>
-                      <span className="block text-sm tracking-wide text-gray-600 dark:text-gray-400">
-                        TailwindAwesome Creator
-                      </span>
-                      <blockquote className="mt-3">
-                        <p className="text-gray-700 dark:text-gray-300">
-                          I love Tailus ❤️. The component blocks are well-structured, simple to use,
-                          and beautifully designed. It makes it really easy to have a good-looking
-                          website in no time.
-                        </p>
-                      </blockquote>
-                    </div>
-                  </div>
-                </div>
-                <div className="group rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white p-[--card-padding] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg]">
-                  <div className="flex gap-3">
-                    <span className="relative block size-10 rounded-[--avatar-border-radius] text-lg">
-                      <img
-                        className="h-full w-full rounded-[--avatar-border-radius] object-cover"
-                        alt="John Doe"
-                        src="https://randomuser.me/api/portraits/men/12.jpg"
-                        loading="lazy"
-                        width={120}
-                        height={120}
-                      />
-                    </span>
-                    <div className="w-[calc(100%-3.25rem)]">
-                      <h3 className="font-medium text-gray-950 dark:text-white">Eric Ampire</h3>
-                      <span className="block text-sm tracking-wide text-gray-600 dark:text-gray-400">
-                        Mobile Engineer at @BRPNews • @GoogleDevExpert for Android{" "}
-                      </span>
-                      <blockquote className="mt-3">
-                        <p className="text-gray-700 dark:text-gray-300">
-                          Tailus templates are the perfect solution for anyone who wants to create a
-                          beautiful and functional website without any web design experience. The
-                          templates are easy to use, customizable, and responsive, and the support
-                          team is always available to help. I highly recommend Tailus templates to
-                          anyone who is looking to create a website.
-                        </p>
-                      </blockquote>
-                    </div>
-                  </div>
-                </div>
-                <div className="group rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white p-[--card-padding] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg]">
-                  <div className="flex gap-3">
-                    <span className="relative block size-10 rounded-[--avatar-border-radius] text-lg">
-                      <img
-                        className="h-full w-full rounded-[--avatar-border-radius] object-cover"
-                        alt="John Doe"
-                        src="https://randomuser.me/api/portraits/men/13.jpg"
-                        loading="lazy"
-                        width={120}
-                        height={120}
-                      />
-                    </span>
-                    <div className="w-[calc(100%-3.25rem)]">
-                      <h3 className="font-medium text-gray-950 dark:text-white">Roland Tubonge</h3>
-                      <span className="block text-sm tracking-wide text-gray-600 dark:text-gray-400">
-                        Software Engineer
-                      </span>
-                      <blockquote className="mt-3">
-                        <p className="text-gray-700 dark:text-gray-300">
-                          Tailus is so well designed that even with a very poor knowledge of web
-                          design you can do miracles. Let yourself be seduced!
-                        </p>
-                      </blockquote>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
@@ -2932,7 +2072,9 @@ function Footer() {
         </div>
         <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
           <div>
-            <span className="font-medium text-gray-950 dark:text-white">Enterprise</span>
+            <span className="font-medium text-gray-950 dark:text-white">
+              Enterprise
+            </span>
             <ul className="mt-4 list-inside space-y-4">
               <li>
                 <a
@@ -2977,7 +2119,9 @@ function Footer() {
             </ul>
           </div>
           <div>
-            <span className="text-sm font-medium text-gray-950 dark:text-white">Product</span>
+            <span className="text-sm font-medium text-gray-950 dark:text-white">
+              Product
+            </span>
             <ul className="mt-4 list-inside space-y-4">
               <li>
                 <a
@@ -3014,7 +2158,9 @@ function Footer() {
             </ul>
           </div>
           <div>
-            <span className="text-sm font-medium text-gray-950 dark:text-white">Docs</span>
+            <span className="text-sm font-medium text-gray-950 dark:text-white">
+              Docs
+            </span>
             <ul className="mt-4 list-inside space-y-4">
               <li>
                 <a
@@ -3083,7 +2229,9 @@ function Footer() {
             </ul>
           </div>
           <div>
-            <span className="text-sm font-medium text-gray-950 dark:text-white">Community</span>
+            <span className="text-sm font-medium text-gray-950 dark:text-white">
+              Community
+            </span>
             <ul className="mt-4 list-inside space-y-4">
               <li>
                 <a
@@ -3145,7 +2293,9 @@ function Footer() {
           </div>
         </div>
         <div className="flex items-center justify-between rounded-md bg-gray-100 px-6 py-3 dark:bg-gray-900">
-          <span className="text-gray-600 dark:text-gray-400">© tailus 2021 - Present</span>
+          <span className="text-gray-600 dark:text-gray-400">
+            © tailus 2021 - Present
+          </span>
           <a
             href="/"
             className="text-sm text-gray-600 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-500"
@@ -3155,5 +2305,125 @@ function Footer() {
         </div>
       </div>
     </footer>
+  );
+}
+
+function QuickStartCard({
+  imageUrl,
+  description,
+}: {
+  imageUrl: string | { light: string; dark: string };
+  description: string;
+}) {
+  return (
+    <div className="group relative overflow-hidden rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white p-[--card-padding] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg]">
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 aspect-video -translate-y-1/2 rounded-full border bg-gradient-to-b from-warning-500 to-white opacity-25 blur-2xl duration-300 group-hover:-translate-y-1/4 dark:from-white dark:to-white dark:opacity-0 dark:group-hover:opacity-5"
+      />
+      <div className="relative">
+        <div className="relative flex size-12 rounded-[calc(var(--card-border-radius)/2)] border border-warning-500/10 *:relative *:m-auto *:size-6 before:absolute before:inset-0 before:rounded-[calc((var(--card-border-radius)/2)-1px)] before:border-t before:border-white before:bg-gradient-to-b before:from-warning-100 before:shadow dark:border-white/15 dark:bg-gray-900 dark:before:border-white/20 dark:before:from-white/10 dark:before:to-transparent dark:before:shadow-gray-950">
+          {typeof imageUrl === "string" ? (
+            <img src={imageUrl} className="h-9 w-9" alt="" />
+          ) : (
+            <>
+              <img
+                src={imageUrl.light}
+                className="h-9 w-9 dark:hidden"
+                alt=""
+              />
+              <img
+                src={imageUrl.dark}
+                className="hidden h-9 w-9 dark:block"
+                alt=""
+              />
+            </>
+          )}
+        </div>
+        <div className="mt-6 rounded-b-[--card-border-radius] pb-6">
+          <p className="text-gray-700 dark:text-gray-300">{description}</p>
+        </div>
+        {/* <div className="-mb-[--card-padding] flex gap-3 border-t border-[--ui-light-border-color] py-4 dark:border-[--ui-dark-border-color]">
+          <a
+            href="/"
+            download="/"
+            className="group flex h-8 items-center justify-center gap-1.5 rounded-[--btn-border-radius] bg-gray-100 px-3.5 text-sm text-gray-950 *:select-none hover:bg-gray-200/75 active:bg-gray-100 disabled:border disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-950 *:disabled:opacity-20 dark:bg-gray-500/10 dark:text-white dark:hover:bg-gray-500/15 dark:active:bg-gray-500/10 dark:disabled:border-gray-800/50 disabled:dark:bg-gray-900 dark:*:disabled:!text-white [&>*:not(.sr-only)]:relative"
+          >
+            <span>Download</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1em"
+              height="1em"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="m17 13l-5 5m0 0l-5-5m5 5V6"
+              />
+            </svg>
+          </a>
+          <a
+            href="https://github.com/tailus-ui"
+            className="group flex size-8 items-center justify-center rounded-[--btn-border-radius] bg-gray-100 text-gray-950 *:select-none hover:bg-gray-200/75 active:bg-gray-100 disabled:border disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-950 *:disabled:opacity-20 dark:bg-gray-500/10 dark:text-white dark:hover:bg-gray-500/15 dark:active:bg-gray-500/10 dark:disabled:border-gray-800/50 disabled:dark:bg-gray-900 dark:*:disabled:!text-white [&>*:not(.sr-only)]:relative"
+          >
+            <span className="sr-only">Source Code</span>
+            <svg
+              className="size-5"
+              xmlns="http://www.w3.org/2000/svg"
+              width="1em"
+              height="1em"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="currentColor"
+                d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33c.85 0 1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"
+              />
+            </svg>
+          </a>
+        </div> */}
+      </div>
+    </div>
+  );
+}
+
+function CommunityCard({
+  userImage,
+  userTitle,
+  name,
+  comment,
+}: {
+  userImage: string;
+  name: string;
+  userTitle: string;
+  comment: string;
+}) {
+  return (
+    <div className="group rounded-[--card-border-radius] border border-[--ui-light-border-color] bg-white p-[--card-padding] dark:border-[--ui-dark-border-color] dark:bg-[--card-dark-bg]">
+      <div className="flex gap-3">
+        <span className="relative block size-10 rounded-[--avatar-border-radius] text-lg">
+          <img
+            className="h-full w-full rounded-[--avatar-border-radius] object-cover"
+            alt={name}
+            src={userImage}
+            loading="lazy"
+            width={120}
+            height={120}
+          />
+        </span>
+        <div className="w-[calc(100%-3.25rem)]">
+          <h3 className="font-medium text-gray-950 dark:text-white">{name}</h3>
+          <span className="block text-sm tracking-wide text-gray-600 dark:text-gray-400">
+            {userTitle}
+          </span>
+          <blockquote className="mt-3">
+            <p className="text-gray-700 dark:text-gray-300">{comment}</p>
+          </blockquote>
+        </div>
+      </div>
+    </div>
   );
 }
