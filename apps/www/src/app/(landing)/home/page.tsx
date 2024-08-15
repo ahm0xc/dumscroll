@@ -163,7 +163,7 @@ export default function HomePage() {
   );
 }
 
-function Header() {
+export function Header() {
   return (
     <header>
       <nav className="fixed z-20 w-full overflow-hidden rounded-b-lg border-x border-b border-[--ui-light-border-color] bg-white/80 backdrop-blur-2xl dark:border-[--ui-dark-border-color] dark:bg-gray-950/0 dark:shadow-md dark:shadow-gray-950/10">
@@ -208,6 +208,14 @@ function Header() {
                       className="block transition hover:text-primary-600 dark:hover:text-primary-400 md:px-4"
                     >
                       <span>Twitter</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/privacy"
+                      className="block transition hover:text-primary-600 dark:hover:text-primary-400 md:px-4"
+                    >
+                      <span>Privacy Policy</span>
                     </Link>
                   </li>
                 </ul>
@@ -1734,7 +1742,7 @@ function Main() {
   );
 }
 
-function Footer() {
+export function Footer() {
   return (
     <footer className="rounded-xl border border-[--ui-light-border-color] dark:border-[--ui-dark-border-color]">
       <div className="mx-auto max-w-6xl space-y-16 px-6 py-16 text-gray-600 2xl:px-0">

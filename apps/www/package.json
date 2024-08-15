@@ -69,7 +69,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.13",
+    "@tailwindcss/typography": "^0.5.14",
     "@types/eslint": "^8.56.10",
     "@types/node": "^20.14.10",
     "@types/react": "^18.3.3",
