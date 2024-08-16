@@ -3,8 +3,9 @@ import { create } from "zustand";
 import { useEffect } from "react";
 import Activation from "./activation";
 import Settings from "./settings";
+import Analytics from "./analytics";
 
-export type UI = "settings" | "activation";
+export type UI = "settings" | "analytics" | "activation";
 export interface UseAppearanceStore {
   ui: UI;
   setUI: (ui: UI) => void;
@@ -28,6 +29,7 @@ export default function App() {
   return (
     <div className="mt-8 px-4">
       {ui === "settings" && <Settings />}
+      {ui === "analytics" && <Analytics />}
       {ui === "activation" && <Activation />}
     </div>
   );

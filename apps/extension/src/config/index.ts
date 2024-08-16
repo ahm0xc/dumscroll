@@ -56,3 +56,12 @@ export const defaultBlocks = z.array(blockSchema).parse([
     blockType: "admit",
   },
 ]);
+
+export const socialMediaPlatforms = [
+  { name: "Facebook", url: "https://facebook.com", color: "#1877F2", colorName: "blue" },
+  { name: "Youtube", url: "https://youtube.com", color: "#FF0000", colorName: "red" },
+  { name: "Linkedin", url: "https://linkedin.com", color: "#0A66C2", colorName: "indigo" },
+  { name: "Twitter", url: "https://twitter.com", color: "#1DA1F2", colorName: "sky" },
+  { name: "Instagram", url: "https://instagram.com", color: "#833AB4", colorName: "purple" },
+  { name: "Tiktok", url: "https://tiktok.com", color: "#25F4EE", colorName: "cyan" },
+];

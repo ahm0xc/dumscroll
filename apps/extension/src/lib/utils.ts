@@ -1,6 +1,8 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
+import type { Track } from "~/options/analytics";
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
@@ -64,6 +66,16 @@ export function isFirstTimeGreater(time1: string, time2: string) {
   return date1 > date2;
 }
 
+export function getDateFromTrackId(id: string) {
+  return id.split("#").at(0);
+}
+export function getUserIdFromTrackId(id: string) {
+  return id.split("#").at(1);
+}
+export function getOriginFromTrackId(id: string) {
+  return id.split("#").at(2);
+}
+
 export function getHigherLevelDomain(url: string, includePath = true) {
   // Remove the protocol (http:// or https://)
   let domain = url.replace(/^https?:\/\//, "");
@@ -80,4 +92,30 @@ export function getHigherLevelDomain(url: string, includePath = true) {
   }
   // Otherwise, return the domain and path
   return domain.slice(0, pathIndex);
+}
+
+export function getPlatformNameFromUrl(url: string) {
+  return (
+    url
+      .replace("https://", "")
+      .replace("http://", "")
+      .replace("www.", "")
+      .split(".")[0] ?? ""
+  );
+}
+
+export function getFormattedTracks(tracks: Track[]) {
+  const map = new Map<string, { date: string; tracks: Track[] }>();
+
+  tracks.forEach((track) => {
+    const date = getDateFromTrackId(track.id);
+    if (!date) return;
+
+    if (!map.has(date)) {
+      map.set(date, { date, tracks: [] });
+    }
+    map.get(date)!.tracks.push(track);
+  });
+
+  return Array.from(map.values());
 }
