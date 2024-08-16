@@ -1,10 +1,5 @@
 import { motion } from "framer-motion";
-import {
-  type LucideIcon,
-  KeySquareIcon,
-  Settings2Icon,
-  ChartSplineIcon,
-} from "lucide-react";
+import { ChartSplineIcon, KeySquareIcon, type LucideIcon, Settings2Icon } from "lucide-react";
 import { type UI, useAppearanceStore } from "./app";
 
 export default function Sidebar() {
@@ -13,16 +8,8 @@ export default function Sidebar() {
       <div className="mt-8 mx-4">
         <div className="space-y-2">
           <SidebarItem title="Settings" ui="settings" icon={Settings2Icon} />
-          <SidebarItem
-            title="Analytics"
-            ui="analytics"
-            icon={ChartSplineIcon}
-          />
-          <SidebarItem
-            title="Activation"
-            ui="activation"
-            icon={KeySquareIcon}
-          />
+          <SidebarItem title="Analytics" ui="analytics" icon={ChartSplineIcon} />
+          <SidebarItem title="Activation" ui="activation" icon={KeySquareIcon} />
         </div>
       </div>
     </div>
@@ -38,10 +25,7 @@ function SidebarItem({
   ui: UI;
   icon: LucideIcon;
 }) {
-  const [appearanceUI, setAppearanceUI] = useAppearanceStore((state) => [
-    state.ui,
-    state.setUI,
-  ]);
+  const [appearanceUI, setAppearanceUI] = useAppearanceStore((state) => [state.ui, state.setUI]);
 
   return (
     <button

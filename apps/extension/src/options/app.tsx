@@ -2,8 +2,8 @@ import { create } from "zustand";
 
 import { useEffect } from "react";
 import Activation from "./activation";
-import Settings from "./settings";
 import Analytics from "./analytics";
+import Settings from "./settings";
 
 export type UI = "settings" | "analytics" | "activation";
 export interface UseAppearanceStore {

@@ -1,8 +1,8 @@
 import { Badge, Card, ProgressBar } from "@tremor/react";
 
+import { Clock3Icon } from "lucide-react";
 import { getDateFromTrackId } from "~/lib/utils";
 import type { Track } from ".";
-import { Clock3Icon } from "lucide-react";
 
 function deterministicRandomNumber(id: string, min: number, max: number) {
   // Create a simple hash of the id
@@ -26,9 +26,7 @@ export default function DailyTimeSaved({ tracks }: { tracks: Track[] }) {
   const today = new Date();
   const dateId = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, "0")}-${today.getDate().toString().padStart(2, "0")}`;
 
-  const todaysTracks = tracks.filter(
-    (t) => getDateFromTrackId(t.id) === dateId,
-  );
+  const todaysTracks = tracks.filter((t) => getDateFromTrackId(t.id) === dateId);
 
   const screenTime = todaysTracks.reduce((acc, currentTrack) => {
     return acc + currentTrack.duration;
@@ -56,12 +54,7 @@ export default function DailyTimeSaved({ tracks }: { tracks: Track[] }) {
           <span>This is calculated based on your uses and distractions</span>
         </p>
         <ProgressBar value={savedPercentage} color="blue" className="mt-2" />
-        <Badge
-          size="sm"
-          color="green"
-          icon={Clock3Icon}
-          className="absolute top-3 right-3"
-        >
+        <Badge size="sm" color="green" icon={Clock3Icon} className="absolute top-3 right-3">
           {savedPercentage}% saved
         </Badge>
       </Card>

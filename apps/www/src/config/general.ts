@@ -1,7 +1,7 @@
 export const appConfig = {
   name: "Dumscroll",
   contact: "contact@dumscroll.com",
-}
+};
 
 export const socialMediaPlatforms = [
   { name: "Facebook", url: "https://facebook.com", color: "#1877F2" },

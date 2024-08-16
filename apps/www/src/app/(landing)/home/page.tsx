@@ -22,15 +22,13 @@ const COMMUNITY_COMMENTS = [
     userImage: "https://randomuser.me/api/portraits/women/5.jpg",
     name: "Anna Thompson",
     userTitle: "Product Manager",
-    comment:
-      "This extension is a game-changer. I've regained control over my time.",
+    comment: "This extension is a game-changer. I've regained control over my time.",
   },
   {
     userImage: "https://randomuser.me/api/portraits/men/6.jpg",
     name: "Liam Johnson",
     userTitle: "Engineer",
-    comment:
-      "I can't believe how much more productive I've become. Highly recommend!",
+    comment: "I can't believe how much more productive I've become. Highly recommend!",
   },
   {
     userImage: "https://randomuser.me/api/portraits/women/7.jpg",
@@ -42,50 +40,43 @@ const COMMUNITY_COMMENTS = [
     userImage: "https://randomuser.me/api/portraits/men/8.jpg",
     name: "Michael Brown",
     userTitle: "Designer",
-    comment:
-      "Amazing tool. My focus has improved dramatically since I started using it.",
+    comment: "Amazing tool. My focus has improved dramatically since I started using it.",
   },
   {
     userImage: "https://randomuser.me/api/portraits/women/9.jpg",
     name: "Sophia Wilson",
     userTitle: "Writer",
-    comment:
-      "I love it! My productivity has soared, and I have more time for creative work.",
+    comment: "I love it! My productivity has soared, and I have more time for creative work.",
   },
   {
     userImage: "https://randomuser.me/api/portraits/men/10.jpg",
     name: "James Davis",
     userTitle: "Analyst",
-    comment:
-      "This extension is exactly what I needed to stay on track. Fantastic!",
+    comment: "This extension is exactly what I needed to stay on track. Fantastic!",
   },
   {
     userImage: "https://randomuser.me/api/portraits/women/11.jpg",
     name: "Olivia Taylor",
     userTitle: "Manager",
-    comment:
-      "It's incredible how much time I was wasting. Now I can focus on what matters.",
+    comment: "It's incredible how much time I was wasting. Now I can focus on what matters.",
   },
   {
     userImage: "https://randomuser.me/api/portraits/men/12.jpg",
     name: "Ethan Martinez",
     userTitle: "Entrepreneur",
-    comment:
-      "The best extension I've ever used. My days are so much more productive now.",
+    comment: "The best extension I've ever used. My days are so much more productive now.",
   },
   {
     userImage: "https://randomuser.me/api/portraits/women/13.jpg",
     name: "Isabella Anderson",
     userTitle: "Coordinator",
-    comment:
-      "I feel so much more in control of my time. This extension is a must-have!",
+    comment: "I feel so much more in control of my time. This extension is a must-have!",
   },
   {
     userImage: "https://randomuser.me/api/portraits/men/14.jpg",
     name: "Alexander Lee",
     userTitle: "Creator",
-    comment:
-      "A fantastic tool for anyone looking to reclaim their time. Highly effective!",
+    comment: "A fantastic tool for anyone looking to reclaim their time. Highly effective!",
   },
 ];
 
@@ -185,11 +176,7 @@ export function Header() {
         <div className="m-auto max-w-6xl px-6 2xl:px-0">
           <div className="flex flex-wrap items-center justify-between py-2 sm:py-4">
             <div className="flex w-full items-center justify-between lg:w-auto">
-              <Link
-                href="/"
-                aria-label="Dumscroll"
-                className="flex items-center gap-1.5"
-              >
+              <Link href="/" aria-label="Dumscroll" className="flex items-center gap-1.5">
                 <Logo /> <span className="text-xl font-medium">Dumscroll</span>
               </Link>
               <div className="flex lg:hidden">
@@ -294,28 +281,22 @@ function Main() {
                       stroke="currentColor"
                       strokeWidth={2}
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M9 5l7 7-7 7"
-                      />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                     </svg>
                   </div>
                 </span>
               </a>
               <h1 className="mt-8 text-wrap text-4xl font-semibold text-gray-950 dark:text-white md:text-5xl xl:text-5xl xl:[line-height:1.125]">
-                Stop Endless Scrolling <br className="hidden sm:block" />{" "}
-                Reclaim your time with Dumscroll
+                Stop Endless Scrolling <br className="hidden sm:block" /> Reclaim your time with
+                Dumscroll
               </h1>
               <p className="mx-auto mt-8 hidden max-w-2xl text-wrap text-lg text-gray-700 dark:text-gray-300 sm:block">
-                DumScroll is here to help you break the cycle of endless social
-                media scrolling. Stay focused, reduce distractions, and take
-                charge of your digital habits.
+                DumScroll is here to help you break the cycle of endless social media scrolling.
+                Stay focused, reduce distractions, and take charge of your digital habits.
               </p>
               <p className="mx-auto mt-6 max-w-2xl text-wrap text-gray-700 dark:text-gray-300 sm:hidden">
-                DumScroll is here to help you break the cycle of endless social
-                media scrolling. Stay focused, reduce distractions, and take
-                charge of your digital habits.
+                DumScroll is here to help you break the cycle of endless social media scrolling.
+                Stay focused, reduce distractions, and take charge of your digital habits.
               </p>
               <div className="mt-8 flex flex-col items-center justify-center gap-4">
                 <div className="rounded-[calc(var(--btn-border-radius)+4px)] border bg-gray-950/5 p-1 dark:border-white/10 dark:bg-white/5">
@@ -326,9 +307,7 @@ function Main() {
                     className="group relative z-[1] flex h-11 items-center justify-center gap-1.5 rounded-[--btn-border-radius] border border-primary-600 bg-primary-500 px-4 text-base text-white shadow-md shadow-primary-200 *:select-none before:absolute before:inset-0 before:rounded-[calc(var(--btn-border-radius)-1px)] before:border before:border-primary-500 before:bg-gradient-to-b before:from-primary-600 hover:bg-primary-600 active:bg-primary-700 disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-950/40 disabled:*:text-gray-300 *:disabled:opacity-20 disabled:before:border-transparent disabled:before:bg-gray-100 disabled:before:from-transparent dark:border-0 dark:bg-primary-600 dark:shadow-primary-500/10 dark:before:border-0 dark:before:border-t dark:before:border-primary-400 dark:before:shadow-inner dark:before:shadow-white/10 dark:hover:bg-primary-700 dark:active:bg-primary-800 dark:active:before:from-primary-700 dark:disabled:border dark:disabled:border-gray-800/50 disabled:dark:bg-gray-900 dark:*:disabled:!text-white disabled:dark:*:text-gray-700 dark:disabled:before:bg-gray-900 dark:disabled:before:from-gray-900 dark:disabled:before:shadow-none [&>*:not(.sr-only)]:relative"
                   >
                     <ChromeIcon size={18} />
-                    <span className="text-nowrap">
-                      Get {appConfig.name} now
-                    </span>
+                    <span className="text-nowrap">Get {appConfig.name} now</span>
                   </a>
                 </div>
                 {/* <button
@@ -455,8 +434,7 @@ function Main() {
                         Secure by default
                       </h2>
                       <p className="text-gray-700 dark:text-gray-300">
-                        We will not send any data to any third party or any
-                        other place.
+                        We will not send any data to any third party or any other place.
                       </p>
                     </div>
                   </div>
@@ -581,8 +559,7 @@ function Main() {
                           Daily Analytics
                         </h2>
                         <p className="text-gray-700 dark:text-gray-300">
-                          Daily analytics for Better understanding how much time
-                          savings
+                          Daily analytics for Better understanding how much time savings
                         </p>
                       </div>
                     </div>
@@ -665,8 +642,7 @@ function Main() {
                           Anti block system
                         </h2>
                         <p className="text-gray-700 dark:text-gray-300">
-                          It will show you warning + annoying popup so you
-                          resist yourself
+                          It will show you warning + annoying popup so you resist yourself
                         </p>
                       </div>
                     </div>
@@ -924,10 +900,7 @@ function Main() {
                           result="shadowBlurInner1"
                           stdDeviation="17.5"
                         />
-                        <feOffset
-                          in="shadowBlurInner1"
-                          result="shadowOffsetInner1"
-                        />
+                        <feOffset in="shadowBlurInner1" result="shadowOffsetInner1" />
                         <feComposite
                           in="shadowOffsetInner1"
                           in2="SourceAlpha"
@@ -986,21 +959,13 @@ function Main() {
                       fill="#ffc24a"
                       d="m0 282.998l2.123-2.972L102.527 89.512l.212-2.017L58.48 4.358C54.77-2.606 44.33-.845 43.114 6.951z"
                     />
-                    <use
-                      fill="#ffa712"
-                      fillRule="evenodd"
-                      href="#logosFirebase2"
-                    />
+                    <use fill="#ffa712" fillRule="evenodd" href="#logosFirebase2" />
                     <use filter="url(#logosFirebase0)" href="#logosFirebase2" />
                     <path
                       fill="#f4bd62"
                       d="m135.005 150.38l32.955-33.75l-32.965-62.93c-3.129-5.957-11.866-5.975-14.962 0L102.42 87.287v2.86z"
                     />
-                    <use
-                      fill="#ffa50e"
-                      fillRule="evenodd"
-                      href="#logosFirebase3"
-                    />
+                    <use fill="#ffa50e" fillRule="evenodd" href="#logosFirebase3" />
                     <use filter="url(#logosFirebase1)" href="#logosFirebase3" />
                     <path
                       fill="#f6820c"
@@ -1137,11 +1102,7 @@ function Main() {
                         y2="68.21%"
                       >
                         <stop offset="0%" stopColor="#ff31d9" />
-                        <stop
-                          offset="100%"
-                          stopColor="#ff5be1"
-                          stopOpacity={0}
-                        />
+                        <stop offset="100%" stopColor="#ff5be1" stopOpacity={0} />
                       </linearGradient>
                     </defs>
                     <path
@@ -1373,8 +1334,7 @@ function Main() {
                     Create your own distraction free workspace.
                   </h2>
                   <p className="mt-6 text-gray-700 dark:text-gray-300">
-                    Create, customize, schedule blocking rules on any website as
-                    you want.
+                    Create, customize, schedule blocking rules on any website as you want.
                   </p>
                 </div>
                 <ul className="mt-8 divide-y divide-[--ui-light-border-color] border-y border-[--ui-light-border-color] text-gray-700 *:flex *:items-center *:gap-3 *:py-3 dark:divide-[--ui-dark-border-color] dark:border-[--ui-dark-border-color] dark:text-gray-300">
@@ -1496,8 +1456,8 @@ function Main() {
                 These are not always distracting
               </h2>
               <p className="mt-6 text-gray-700 dark:text-gray-300">
-                Restriction and lower the distraction so you can study, work,
-                research without getting distracted by watching nonsense videos.
+                Restriction and lower the distraction so you can study, work, research without
+                getting distracted by watching nonsense videos.
               </p>
             </div>
             <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -1534,10 +1494,7 @@ function Main() {
             </div>
             <div className="mt-12 gap-3 sm:columns-2 lg:columns-3">
               {COMMUNITY_COMMENTS.map((comment) => (
-                <div
-                  className="mt-3 break-inside-avoid-column first:mt-0"
-                  key={comment.comment}
-                >
+                <div className="mt-3 break-inside-avoid-column first:mt-0" key={comment.comment}>
                   <CommunityCard
                     userImage={comment.userImage}
                     userTitle={comment.userTitle}
@@ -1751,24 +1708,15 @@ export function Footer() {
     <footer className="rounded-xl border border-[--ui-light-border-color] dark:border-[--ui-dark-border-color]">
       <div className="mx-auto max-w-6xl space-y-16 px-6 py-16 text-gray-600 2xl:px-0">
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[--ui-light-border-color] pb-8 dark:border-[--ui-dark-border-color]">
-          <Link
-            href="/"
-            aria-label="Dumscroll"
-            className="flex items-center gap-1.5"
-          >
-            <Logo />{" "}
-            <span className="text-xl font-medium text-foreground">
-              Dumscroll
-            </span>
+          <Link href="/" aria-label="Dumscroll" className="flex items-center gap-1.5">
+            <Logo /> <span className="text-xl font-medium text-foreground">Dumscroll</span>
           </Link>
         </div>
         <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
           {FOOTER.map((item) => {
             return (
               <div key={`footer-item-${item.title}`}>
-                <span className="font-medium text-gray-950 dark:text-white">
-                  {item.title}
-                </span>
+                <span className="font-medium text-gray-950 dark:text-white">{item.title}</span>
                 <ul className="mt-4 list-inside space-y-4">
                   {item.links.map((link) => (
                     <li key={`footer-item-${item.title}/${link.label}`}>
@@ -1785,9 +1733,7 @@ export function Footer() {
             );
           })}
           <div>
-            <span className="text-sm font-medium text-gray-950 dark:text-white">
-              Community
-            </span>
+            <span className="text-sm font-medium text-gray-950 dark:text-white">Community</span>
             <ul className="mt-4 list-inside space-y-4">
               <li>
                 <a
@@ -1883,16 +1829,8 @@ function QuickStartCard({
             <img src={imageUrl} className="h-9 w-9" alt="" />
           ) : (
             <>
-              <img
-                src={imageUrl.light}
-                className="h-9 w-9 dark:hidden"
-                alt=""
-              />
-              <img
-                src={imageUrl.dark}
-                className="hidden h-9 w-9 dark:block"
-                alt=""
-              />
+              <img src={imageUrl.light} className="h-9 w-9 dark:hidden" alt="" />
+              <img src={imageUrl.dark} className="hidden h-9 w-9 dark:block" alt="" />
             </>
           )}
         </div>
@@ -1995,7 +1933,10 @@ function LogoCloudMarquee() {
       {LOGO_CLOUD_MARQUEE_IMAGES.map((image, i) => (
         <img
           src={image.url}
-          key={`logo-cloud-logo-${i}`}
+          key={`logo-cloud-logo-${
+            // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+            i
+          }`}
           className="mx-4 h-8 w-auto brightness-50 grayscale dark:invert"
           alt=""
         />

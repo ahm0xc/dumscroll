@@ -95,13 +95,7 @@ export function getHigherLevelDomain(url: string, includePath = true) {
 }
 
 export function getPlatformNameFromUrl(url: string) {
-  return (
-    url
-      .replace("https://", "")
-      .replace("http://", "")
-      .replace("www.", "")
-      .split(".")[0] ?? ""
-  );
+  return url.replace("https://", "").replace("http://", "").replace("www.", "").split(".")[0] ?? "";
 }
 
 export function getFormattedTracks(tracks: Track[]) {

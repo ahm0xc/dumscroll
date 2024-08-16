@@ -14,12 +14,9 @@ export async function GET(req: NextRequest) {
     });
   }
   if (range > 60) {
-    return new Response(
-      JSON.stringify({ error: "Range can't be greater than 60 days" }),
-      {
-        status: 400,
-      },
-    );
+    return new Response(JSON.stringify({ error: "Range can't be greater than 60 days" }), {
+      status: 400,
+    });
   }
 
   const user = await db.query.users.findFirst({
@@ -27,12 +24,9 @@ export async function GET(req: NextRequest) {
   });
 
   if (!user) {
-    return new Response(
-      JSON.stringify({ error: "User not found. The license key is invalid" }),
-      {
-        status: 404,
-      },
-    );
+    return new Response(JSON.stringify({ error: "User not found. The license key is invalid" }), {
+      status: 404,
+    });
   }
 
   const today = dayjs();
@@ -48,8 +42,7 @@ export async function GET(req: NextRequest) {
   });
 
   const tracks = await db.query.tracks.findMany({
-    where: (track, { or, like }) =>
-      or(...trackIdPrefixes.map((p) => like(track.id, `${p}%`))),
+    where: (track, { or, like }) => or(...trackIdPrefixes.map((p) => like(track.id, `${p}%`))),
   });
 
   return new Response(JSON.stringify({ licenseKey, tracks }), { status: 200 });

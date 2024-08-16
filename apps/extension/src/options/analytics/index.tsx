@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
+import { settings } from "~/config";
 import useGlobalStorage from "~/hooks/globalstorage";
-import DailyUses from "./daily-uses";
+import DailyScreenTime from "./daily-screen-time";
 import DailySocialMediaUses from "./daily-social-media-uses";
 import DailyTimeSaved from "./daily-time-saved";
-import { settings } from "~/config";
-import DailyScreenTime from "./daily-screen-time";
+import DailyUses from "./daily-uses";
 
 export interface Track {
   id: string;
@@ -33,8 +33,7 @@ export default function Analytics() {
 
         setTracksData(
           (data.tracks as Track[]).sort(
-            (a, b) =>
-              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+            (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
           ),
         );
       } catch (error) {
@@ -53,9 +52,7 @@ export default function Analytics() {
       </div>
       <div className="mt-6">
         {(tracksData?.length ?? 0) < 3 && (
-          <p className="text-gray-700 dark:text-gray-300">
-            No track data available
-          </p>
+          <p className="text-gray-700 dark:text-gray-300">No track data available</p>
         )}
         {!!tracksData?.length && (
           <section className="grid grid-cols-2 xl:grid-cols-3 gap-6">
