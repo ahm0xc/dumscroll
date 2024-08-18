@@ -13,9 +13,12 @@ export default function ApiKeysSetupForm() {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isValidating, setIsValidating] = useState(false);
 
-  const { value: licenseKey, set: setLicenseKey } = useGlobalStorage<string>("", {
-    key: settings.activation.license.key,
-  });
+  const { value: licenseKey, set: setLicenseKey } = useGlobalStorage<string>(
+    "",
+    {
+      key: settings.activation.license.key,
+    },
+  );
 
   async function handleActivate() {
     const key = inputRef.current?.value.trim();
@@ -32,7 +35,12 @@ export default function ApiKeysSetupForm() {
     } else {
       toast.error("Invalid license key", {
         action: (
-          <Button size="sm" className="text-[11px] h-8" variant="secondary" asChild>
+          <Button
+            size="sm"
+            className="text-[11px] h-8"
+            variant="secondary"
+            asChild
+          >
             <a href={`${APP_URL}/dashboard/get-started`}>Get key</a>
           </Button>
         ),
@@ -45,6 +53,12 @@ export default function ApiKeysSetupForm() {
     window.location.reload();
   }
 
+  function maskKey(key: string) {
+    const firstPart = key.substring(0, 9); // Get the first part
+    const lastPart = key.substring(key.length - 13); // Get the last part
+    return `${firstPart}************${lastPart}`; // Combine them with masked middle part
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, filter: "blur(8px)" }}
@@ -54,7 +68,8 @@ export default function ApiKeysSetupForm() {
       <div>
         <h3 className="text-lg font-medium">Setup Api Keys</h3>
         <p className="text-[15px] text-neutral-800">
-          Input your activation key to activate the extension. Don't have any? check{" "}
+          Input your activation key to activate the extension. Don't have any?
+          check{" "}
           <a
             href="https://dumscroll.com/dashboard/keys"
             className="underline underline-offset-2 cursor-alias"
@@ -72,19 +87,29 @@ export default function ApiKeysSetupForm() {
             <p className="text-xs">Api keys</p>
             <Input
               ref={inputRef}
-              defaultValue={licenseKey}
+              defaultValue={licenseKey ? maskKey(licenseKey) : undefined}
               readOnly={Boolean(licenseKey)}
               placeholder="XXXX-XXXX-XXXX-XXXX"
             />
           </div>
           <div>
             {licenseKey ? (
-              <Button className="w-full" variant="destructive" onClick={handleRemove}>
+              <Button
+                className="w-full"
+                variant="destructive"
+                onClick={handleRemove}
+              >
                 Remove
               </Button>
             ) : (
-              <Button className="w-full items-center gap-1.5" onClick={handleActivate}>
-                {isValidating && <Loader2Icon size={15} className="animate-spin" />} Activate
+              <Button
+                className="w-full items-center gap-1.5"
+                onClick={handleActivate}
+              >
+                {isValidating && (
+                  <Loader2Icon size={15} className="animate-spin" />
+                )}{" "}
+                Activate
               </Button>
             )}
           </div>
