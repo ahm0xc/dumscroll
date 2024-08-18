@@ -1,26 +1,23 @@
-// import detectUrlChange from "detect-url-change";
-// import { trackTime } from "./track-time";
+import detectUrlChange from "detect-url-change";
+
+import { GlobalStorage } from "~/helpers/globalstorage";
+import { settings } from "~/config";
+import { handleDefaultBlocks } from ".";
 
 // // import "./facebook.css";
 
-// function main() {
-//   chrome.runtime.sendMessage(
-//     { action: "getStorageValue", key: "is-fb-watch-blocked" },
-//     (response) => {
-//       if (chrome.runtime.lastError) {
-//         console.error(chrome.runtime.lastError.message);
-//       } else {
-//         const isFBWatchBlocked = response.value;
+async function main() {
+  GlobalStorage.get(settings.platformDefaults.facebook.blockReels.key).then(
+    (v) => {
+      if (!v) return;
 
-//         if (isFBWatchBlocked) {
-//           removeFBWatch();
-//         }
-//       }
-//     },
-//   );
-// }
-// main();
-// trackTime({ platform: "facebook" });
+      detectUrlChange.on("change", (newUrl) => {
+        handleDefaultBlocks(newUrl);
+      });
+    },
+  );
+}
+main();
 
 // function removeFBWatch() {
 //   const style = document.createElement("style");
