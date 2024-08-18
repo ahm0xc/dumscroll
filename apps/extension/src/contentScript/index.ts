@@ -4,9 +4,9 @@ import { defaultBlocks, settings } from "~/config";
 import { GlobalStorage } from "~/helpers/globalstorage";
 import { getHigherLevelDomain } from "~/lib/utils";
 import type { ScheduleType } from "~/options/settings/schedule";
-import { openCrimeModal } from "./crime-modal";
 import { blockTotalWebsite } from "./total-block";
 import { trackTime } from "./track-time";
+import { openCrimeModal } from "./crime-modal";
 
 const origin = window.location.origin;
 trackTime({
@@ -25,7 +25,7 @@ detectUrlChange.on("change", async (newUrl) => {
     handleSchedules(newUrl, schedules);
   }
   // handle default blocks
-  handleDefaultBlocks(newUrl);
+  // handleDefaultBlocks(newUrl);
 });
 
 function handleSchedules(newUrl: string, schedules: ScheduleType[]): void {
@@ -59,7 +59,7 @@ function handleSchedules(newUrl: string, schedules: ScheduleType[]): void {
   }
 }
 
-function handleDefaultBlocks(newUrl: string) {
+export function handleDefaultBlocks(newUrl: string) {
   for (let i = 0; i < defaultBlocks.length; i++) {
     const block = defaultBlocks[i];
     if (!newUrl.includes(block.url)) continue;

@@ -1,5 +1,8 @@
+import detectUrlChange from "detect-url-change";
+
 import { settings } from "~/config";
 import { GlobalStorage } from "~/helpers/globalstorage";
+import { handleDefaultBlocks } from ".";
 
 async function main() {
   GlobalStorage.get(settings.platformDefaults.youtube.blockShorts.key).then(
@@ -14,11 +17,21 @@ async function main() {
     if (v) grayScaleThumbnails();
   });
 
-  GlobalStorage.get(
-    settings.platformDefaults.youtube.blackThumbnails.key,
-  ).then((v) => {
-    if (v) blackThumbnails();
-  });
+  GlobalStorage.get(settings.platformDefaults.youtube.blackThumbnails.key).then(
+    (v) => {
+      if (v) blackThumbnails();
+    },
+  );
+
+  GlobalStorage.get(settings.platformDefaults.youtube.blockShorts.key).then(
+    (v) => {
+      if (!v) return;
+
+      detectUrlChange.on("change", (newUrl) => {
+        handleDefaultBlocks(newUrl);
+      });
+    },
+  );
 }
 
 main();

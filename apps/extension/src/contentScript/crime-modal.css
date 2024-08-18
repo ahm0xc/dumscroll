@@ -1,4 +1,4 @@
-dumscroll-root .modal-overlay {
+/* dumscroll-root .modal-overlay {
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.7);
@@ -59,6 +59,7 @@ dumscroll-root button:disabled {
   opacity: 0.8;
   pointer-events: none;
 }
+*/
 
 @keyframes modal-appear {
   from {
