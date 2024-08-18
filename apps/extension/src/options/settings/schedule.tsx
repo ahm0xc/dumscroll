@@ -8,7 +8,7 @@ import { Input } from "~/components/ui/input";
 import { ScrollArea } from "~/components/ui/scroll-area";
 import { settings } from "~/config";
 import { WEEK_NAMES } from "~/constants";
-import useGlobalStorage from "~/hooks/globalstorage";
+import useGlobalStorage from "~/hooks/use-globalstorage";
 import { cn, convertTime, isFirstTimeGreater, isShallowEqual, isValidURL } from "~/lib/utils";
 
 export interface ScheduleType {

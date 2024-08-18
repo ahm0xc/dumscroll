@@ -4,8 +4,11 @@ import type { PropsWithChildren } from "react";
 import ProductivitySettings from "./productivity";
 import RemindersSettings from "./reminders";
 import Schedule from "./schedule";
-import SettingsNavigation, { useSettingsNavigation } from "./settings-navigation";
+import SettingsNavigation, {
+  useSettingsNavigation,
+} from "./settings-navigation";
 import UsesTrackingSettings from "./uses-tracking";
+import GeneralSettings from "./general";
 
 export default function Settings() {
   const [ui] = useSettingsNavigation((state) => [state.ui]);
@@ -19,6 +22,11 @@ export default function Settings() {
         <SettingsNavigation />
       </div>
       <div className="mt-6">
+        {ui === "general" && (
+          <BlurWrapper>
+            <GeneralSettings />
+          </BlurWrapper>
+        )}
         {ui === "uses-tracking" && (
           <BlurWrapper>
             <UsesTrackingSettings />

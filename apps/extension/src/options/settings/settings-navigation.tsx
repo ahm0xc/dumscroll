@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { create } from "zustand";
 
-export type UI = "uses-tracking" | "schedule" | "productivity" | "reminders";
+export type UI = "general" | "uses-tracking" | "schedule" | "productivity" | "reminders";
 
 type UseSettingsNavigation = {
   ui: UI;
@@ -9,7 +9,7 @@ type UseSettingsNavigation = {
 };
 
 export const useSettingsNavigation = create<UseSettingsNavigation>((set) => ({
-  ui: "uses-tracking",
+  ui: "general",
   setUI: (ui) => set({ ui }),
 }));
 
@@ -25,6 +25,10 @@ export default function SettingsNavigation() {
   ]);
 
   const navigationItems: NavigationItemType[] = [
+    {
+      label: "General",
+      ui: "general",
+    },
     {
       label: "Uses tracking",
       ui: "uses-tracking",

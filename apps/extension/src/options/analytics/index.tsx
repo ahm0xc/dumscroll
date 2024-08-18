@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 import { settings } from "~/config";
-import useGlobalStorage from "~/hooks/globalstorage";
+import useGlobalStorage from "~/hooks/use-globalstorage";
 import DailyScreenTime from "./daily-screen-time";
 import DailySocialMediaUses from "./daily-social-media-uses";
 import DailyTimeSaved from "./daily-time-saved";

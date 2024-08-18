@@ -1,7 +1,7 @@
 import { CloudIcon } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import { APP_URL, settings } from "~/config";
-import useGlobalStorage from "~/hooks/globalstorage";
+import useGlobalStorage from "~/hooks/use-globalstorage";
 import { useAppearanceStore } from "./app";
 
 export default function ActivationBanner() {

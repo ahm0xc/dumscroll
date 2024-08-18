@@ -7,7 +7,7 @@ import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { APP_URL, settings } from "~/config";
 import { validateLicenseKey } from "~/helpers/validate-license";
-import useGlobalStorage from "~/hooks/globalstorage";
+import useGlobalStorage from "~/hooks/use-globalstorage";
 
 export default function ApiKeysSetupForm() {
   const inputRef = useRef<HTMLInputElement>(null);

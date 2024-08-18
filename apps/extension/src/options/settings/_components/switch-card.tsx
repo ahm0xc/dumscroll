@@ -8,8 +8,8 @@ export default function SwitchCard({
   onCheckedChange,
   comingSoon = false,
 }: {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   checked: boolean;
   onCheckedChange: (checked: boolean) => void;
   comingSoon?: boolean;
@@ -22,12 +22,24 @@ export default function SwitchCard({
       )}
     >
       <div>
-        {comingSoon && <p className="text-[11px] uppercase text-foreground/80">coming soon</p>}
-        <p className="text-neutral-900 text-lg font-medium">{title}</p>
-        <p className="text-sm mt-1 text-neutral-700">{description}</p>
+        {comingSoon && (
+          <p className="text-[11px] uppercase text-foreground/80">
+            coming soon
+          </p>
+        )}
+        {title && (
+          <p className="text-neutral-900 text-lg font-medium">{title}</p>
+        )}
+        {description && (
+          <p className="text-sm mt-1 text-neutral-700">{description}</p>
+        )}
       </div>
       <div>
-        <Switch id={title} checked={checked} onCheckedChange={onCheckedChange} />
+        <Switch
+          id={title}
+          checked={checked}
+          onCheckedChange={onCheckedChange}
+        />
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import { settings } from "~/config";
-import useGlobalStorage from "~/hooks/globalstorage";
+import useGlobalStorage from "~/hooks/use-globalstorage";
 import SwitchCard from "./_components/switch-card";
 
 export default function ProductivitySettings() {

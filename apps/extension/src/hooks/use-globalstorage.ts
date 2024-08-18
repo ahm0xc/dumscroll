@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 
 import { GlobalStorage } from "~/helpers/globalstorage";
 
-export default function useGlobalStorage<T>(defaultValue: T, { key }: { key: string }) {
+export default function useGlobalStorage<T>(
+  defaultValue: T,
+  { key }: { key: string },
+) {
   const [value, setValue] = useState<T>(defaultValue);
 
   function set(v: T) {
@@ -16,7 +19,11 @@ export default function useGlobalStorage<T>(defaultValue: T, { key }: { key: str
   useEffect(() => {
     async function getAndSetValue() {
       const v = await GlobalStorage.get(key);
-      v && setValue(v as T);
+      if (v === null || typeof v === "undefined") {
+        set(defaultValue);
+      } else {
+        set(v as T);
+      }
     }
     getAndSetValue();
   }, [key]);
