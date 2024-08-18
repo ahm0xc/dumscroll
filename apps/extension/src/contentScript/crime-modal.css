@@ -1,4 +1,4 @@
-.modal-overlay {
+dumscroll-root .modal-overlay {
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.7);
@@ -9,7 +9,7 @@
   backdrop-filter: blur(8px);
 }
 
-.modal-content {
+dumscroll-root .modal-content {
   background-color: #ffffff;
   padding: 30px;
   border-radius: 15px;
@@ -20,20 +20,20 @@
   animation: modal-appear 0.3s ease-out;
 }
 
-.modal-title {
+dumscroll-root .modal-title {
   font-size: 24px;
   color: black;
   font-weight: 600;
   margin-bottom: 10px;
 }
 
-.modal-message {
+dumscroll-root .modal-message {
   font-size: 18px;
   color: #333;
   margin-bottom: 20px;
 }
 
-button {
+dumscroll-root button {
   padding: 12px 24px;
   font-size: 0.8rem;
   background-color: hsl(0, 57%, 48%);
@@ -47,15 +47,15 @@ button {
     transform 0.1s;
 }
 
-button:hover {
+dumscroll-root button:hover {
   background-color: hsl(0, 57%, 55%);
 }
 
-button:active {
+dumscroll-root button:active {
   transform: scale(0.95);
 }
 
-button:disabled {
+dumscroll-root button:disabled {
   opacity: 0.8;
   pointer-events: none;
 }

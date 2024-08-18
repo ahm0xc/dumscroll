@@ -6,10 +6,7 @@ import useCountdown from "~/hooks/use-countdown";
 import "./crime-modal.css";
 
 export function openCrimeModal(_url: string) {
-  const rootEl = document.createElement("div");
-  rootEl.id = "root";
-  document.body.appendChild(rootEl);
-  const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
+  const root = ReactDOM.createRoot(document.querySelector("dumscroll-root") as HTMLElement);
 
   root.render(
     <React.StrictMode>

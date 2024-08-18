@@ -1,46 +1,64 @@
-// import detectUrlChange from "detect-url-change";
-// import { trackTime } from "./track-time";
+import { settings } from "~/config";
+import { GlobalStorage } from "~/helpers/globalstorage";
 
-// function main() {
-//   chrome.runtime.sendMessage(
-//     { action: "getStorageValue", key: "is-yt-shorts-blocked" },
-//     (response) => {
-//       if (chrome.runtime.lastError) {
-//         console.error(chrome.runtime.lastError.message);
-//       } else {
-//         const isShortsBlocked = response.value;
+async function main() {
+  GlobalStorage.get(settings.platformDefaults.youtube.blockShorts.key).then(
+    (v) => {
+      if (v) removeShortsNavigation();
+    },
+  );
 
-//         if (isShortsBlocked) {
-//           blockYoutubeShorts();
-//         }
-//       }
-//     },
-//   );
-// }
+  GlobalStorage.get(
+    settings.platformDefaults.youtube.grayScaleThumbnails.key,
+  ).then((v) => {
+    if (v) grayScaleThumbnails();
+  });
 
-// main();
-// trackTime({ platform: "youtube" });
+  GlobalStorage.get(
+    settings.platformDefaults.youtube.blackThumbnails.key,
+  ).then((v) => {
+    if (v) blackThumbnails();
+  });
+}
 
-// function blockYoutubeShorts() {
-//   const style = document.createElement("style");
-//   style.textContent = `
-//     a[title='Shorts'] {
-//       display: none !important;
-//     }
-//     ytd-rich-shelf-renderer[is-shorts] {
-//       display: none !important;
-//     }
-//     ytd-reel-shelf-renderer {
-//       display: none !important;
-//     }
-//   `;
-//   document.head.appendChild(style);
+main();
 
-//   detectUrlChange.on("change", (newUrl) => {
-//     if (newUrl.includes("/shorts/")) {
-//       const url = new URL(newUrl);
-//       const v = url.pathname.split("/").pop();
-//       window.location.replace(`https://youtu.be/watch?v=${v}`);
-//     }
-//   });
-// }
+function removeShortsNavigation() {
+  const style = document.createElement("style");
+  style.textContent = `
+    a[title='Shorts'] {
+      display: none !important;
+    }
+    ytd-rich-shelf-renderer[is-shorts] {
+      display: none !important;
+    }
+    ytd-reel-shelf-renderer {
+      display: none !important;
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+function grayScaleThumbnails() {
+  const style = document.createElement("style");
+  style.textContent = `
+    yt-image.ytd-thumbnail img,
+    yt-image.ytd-playlist-video-thumbnail-renderer,
+    ytd-display-ad-renderer {
+      filter: grayscale(1);
+    }
+    `;
+  document.head.appendChild(style);
+}
+
+function blackThumbnails() {
+  const style = document.createElement("style");
+  style.textContent = `
+    yt-image.ytd-thumbnail img,
+    yt-image.ytd-playlist-video-thumbnail-renderer,
+    ytd-display-ad-renderer {
+      filter: brightness(0);
+    }
+    `;
+  document.head.appendChild(style);
+}

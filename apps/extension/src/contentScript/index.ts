@@ -13,9 +13,14 @@ trackTime({
   url: origin,
 });
 
+const rootEl = document.createElement("dumscroll-root");
+document.body.appendChild(rootEl);
+
 detectUrlChange.on("change", async (newUrl) => {
   // handle schedules
-  const schedules = (await GlobalStorage.get(settings.schedule.key)) as ScheduleType[] | undefined;
+  const schedules = (await GlobalStorage.get(settings.schedule.key)) as
+    | ScheduleType[]
+    | undefined;
   if (schedules) {
     handleSchedules(newUrl, schedules);
   }
@@ -31,7 +36,9 @@ function handleSchedules(newUrl: string, schedules: ScheduleType[]): void {
     if (!newUrl.includes(higherLevelDomainWithPath)) continue;
     console.info("DETECTED BLOCKED WEBSITE: ", newUrl);
 
-    const [startHour, startMinute] = schedule.startingTime.split(":").map(Number);
+    const [startHour, startMinute] = schedule.startingTime
+      .split(":")
+      .map(Number);
     const [endHour, endMinute] = schedule.endingTime.split(":").map(Number);
 
     const currentTime = new Date();

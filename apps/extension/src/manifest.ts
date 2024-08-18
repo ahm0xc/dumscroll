@@ -29,10 +29,10 @@ export default defineManifest({
       matches: ["http://*/*", "https://*/*"],
       js: ["src/contentScript/index.ts"],
     },
-    // {
-    //   matches: ["*://*.youtube.com/*", "*://youtu.be/*"],
-    //   js: ["src/contentScript/youtube.ts"],
-    // },
+    {
+      matches: ["*://*.youtube.com/*", "*://youtu.be/*"],
+      js: ["src/contentScript/youtube.ts"],
+    },
     // {
     //   matches: ["https://*.instagram.com/*"],
     //   js: ["src/contentScript/instagram.ts"],
