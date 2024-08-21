@@ -65,6 +65,9 @@ export default function DailyUses({ tracks }: { tracks: Track[] }) {
       const socialTracks = f.tracks.filter((t) =>
         socialMediaNames.includes(getPlatformNameFromUrl(t.url)),
       );
+      const othersTracks = f.tracks.filter(
+        (t) => !socialMediaNames.includes(getPlatformNameFromUrl(t.url)),
+      );
 
       return {
         date: dateFormatter(f.date),
@@ -74,11 +77,14 @@ export default function DailyUses({ tracks }: { tracks: Track[] }) {
           acc[getPlatformNameFromUrl(t.url)] = t.duration;
           return acc;
         }, {}),
+        others: othersTracks.reduce((acc, t) => acc + t.duration, 0),
       };
     })
     .filter((x) =>
       dayjs(x.rawDate).isAfter(today.subtract(dataOfDays, "days")),
     );
+
+  console.log({ formattedChartData });
 
   return (
     <Card>
@@ -113,8 +119,8 @@ export default function DailyUses({ tracks }: { tracks: Track[] }) {
           className="mt-6"
           data={formattedChartData}
           index="date"
-          categories={socialMediaNames}
-          colors={socialMediaColors}
+          categories={["others", ...socialMediaNames]}
+          colors={["#808080", ...socialMediaColors]}
           valueFormatter={valueFormatter}
           yAxisWidth={48}
           customTooltip={customTooltip}
@@ -148,7 +154,8 @@ const customTooltip = (props: CustomTooltipTypeBar) => {
           className="flex flex-1 space-x-2.5"
         >
           <div
-            className={`flex w-1.5 h-1.5 flex-col bg-${category.color}-500 rounded-full mt-2`}
+            className={"flex w-1.5 h-1.5 flex-col rounded-full mt-2"}
+            style={{ background: category.color }}
           />
           <div className="space-y-1">
             <p className="text-tremor-content">{category.dataKey}</p>
