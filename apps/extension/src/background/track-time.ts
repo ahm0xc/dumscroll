@@ -4,7 +4,7 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
   if (request.action === "trackTime") {
     const timeSpent = request.timeSpent as number;
     let url = (request.url as string).replace("www.", "");
-    if (url.startsWith("http://") || url.startsWith("https://")) {
+    if (!url.startsWith("http://") || !url.startsWith("https://")) {
       url = `https://${url}`;
     }
     const licenseKey = request.licenseKey as string;
