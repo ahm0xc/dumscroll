@@ -43,11 +43,7 @@ function seededRandom(seed: number): number {
 }
 
 // Generates a deterministic random number between min and max based on a given ID
-function getDeterministicRandomNumber(
-  id: string,
-  min: number,
-  max: number,
-): number {
+function getDeterministicRandomNumber(id: string, min: number, max: number): number {
   const seed = hashStringToNumber(id);
   const random = seededRandom(seed);
   return min + Math.floor(random * (max - min + 1));
@@ -57,9 +53,7 @@ export default function DailyTimeSaved({ tracks }: { tracks: Track[] }) {
   const today = new Date();
   const dateId = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, "0")}-${today.getDate().toString().padStart(2, "0")}`;
 
-  const todaysTracks = tracks.filter(
-    (t) => getDateFromTrackId(t.id) === dateId,
-  );
+  const todaysTracks = tracks.filter((t) => getDateFromTrackId(t.id) === dateId);
 
   const screenTime = todaysTracks.reduce((acc, currentTrack) => {
     return acc + currentTrack.duration;
@@ -87,12 +81,7 @@ export default function DailyTimeSaved({ tracks }: { tracks: Track[] }) {
           <span>This is calculated based on your uses and distractions</span>
         </p>
         <ProgressBar value={savedPercentage} color="blue" className="mt-2" />
-        <Badge
-          size="sm"
-          color="green"
-          icon={Clock3Icon}
-          className="absolute top-3 right-3"
-        >
+        <Badge size="sm" color="green" icon={Clock3Icon} className="absolute top-3 right-3">
           {savedPercentage}% saved
         </Badge>
       </Card>

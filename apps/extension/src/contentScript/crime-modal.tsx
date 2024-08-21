@@ -6,9 +6,7 @@ import useCountdown from "~/hooks/use-countdown";
 import "./crime-modal.css";
 
 export function openCrimeModal(_url: string) {
-  const root = ReactDOM.createRoot(
-    document.querySelector("dumscroll-root") as HTMLElement,
-  );
+  const root = ReactDOM.createRoot(document.querySelector("dumscroll-root") as HTMLElement);
 
   root.render(
     <React.StrictMode>
@@ -68,12 +66,8 @@ function Modal() {
         >
           Committing crime 🫢!!
         </p>
-        <p
-          className="modal-message"
-          style={{ fontSize: 18, color: "#333", marginBottom: 20 }}
-        >
-          Are you sure you wanna commit this crime. This blocking features are
-          for you betterment.
+        <p className="modal-message" style={{ fontSize: 18, color: "#333", marginBottom: 20 }}>
+          Are you sure you wanna commit this crime. This blocking features are for you betterment.
         </p>
         <button
           type="button"

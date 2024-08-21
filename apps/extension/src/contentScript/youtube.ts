@@ -5,33 +5,25 @@ import { GlobalStorage } from "~/helpers/globalstorage";
 import { handleDefaultBlocks } from ".";
 
 async function main() {
-  GlobalStorage.get(settings.platformDefaults.youtube.blockShorts.key).then(
-    (v) => {
-      if (v) removeShortsNavigation();
-    },
-  );
+  GlobalStorage.get(settings.platformDefaults.youtube.blockShorts.key).then((v) => {
+    if (v) removeShortsNavigation();
+  });
 
-  GlobalStorage.get(
-    settings.platformDefaults.youtube.grayScaleThumbnails.key,
-  ).then((v) => {
+  GlobalStorage.get(settings.platformDefaults.youtube.grayScaleThumbnails.key).then((v) => {
     if (v) grayScaleThumbnails();
   });
 
-  GlobalStorage.get(settings.platformDefaults.youtube.blackThumbnails.key).then(
-    (v) => {
-      if (v) blackThumbnails();
-    },
-  );
+  GlobalStorage.get(settings.platformDefaults.youtube.blackThumbnails.key).then((v) => {
+    if (v) blackThumbnails();
+  });
 
-  GlobalStorage.get(settings.platformDefaults.youtube.blockShorts.key).then(
-    (v) => {
-      if (!v) return;
+  GlobalStorage.get(settings.platformDefaults.youtube.blockShorts.key).then((v) => {
+    if (!v) return;
 
-      detectUrlChange.on("change", (newUrl) => {
-        handleDefaultBlocks(newUrl);
-      });
-    },
-  );
+    detectUrlChange.on("change", (newUrl) => {
+      handleDefaultBlocks(newUrl);
+    });
+  });
 }
 
 main();

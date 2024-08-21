@@ -1,21 +1,19 @@
 import detectUrlChange from "detect-url-change";
 
-import { GlobalStorage } from "~/helpers/globalstorage";
 import { settings } from "~/config";
+import { GlobalStorage } from "~/helpers/globalstorage";
 import { handleDefaultBlocks } from ".";
 
 // // import "./facebook.css";
 
 async function main() {
-  GlobalStorage.get(settings.platformDefaults.facebook.blockReels.key).then(
-    (v) => {
-      if (!v) return;
+  GlobalStorage.get(settings.platformDefaults.facebook.blockReels.key).then((v) => {
+    if (!v) return;
 
-      detectUrlChange.on("change", (newUrl) => {
-        handleDefaultBlocks(newUrl);
-      });
-    },
-  );
+    detectUrlChange.on("change", (newUrl) => {
+      handleDefaultBlocks(newUrl);
+    });
+  });
 }
 main();
 

@@ -53,9 +53,7 @@ export default function DailyUses({ tracks }: { tracks: Track[] }) {
   const [dataOfDays, setDataOfDays] = useState(1);
 
   const ft = getFormattedTracks(tracks);
-  const socialMediaNames = socialMediaPlatforms.map((p) =>
-    p.name.toLowerCase(),
-  );
+  const socialMediaNames = socialMediaPlatforms.map((p) => p.name.toLowerCase());
   const socialMediaColors = socialMediaPlatforms.map((p) => p.colorName);
 
   const today = dayjs();
@@ -80,24 +78,17 @@ export default function DailyUses({ tracks }: { tracks: Track[] }) {
         others: othersTracks.reduce((acc, t) => acc + t.duration, 0),
       };
     })
-    .filter((x) =>
-      dayjs(x.rawDate).isAfter(today.subtract(dataOfDays, "days")),
-    );
+    .filter((x) => dayjs(x.rawDate).isAfter(today.subtract(dataOfDays, "days")));
 
   return (
     <Card>
       <div className="flex items-center justify-between">
         <div>
           <p className="font-medium">Daily uses</p>
-          <p className="text-sm text-neutral-800">
-            All websites you visited today.
-          </p>
+          <p className="text-sm text-neutral-800">All websites you visited today.</p>
         </div>
         <div>
-          <TabGroup
-            onIndexChange={(i) => setDataOfDays(filters[i].days)}
-            defaultIndex={0}
-          >
+          <TabGroup onIndexChange={(i) => setDataOfDays(filters[i].days)} defaultIndex={0}>
             <TabList variant="solid" color="blue">
               {filters.map((f) => (
                 <Tab value={f.days} key={`filter-${f.days}/${f.label}`}>

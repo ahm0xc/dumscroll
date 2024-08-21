@@ -2,10 +2,7 @@ import { useEffect, useState } from "react";
 
 import { GlobalStorage } from "~/helpers/globalstorage";
 
-export default function useGlobalStorage<T>(
-  defaultValue: T,
-  { key }: { key: string },
-) {
+export default function useGlobalStorage<T>(defaultValue: T, { key }: { key: string }) {
   const [value, setValue] = useState<T>(defaultValue);
 
   function set(v: T) {

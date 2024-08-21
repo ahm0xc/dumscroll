@@ -1,14 +1,12 @@
-import type { Track } from ".";
 import { Card } from "@tremor/react";
 import { cn, getPlatformNameFromUrl } from "~/lib/utils";
+import type { Track } from ".";
 
 interface AllWebVisitedProps {
   tracks: Track[];
 }
 
-const AllWebVisited: React.FC<AllWebVisitedProps> = ({
-  tracks,
-}: AllWebVisitedProps) => {
+const AllWebVisited: React.FC<AllWebVisitedProps> = ({ tracks }: AllWebVisitedProps) => {
   const LIMIT = 7;
 
   tracks = tracks.sort((a, b) => b.duration - a.duration);
@@ -28,8 +26,7 @@ const AllWebVisited: React.FC<AllWebVisitedProps> = ({
         {topViewedWebsites.map((track) => {
           const percentage = Math.floor((track.duration / totalTime) * 100);
           const timeSpent = Math.floor(track.duration / 60);
-          const timeSpentText =
-            timeSpent > 60 ? `${Math.floor(timeSpent / 60)}h` : `${timeSpent}m`;
+          const timeSpentText = timeSpent > 60 ? `${Math.floor(timeSpent / 60)}h` : `${timeSpent}m`;
 
           return (
             <div
@@ -41,18 +38,16 @@ const AllWebVisited: React.FC<AllWebVisitedProps> = ({
                   className="h-full rounded-[inherit] bg-orange-400 z-[1] rounded-md"
                   style={{ width: `${percentage}%` }}
                 />
-                <span className={cn("text-neutral-700", percentage < 10 && "ml-20")}>{timeSpentText}</span>
+                <span className={cn("text-neutral-700", percentage < 10 && "ml-20")}>
+                  {timeSpentText}
+                </span>
               </div>
-              <p className="z-[2] ml-2 font-medium">
-                {getPlatformNameFromUrl(track.url)}{" "}
-              </p>
+              <p className="z-[2] ml-2 font-medium">{getPlatformNameFromUrl(track.url)} </p>
             </div>
           );
         })}
       </div>
-      <div>
-        {tracks.length - LIMIT > 0 && <p>And {tracks.length - LIMIT} more</p>}
-      </div>
+      <div>{tracks.length - LIMIT > 0 && <p>And {tracks.length - LIMIT} more</p>}</div>
     </Card>
   );
 };

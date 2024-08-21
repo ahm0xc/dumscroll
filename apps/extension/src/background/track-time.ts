@@ -7,7 +7,7 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
       .replace("www.", "")
       .replaceAll("https://", "")
       .replaceAll("http://", "");
-      
+
     url = `https://${url}`;
     const licenseKey = request.licenseKey as string;
     console.info({ timeSpent, url, licenseKey: licenseKey });

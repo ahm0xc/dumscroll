@@ -1,10 +1,10 @@
 import { type ReactNode, useEffect } from "react";
 
 import { Card } from "~/components/ui/card";
-import SwitchCard from "./_components/switch-card";
-import useGlobalStorage from "~/hooks/use-globalstorage";
 import { settings } from "~/config";
 import { GlobalStorage } from "~/helpers/globalstorage";
+import useGlobalStorage from "~/hooks/use-globalstorage";
+import SwitchCard from "./_components/switch-card";
 
 const GeneralSettings: React.FC = () => {
   return (
@@ -27,30 +27,27 @@ const GeneralSettings: React.FC = () => {
 export default GeneralSettings;
 
 function YoutubeSettings() {
-  const { value: isShortsBlocked, set: setIsShortsBlocked } =
-    useGlobalStorage<boolean>(
-      settings.platformDefaults.youtube.blockShorts.default,
-      {
-        key: settings.platformDefaults.youtube.blockShorts.key,
-      },
-    );
-  const { value: isGrayScaleThumbnails, set: setIsGrayScaleThumbnails } =
-    useGlobalStorage<boolean>(
-      settings.platformDefaults.youtube.grayScaleThumbnails.default,
-      {
-        key: settings.platformDefaults.youtube.grayScaleThumbnails.key,
-      },
-    );
-  const { value: isBlackThumbnails, set: setIsBlackThumbnails } =
-    useGlobalStorage<boolean>(
-      settings.platformDefaults.youtube.blackThumbnails.default,
-      {
-        key: settings.platformDefaults.youtube.blackThumbnails.key,
-      },
-    );
+  const { value: isShortsBlocked, set: setIsShortsBlocked } = useGlobalStorage<boolean>(
+    settings.platformDefaults.youtube.blockShorts.default,
+    {
+      key: settings.platformDefaults.youtube.blockShorts.key,
+    },
+  );
+  const { value: isGrayScaleThumbnails, set: setIsGrayScaleThumbnails } = useGlobalStorage<boolean>(
+    settings.platformDefaults.youtube.grayScaleThumbnails.default,
+    {
+      key: settings.platformDefaults.youtube.grayScaleThumbnails.key,
+    },
+  );
+  const { value: isBlackThumbnails, set: setIsBlackThumbnails } = useGlobalStorage<boolean>(
+    settings.platformDefaults.youtube.blackThumbnails.default,
+    {
+      key: settings.platformDefaults.youtube.blackThumbnails.key,
+    },
+  );
 
   useEffect(() => {
-    GlobalStorage.get("hello").then((v) => console.log(v));
+    GlobalStorage.get("hello").then((_v) => {});
   }, []);
 
   return (
@@ -99,13 +96,12 @@ function YoutubeSettings() {
 }
 
 function FacebookSettings() {
-  const { value: isReelsBlocked, set: setIsReelsBlocked } =
-    useGlobalStorage<boolean>(
-      settings.platformDefaults.facebook.blockReels.default,
-      {
-        key: settings.platformDefaults.facebook.blockReels.key,
-      },
-    );
+  const { value: isReelsBlocked, set: setIsReelsBlocked } = useGlobalStorage<boolean>(
+    settings.platformDefaults.facebook.blockReels.default,
+    {
+      key: settings.platformDefaults.facebook.blockReels.key,
+    },
+  );
 
   return (
     <Block
@@ -155,13 +151,12 @@ function FacebookSettings() {
 }
 
 function InstagramSettings() {
-  const { value: isReelsBlocked, set: setIsReelsBlocked } =
-    useGlobalStorage<boolean>(
-      settings.platformDefaults.instagram.blockReels.default,
-      {
-        key: settings.platformDefaults.instagram.blockReels.key,
-      },
-    );
+  const { value: isReelsBlocked, set: setIsReelsBlocked } = useGlobalStorage<boolean>(
+    settings.platformDefaults.instagram.blockReels.default,
+    {
+      key: settings.platformDefaults.instagram.blockReels.key,
+    },
+  );
 
   return (
     <Block

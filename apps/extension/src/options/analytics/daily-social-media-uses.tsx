@@ -34,9 +34,7 @@ function dateFormatter(date: string) {
 
 export default function DailySocialMediaUses({ tracks }: { tracks: Track[] }) {
   const ft = getFormattedTracks(tracks);
-  const socialMediaNames = socialMediaPlatforms.map((p) =>
-    p.name.toLowerCase(),
-  );
+  const socialMediaNames = socialMediaPlatforms.map((p) => p.name.toLowerCase());
   const socialMediaColors = socialMediaPlatforms.map((p) => p.colorName);
 
   const formattedChartData = ft.map((f) => {
@@ -88,9 +86,7 @@ export default function DailySocialMediaUses({ tracks }: { tracks: Track[] }) {
     <Card>
       <div className="">
         <p className="font-medium">Social media uses</p>
-        <p className="text-sm text-neutral-800">
-          Keep track of your social media uses.
-        </p>
+        <p className="text-sm text-neutral-800">Keep track of your social media uses.</p>
       </div>
       {formattedChartData.length < 3 ? (
         <NotEnoughData placeholder="We require at least 3 days of data" />
