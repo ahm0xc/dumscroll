@@ -9,7 +9,7 @@ interface AllWebVisitedProps {
 const AllWebVisited: React.FC<AllWebVisitedProps> = ({
   tracks,
 }: AllWebVisitedProps) => {
-  const LIMIT = 14;
+  const LIMIT = 7;
 
   tracks = tracks.sort((a, b) => b.duration - a.duration);
 
@@ -41,7 +41,7 @@ const AllWebVisited: React.FC<AllWebVisitedProps> = ({
                   className="h-full rounded-[inherit] bg-orange-400 z-[1] rounded-md"
                   style={{ width: `${percentage}%` }}
                 />
-                <span className={cn("text-neutral-700", percentage < 10 && "ml-12")}>{timeSpentText}</span>
+                <span className={cn("text-neutral-700", percentage < 10 && "ml-20")}>{timeSpentText}</span>
               </div>
               <p className="z-[2] ml-2 font-medium">
                 {getPlatformNameFromUrl(track.url)}{" "}

@@ -84,8 +84,6 @@ export default function DailyUses({ tracks }: { tracks: Track[] }) {
       dayjs(x.rawDate).isAfter(today.subtract(dataOfDays, "days")),
     );
 
-  console.log({ formattedChartData });
-
   return (
     <Card>
       <div className="flex items-center justify-between">

@@ -95,7 +95,21 @@ export function getHigherLevelDomain(url: string, includePath = true) {
 }
 
 export function getPlatformNameFromUrl(url: string) {
-  return url.replace("https://", "").replace("http://", "").replace("www.", "").split(".")[0] ?? "";
+  const parsedUrl = new URL(url);
+  let domain = parsedUrl.hostname;
+
+  if (domain.startsWith("www.")) {
+    domain = domain.substring(4);
+  }
+
+  const domainParts = domain.split(".");
+
+  if (domainParts.length > 1) {
+    return domainParts.slice(0, -1).join(".");
+  }
+
+  return domainParts[0];
+  // return url.replace("https://", "").replace("http://", "").replace("www.", "").split(".")[0] ?? "";
 }
 
 export function getFormattedTracks(tracks: Track[]) {

@@ -3,10 +3,12 @@ import { APP_URL } from "~/config";
 chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
   if (request.action === "trackTime") {
     const timeSpent = request.timeSpent as number;
-    let url = (request.url as string).replace("www.", "");
-    if (!url.startsWith("http://") || !url.startsWith("https://")) {
-      url = `https://${url}`;
-    }
+    let url = (request.url as string)
+      .replace("www.", "")
+      .replaceAll("https://", "")
+      .replaceAll("http://", "");
+      
+    url = `https://${url}`;
     const licenseKey = request.licenseKey as string;
     console.info({ timeSpent, url, licenseKey: licenseKey });
 
