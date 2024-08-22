@@ -7,7 +7,6 @@ import {
 import { Footer, Header } from "../home/page";
 import { cn } from "~/lib/utils";
 import { CheckIcon } from "lucide-react";
-import { Button } from "~/components/ui/button";
 
 const headingFont = HeadingFont({
   subsets: ["latin"],
@@ -26,22 +25,34 @@ const handWritingFont = HandWritingFont({
 
 const FEATURES = [
   {
-    content: "Access to basic features",
+    content: "Block Reels & Shorts",
   },
   {
-    content: "Basic reporting + analytics",
+    content: "Hide Thumbnails",
   },
   {
-    content: "Chat support",
+    content: "Daily Activity Tracking",
   },
   {
-    content: "Advance custom felids",
+    content: "Scheduled Blocking",
   },
   {
-    content: "Priority chat support",
+    content: "300+ Porn Sites Blocked",
   },
   {
-    content: "200+ integration support",
+    content: "Bulk Site Blocking",
+  },
+  {
+    content: "Reminders & Alerts",
+  },
+  {
+    content: "Time Limits",
+  },
+  {
+    content: "Privacy-Focused",
+  },
+  {
+    content: "... And more!",
   },
 ];
 
@@ -71,7 +82,7 @@ const PricingPage: React.FC = () => {
           <div className="mx-auto max-w-5xl rounded-2xl border bg-secondary p-10">
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-3xl font-semibold">Basic</p>
+                <p className="text-3xl font-semibold">Try our pricing</p>
                 <p>Our most popular plan for everyone</p>
               </div>
               <div>
@@ -80,7 +91,7 @@ const PricingPage: React.FC = () => {
                     <span className="text-2xl font-semibold text-foreground/70">
                       $
                     </span>
-                    <span className="text-5xl font-bold">3</span>
+                    <span className="text-6xl font-bold">3</span>
                   </p>
                   <p className="font-semibold text-foreground/70"> / month</p>
                 </div>
@@ -107,7 +118,7 @@ const PricingPage: React.FC = () => {
             </div>
             <div className="mt-10 flex items-center gap-3">
               <BuyButton />{" "}
-              <div className="flex items-center gap-4 ml-4">
+              <div className="ml-4 flex items-center gap-4">
                 <svg
                   className="h-5 rotate-180"
                   viewBox="0 0 238 103"
@@ -140,7 +151,7 @@ function BuyButton() {
       type="button"
       className="group relative flex h-14 w-full items-center justify-center rounded-2xl border border-none border-gray-950 bg-gray-600 px-3 text-xl text-white duration-200 *:select-none before:absolute before:inset-0 before:rounded-[calc(var(--btn-border-radius)-1px)] before:border before:border-gray-600 before:bg-gradient-to-b before:from-gray-800 hover:bg-gray-900 active:bg-gray-950 disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-950/40 disabled:*:text-gray-300 *:disabled:opacity-20 disabled:before:border-transparent disabled:before:bg-gray-100 disabled:before:from-transparent dark:border-0 dark:bg-white dark:text-gray-950 dark:before:border-0 dark:before:border-t dark:before:border-gray-200 dark:before:from-gray-200 dark:before:shadow-inner dark:before:shadow-white/10 dark:hover:bg-gray-100 dark:active:bg-gray-300 dark:active:before:from-gray-200 dark:disabled:border dark:disabled:border-gray-800/50 disabled:dark:bg-gray-900 dark:*:disabled:!text-white disabled:dark:*:text-gray-700 dark:disabled:before:bg-gray-900 dark:disabled:before:from-gray-900 dark:disabled:before:shadow-none lg:w-fit lg:px-10 [&>*:not(.sr-only)]:relative"
     >
-      <span>Get started</span>
+      <span>Start 7 days trial</span>
     </button>
   );
 }
