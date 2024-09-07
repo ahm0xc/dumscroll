@@ -4,6 +4,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 
+import QueryProvider from "~/components/query-provider";
 import { ThemeProvider } from "~/components/theme-provider";
 import { Toaster } from "~/components/ui/sonner";
 import { cn } from "~/lib/utils";
@@ -19,11 +20,13 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <ClerkProvider>
       <html lang="en" className={cn("antialiased", GeistSans.variable)}>
-        <body className="antialiased font-sans" suppressHydrationWarning>
+        <body className="font-sans antialiased" suppressHydrationWarning>
           <TRPCReactProvider>
             <ThemeProvider>
-              {children}
-              <Toaster richColors position="top-right" />
+              <QueryProvider>
+                {children}
+                <Toaster richColors position="top-right" />
+              </QueryProvider>
             </ThemeProvider>
           </TRPCReactProvider>
         </body>

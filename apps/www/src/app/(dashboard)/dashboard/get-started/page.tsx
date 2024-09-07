@@ -7,10 +7,12 @@ import GetStarted from "./get-started";
 
 export default async function GetStartedPage() {
   const { userId } = auth();
+
   if (!userId) {
     redirect(env.NEXT_PUBLIC_CLERK_SIGN_IN_URL);
     return null; // Redirect to sign-in page if user is not authenticated.
   }
+
   const user = await db.query.users.findFirst({
     where: (users, { eq }) => eq(users.id, userId),
   });

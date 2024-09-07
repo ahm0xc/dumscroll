@@ -14,6 +14,8 @@ export const env = createEnv({
     LEMON_SQUEEZY_API_TOKEN: z.string(),
     LEMON_SQUEEZY_STORE_ID: z.string(),
     LEMON_SQUEEZY_WEBHOOK_SIGNATURE: z.string(),
+    PADDLE_WEBHOOK_SECRET_TOKEN: z.string(),
+    PADDLE_CLIENT_SECRET: z.string(),
   },
 
   /**
@@ -26,6 +28,9 @@ export const env = createEnv({
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string(),
     NEXT_PUBLIC_CLERK_SIGN_IN_URL: z.string(),
     NEXT_PUBLIC_CLERK_SIGN_UP_URL: z.string(),
+    NEXT_PUBLIC_PADDLE_CLIENT_TOKEN: z.string(),
+    NEXT_PUBLIC_PADDLE_MONTHLY_PRICE_ID: z.string(),
+    NEXT_PUBLIC_PADDLE_ENVIRONMENT: z.enum(["production", "sandbox"]),
   },
 
   /**
@@ -43,7 +48,11 @@ export const env = createEnv({
     LEMON_SQUEEZY_API_TOKEN: process.env.LEMON_SQUEEZY_API_TOKEN,
     LEMON_SQUEEZY_STORE_ID: process.env.LEMON_SQUEEZY_STORE_ID,
     LEMON_SQUEEZY_WEBHOOK_SIGNATURE: process.env.LEMON_SQUEEZY_WEBHOOK_SIGNATURE,
-    // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
+    PADDLE_WEBHOOK_SECRET_TOKEN: process.env.PADDLE_WEBHOOK_SECRET_TOKEN,
+    PADDLE_CLIENT_SECRET: process.env.PADDLE_CLIENT_SECRET,
+    NEXT_PUBLIC_PADDLE_CLIENT_TOKEN: process.env.NEXT_PUBLIC_PADDLE_CLIENT_TOKEN,
+    NEXT_PUBLIC_PADDLE_MONTHLY_PRICE_ID: process.env.NEXT_PUBLIC_PADDLE_MONTHLY_PRICE_ID,
+    NEXT_PUBLIC_PADDLE_ENVIRONMENT: process.env.NEXT_PUBLIC_PADDLE_ENVIRONMENT,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

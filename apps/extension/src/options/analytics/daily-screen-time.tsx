@@ -7,9 +7,7 @@ export default function DailyScreenTime({ tracks }: { tracks: Track[] }) {
   const today = new Date();
   const dateId = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, "0")}-${today.getDate().toString().padStart(2, "0")}`;
 
-  const todaysTracks = tracks.filter(
-    (t) => getDateFromTrackId(t.id) === dateId,
-  );
+  const todaysTracks = tracks.filter((t) => getDateFromTrackId(t.id) === dateId);
 
   const screenTime = todaysTracks.reduce((acc, currentTrack) => {
     return acc + currentTrack.duration;

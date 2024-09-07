@@ -150,6 +150,12 @@ importers:
       '@hookform/resolvers':
         specifier: ^3.9.0
         version: 3.9.0(react-hook-form@7.52.2(react@18.3.1))
+      '@paddle/paddle-js':
+        specifier: ^0.5.0
+        version: 0.5.0
+      '@paddle/paddle-node-sdk':
+        specifier: ^1.5.0
+        version: 1.5.0
       '@radix-ui/react-accordion':
         specifier: ^1.2.0
         version: 1.2.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -202,7 +208,7 @@ importers:
         specifier: ^0.0.5
         version: 0.0.5
       '@tanstack/react-query':
-        specifier: ^5.50.0
+        specifier: ^5.51.23
         version: 5.51.23(react@18.3.1)
       '@trpc/client':
         specifier: ^11.0.0-rc.446
@@ -1008,6 +1014,12 @@ packages:
   '@nodelib/fs.walk@1.2.8':
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
+
+  '@paddle/paddle-js@0.5.0':
+    resolution: {integrity: sha512-AzgOv3VbL5clATVYgdm45LPe4K0bOWer1eLIx1/YK4Q1jUXLAWhrny6F8z5RKaatW8G23PotcBLCLgYRqAPMuA==}
+
+  '@paddle/paddle-node-sdk@1.5.0':
+    resolution: {integrity: sha512-yeE1E0jm1SVciFKhprbX/8kklKMqK1umwn6OFkOL7sAqCy7I4Iw2QEGXrCFzAb+bvWzrl8oE4zNH0Hv7bwDeww==}
 
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
@@ -5759,6 +5771,15 @@ snapshots:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.17.1
+
+  '@paddle/paddle-js@0.5.0': {}
+
+  '@paddle/paddle-node-sdk@1.5.0':
+    dependencies:
+      lodash: 4.17.21
+      node-fetch: 2.7.0
+    transitivePeerDependencies:
+      - encoding
 
   '@pkgjs/parseargs@0.11.0':
     optional: true
