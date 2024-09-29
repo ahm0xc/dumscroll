@@ -1,11 +1,12 @@
 import "./track-time";
+import "./popup-job";
 
 // ****************************************************************
 // ********************* OPTIONS CONFIG ***************************
 // ****************************************************************
-chrome.action.onClicked.addListener(() => {
-  chrome.runtime.openOptionsPage();
-});
+// chrome.action.onClicked.addListener(() => {
+//   chrome.runtime.openOptionsPage();
+// });
 
 // ****************************************************************
 // ******************** LOCAL STORAGE *****************************

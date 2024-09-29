@@ -1,6 +1,6 @@
 "use client";
 
-import { SignedIn, SignedOut } from "@clerk/nextjs";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import {
   CalendarCheck2Icon,
   ChevronRightIcon,
@@ -16,6 +16,7 @@ import Logo from "~/components/logo";
 import { appConfig } from "~/config/general";
 
 import "~/styles/homepage.css";
+import FooterThemeToggle from "./footer-theme-toggle";
 
 const COMMUNITY_COMMENTS = [
   {
@@ -247,11 +248,19 @@ export function Header() {
                 </SignedOut>
                 <SignedIn>
                   <Link
-                    href="/dashboard"
+                    href="/get-started"
                     className="group relative flex h-9 w-full items-center justify-center gap-2 rounded-[--btn-border-radius] border border-gray-950 bg-gray-600 px-3 text-white *:select-none before:absolute before:inset-0 before:rounded-[calc(var(--btn-border-radius)-1px)] before:border before:border-gray-600 before:bg-gradient-to-b before:from-gray-800 hover:bg-gray-900 active:bg-gray-950 disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-950/40 disabled:*:text-gray-300 *:disabled:opacity-20 disabled:before:border-transparent disabled:before:bg-gray-100 disabled:before:from-transparent dark:border-0 dark:bg-white dark:text-gray-950 dark:before:border-0 dark:before:border-t dark:before:border-gray-200 dark:before:from-gray-200 dark:before:shadow-inner dark:before:shadow-white/10 dark:hover:bg-gray-100 dark:active:bg-gray-300 dark:active:before:from-gray-200 dark:disabled:border dark:disabled:border-gray-800/50 disabled:dark:bg-gray-900 dark:*:disabled:!text-white disabled:dark:*:text-gray-700 dark:disabled:before:bg-gray-900 dark:disabled:before:from-gray-900 dark:disabled:before:shadow-none lg:h-8 lg:w-fit lg:text-sm [&>*:not(.sr-only)]:relative"
                   >
-                    <span>Dashboard</span> <ChevronRightIcon size={14} />
+                    <span>Get License</span> <ChevronRightIcon size={14} />
                   </Link>
+                  <UserButton
+                    appearance={{
+                      elements: {
+                        userButtonAvatarBox: "h-8 w-8",
+                        rootBox: "ml-2",
+                      },
+                    }}
+                  />
                 </SignedIn>
               </div>
             </div>
@@ -1719,6 +1728,9 @@ export function Footer() {
           <Link href="/" aria-label="Dumscroll" className="flex items-center gap-1.5">
             <Logo /> <span className="text-xl font-medium text-foreground">Dumscroll</span>
           </Link>
+          <div>
+            <FooterThemeToggle />
+          </div>
         </div>
         <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
           {FOOTER.map((item) => {

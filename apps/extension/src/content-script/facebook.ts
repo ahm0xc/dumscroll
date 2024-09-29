@@ -2,7 +2,7 @@ import detectUrlChange from "detect-url-change";
 
 import { settings } from "~/config";
 import { GlobalStorage } from "~/helpers/globalstorage";
-import { handleDefaultBlocks } from ".";
+// import { handleDefaultBlocks } from ".";
 
 // // import "./facebook.css";
 
@@ -11,7 +11,7 @@ async function main() {
     if (!v) return;
 
     detectUrlChange.on("change", (newUrl) => {
-      handleDefaultBlocks(newUrl);
+      // handleDefaultBlocks(newUrl);
     });
   });
 }

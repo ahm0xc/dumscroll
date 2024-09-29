@@ -27,12 +27,12 @@ export default defineManifest({
   content_scripts: [
     {
       matches: ["http://*/*", "https://*/*"],
-      js: ["src/contentScript/index.ts"],
+      js: ["src/content-script/index.tsx"],
     },
-    {
-      matches: ["*://*.youtube.com/*", "*://youtu.be/*"],
-      js: ["src/contentScript/youtube.ts"],
-    },
+    // {
+    //   matches: ["*://*.youtube.com/*", "*://youtu.be/*"],
+    //   js: ["src/contentScript/youtube.ts"],
+    // },
     // {
     //   matches: ["https://*.instagram.com/*"],
     //   js: ["src/contentScript/instagram.ts"],
@@ -41,10 +41,10 @@ export default defineManifest({
     //   matches: ["https://*.tiktok.com/*", "https://*.vt.tiktok.com/*"],
     //   js: ["src/contentScript/tiktok.ts"],
     // },
-    {
-      matches: ["*://*.facebook.com/*"],
-      js: ["src/contentScript/facebook.ts"],
-    },
+    // {
+    //   matches: ["*://*.facebook.com/*"],
+    //   js: ["src/contentScript/facebook.ts"],
+    // },
   ],
   web_accessible_resources: [
     {
@@ -52,5 +52,13 @@ export default defineManifest({
       matches: [],
     },
   ],
-  permissions: ["storage", "tabs", "webNavigation", "webRequest", "activeTab"],
+  permissions: [
+    "storage",
+    "tabs",
+    "activeTab",
+    "webNavigation",
+    "webRequest",
+    "activeTab",
+    "scripting",
+  ],
 });

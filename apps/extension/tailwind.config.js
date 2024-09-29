@@ -7,7 +7,7 @@ module.exports = {
   content: [
     "./src/**/*.{ts,tsx}",
     "./**/*.html",
-    "options.html", // Path to Tremor module
+    // Path to Tremor module
     "./node_modules/@tremor/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
