@@ -1,5 +1,6 @@
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 import { lemonSqueezyRouter } from "./routers/lemon-squeezy";
+import { waitlistRouter } from "./routers/waitlist";
 
 /**
  * This is the primary router for your server.
@@ -8,6 +9,7 @@ import { lemonSqueezyRouter } from "./routers/lemon-squeezy";
  */
 export const appRouter = createTRPCRouter({
   lemonSqueezy: lemonSqueezyRouter,
+  waitlist: waitlistRouter,
 });
 
 // export type definition of API

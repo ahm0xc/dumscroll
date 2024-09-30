@@ -94,3 +94,10 @@ export const paymentHistories = createTable("payment_histories", {
     .default(sql`CURRENT_TIMESTAMP`)
     .notNull(),
 });
+
+export const waitlists = createTable("waitlist", {
+  id: varchar("id").primaryKey().notNull().$defaultFn(uuid),
+  email: varchar("email").unique().notNull(),
+
+  createdAt: timestamp("created_at", { mode: "string" }).defaultNow(),
+});

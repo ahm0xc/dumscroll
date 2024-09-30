@@ -1,5 +1,5 @@
 {
-  "id": "6614c5d9-dafd-463f-bed8-e5994f973c56",
+  "id": "46799a9f-ebd8-43ed-84f2-9e122e2cf02f",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "6",
   "dialect": "postgresql",
@@ -92,7 +92,17 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "dumscroll_tracks_user_id_dumscroll_user_id_fk": {
+          "name": "dumscroll_tracks_user_id_dumscroll_user_id_fk",
+          "tableFrom": "dumscroll_tracks",
+          "tableTo": "dumscroll_user",
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
@@ -124,6 +134,12 @@
           "primaryKey": false,
           "notNull": false
         },
+        "customer_id": {
+          "name": "customer_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
         "subscription_status": {
           "name": "subscription_status",
           "type": "text",
@@ -132,12 +148,6 @@
         },
         "subscription_plan_id": {
           "name": "subscription_plan_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "subscription_end_date": {
-          "name": "subscription_end_date",
           "type": "text",
           "primaryKey": false,
           "notNull": false
@@ -166,6 +176,41 @@
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
+    },
+    "public.dumscroll_waitlist": {
+      "name": "dumscroll_waitlist",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "dumscroll_waitlist_email_unique": {
+          "name": "dumscroll_waitlist_email_unique",
+          "nullsNotDistinct": false,
+          "columns": ["email"]
+        }
+      }
     }
   },
   "enums": {},
