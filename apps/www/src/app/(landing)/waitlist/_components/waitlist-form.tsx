@@ -29,20 +29,20 @@ const WaitListForm: FC = () => {
   return (
     <div>
       <form
-        className="relative flex w-full rounded-full border bg-secondary dark:bg-secondary/70 p-1"
+        className="relative flex w-full rounded-full border bg-background p-1"
         ref={formRef}
         onSubmit={handleSubmit}
       >
         <input
           type="email"
           placeholder="Enter your email"
-          className="mr-[140px] h-12 w-full rounded-l-full bg-transparent pl-5 text-[15px] outline-none"
+          className="mr-[160px] h-14 w-full rounded-l-full bg-transparent pl-5 text-[15px] outline-none"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
         <button
-          className="absolute right-2 flex h-11 max-h-11 items-center justify-center rounded-full border bg-gradient-to-br from-blue-600 to-blue-500 px-4 font-semibold text-white disabled:opacity-80"
+          className="absolute right-1 flex h-full top-1/2 -translate-y-1/2 max-h-14 items-center justify-center rounded-full border bg-gradient-to-br from-[#316EAC] to-[#5FEEFF] px-7 font-semibold text-white disabled:opacity-80"
           type="submit"
           disabled={waitlistMutation.isPending}
         >
