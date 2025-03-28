@@ -1,10 +1,17 @@
-console.log("background is running");
+let extensionId = "";
 
-chrome.runtime.onMessage.addListener((request) => {
-  if (request.type === "PING") {
-    console.log(
-      "background has received a message from popup, and count is ",
-      request?.count,
-    );
+chrome.management.getSelf((info) => {
+  extensionId = info.id;
+});
+
+
+chrome.webNavigation.onBeforeNavigate.addListener((details) => {
+  const blockedSites = ["facebook.com", "tiktok.com"];
+  const url = new URL(details.url);
+
+  if (blockedSites.some((site) => url.hostname.includes(site))) {
+    chrome.tabs.update(details.tabId, {
+      url: `chrome://newtab?blockedSite=${url.hostname}`,
+    });
   }
 });

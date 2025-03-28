@@ -42,7 +42,8 @@ export default defineManifest({
       matches: [],
     },
   ],
-  permissions: ["storage"],
+  host_permissions: ["http://*/*", "https://*/*"],
+  permissions: ["storage", "webNavigation"],
   chrome_url_overrides: {
     newtab: "newtab.html",
   },
