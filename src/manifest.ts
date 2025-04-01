@@ -17,7 +17,6 @@ export default defineManifest({
     128: "img/logo-128.png",
   },
   action: {
-    default_popup: "popup.html",
     default_icon: "img/logo-48.png",
   },
   options_page: "options.html",
@@ -29,6 +28,7 @@ export default defineManifest({
     {
       matches: ["http://*/*", "https://*/*"],
       js: ["src/content-script/index.ts"],
+      run_at: "document_end",
     },
   ],
   web_accessible_resources: [
@@ -43,8 +43,5 @@ export default defineManifest({
     },
   ],
   host_permissions: ["http://*/*", "https://*/*"],
-  permissions: ["storage", "webNavigation"],
-  chrome_url_overrides: {
-    newtab: "newtab.html",
-  },
+  permissions: ["storage", "webNavigation", "tabs"],
 });
