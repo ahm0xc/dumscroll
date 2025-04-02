@@ -1,12 +1,17 @@
 import React from "react";
 
 import { Button } from "~/components/ui/button";
+import useChromeStorage from "~/hooks/use-chrome-storage";
+import { storage } from "~/lib/storage";
+import { isValidUrl } from "~/lib/utils";
+import { BlockedWebsite, DEFAULT_BLOCKED_WEBSITES } from "~/shared/config";
 import {
   BlushBrushIcon,
   FacebookIcon,
   InstagramIcon,
   PlazaIcon,
   PlusIcon,
+  RedoIcon,
   SearchIcon,
   SecurityBlockedIcon,
   TimeQuarterIcon,
@@ -176,42 +181,94 @@ function SettingsContentHeader({
 }
 
 function BlockedWebsitesTab() {
-  const [searchQuery, setSearchQuery] = React.useState("");
+  const [blockedWebsites, setBlockedWebsites] = useChromeStorage<
+    BlockedWebsite[]
+  >("blocked_websites", DEFAULT_BLOCKED_WEBSITES);
+  const websiteInputRef = React.useRef<HTMLInputElement>(null);
 
-  const blockedWebsites = [
-    "https://www.facebook.com",
-    "https://www.instagram.com",
-    "https://www.twitter.com",
-  ];
+  const handleAddWebsite = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    let website = websiteInputRef.current?.value;
+    if (!website) return;
+
+    // TODO: add toast
+    if (!website.includes(".")) return;
+    if (!website.startsWith("http")) website = `https://${website}`;
+
+    // TODO: add toast
+    const isValid = isValidUrl(website);
+    if (!isValid) return;
+
+    const myUrl = new URL(website);
+    const domain = myUrl.hostname;
+
+    // TODO: add toast
+    if (
+      blockedWebsites.some((blockedWebsite) => blockedWebsite.url === website)
+    )
+      return;
+
+    setBlockedWebsites([{ url: website, name: domain }, ...blockedWebsites]);
+    websiteInputRef.current!.value = "";
+  };
+
+  function handleRemoveWebsite(website: BlockedWebsite) {
+    setBlockedWebsites(
+      blockedWebsites.filter(
+        (blockedWebsite) => blockedWebsite.url !== website.url
+      )
+    );
+  }
+
+  function handleClearAll() {
+    setBlockedWebsites([]);
+  }
+
+  function handleResetDefaults() {
+    setBlockedWebsites(DEFAULT_BLOCKED_WEBSITES);
+  }
 
   return (
     <div className="p-8 flex flex-col gap-4 w-[800px] max-w-full">
-      <div className="flex items-center gap-2 pl-4 py-1 pr-1 rounded-xl border border-border bg-zinc-50 dark:bg-neutral-900">
+      <form
+        onSubmit={handleAddWebsite}
+        className="flex items-center gap-2 pl-4 py-1 pr-1 rounded-xl border border-border bg-zinc-50 dark:bg-neutral-900"
+      >
         <SearchIcon className="size-4 text-muted-foreground min-w-4" />
         <input
+          ref={websiteInputRef}
           type="text"
           placeholder="Type to search or add a new website"
           className="w-full outline-none bg-transparent text-sm placeholder:text-muted-foreground h-12"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
         />
-        <Button size="sm" className="h-12">
+        <Button type="submit" size="sm" className="h-12">
           <PlusIcon className="size-4" />
           Add Website
         </Button>
+      </form>
+      <div className="flex justify-end gap-2">
+        <Button size="sm" variant="outline" onClick={handleResetDefaults}>
+          <RedoIcon className="size-4" />
+          Reset Defaults
+        </Button>
+        <Button size="sm" variant="outline" onClick={handleClearAll}>
+          <TrashIcon className="size-4" />
+          Clear All
+        </Button>
       </div>
-      <div className="flex flex-col bg-zinc-50 dark:bg-neutral-900 rounded-xl p-4 border border-border">
+      <div className="flex flex-col bg-zinc-50 dark:bg-neutral-900 rounded-xl p-4 border border-border max-h-[600px] overflow-y-scroll">
         {blockedWebsites.map((website) => {
-          const myUrl = new URL(website);
+          const myUrl = new URL(website.url);
           const domain = myUrl.hostname;
 
           return (
             <div
-              key={website}
+              key={website.url}
               className="flex items-center gap-2 py-2 px-2 rounded-xl relative hover:bg-zinc-100 dark:hover:bg-neutral-800 duration-200"
             >
               <img
-                src={`https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${domain}&size=32`}
+                src={`https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${website.url}&size=32`}
                 alt=""
                 className="size-4 rounded-full"
               />
@@ -221,6 +278,7 @@ function BlockedWebsitesTab() {
                   size="icon"
                   variant="ghost"
                   className="hover:bg-destructive/10 h-8 w-8 rounded-full"
+                  onClick={() => handleRemoveWebsite(website)}
                 >
                   <TrashIcon className="size-4 text-destructive" />
                 </Button>

@@ -1,7 +1,17 @@
+import { storage } from "~/lib/storage";
+import { DEFAULT_BLOCKED_WEBSITES } from "~/shared/config";
+
 let extensionId = "";
 
 chrome.management.getSelf((info) => {
   extensionId = info.id;
+});
+
+chrome.runtime.onInstalled.addListener(async () => {
+  const blockedWebsites = await storage.local.get("blocked_websites");
+  if (!blockedWebsites) {
+    await storage.local.set("blocked_websites", DEFAULT_BLOCKED_WEBSITES);
+  }
 });
 
 chrome.action.onClicked.addListener(async (tab) => {
