@@ -1,4 +1,4 @@
-import { IconProps, WatchStarIcon } from "./icons";
+import { IconProps, UserStoryIcon, WatchStarIcon } from "./icons";
 
 export type BlockedWebsite = {
   url: string;
@@ -15,19 +15,21 @@ export interface Customization {
   id: string;
   name: string;
   description: string;
-  defaultEnabled: boolean;
-  onToggle: (enabled: boolean) => void;
   icon?: (props: IconProps) => React.ReactNode;
   info?: string;
 }
 
 export const FACEBOOK_CUSTOMIZATIONS: Customization[] = [
   {
-    id: "facebook-remove-watch",
+    id: "facebook-remove-watch-links",
     name: "Remove Watch",
-    description: "Remove the Watch section from Facebook",
-    defaultEnabled: true,
-    onToggle: () => {},
+    description: "Remove the Watch links from everywhere",
     icon: WatchStarIcon,
   },
-];
+  {
+    id: "facebook-remove-stories",
+    name: "Remove Stories",
+    description: "Remove stories section",
+    icon: UserStoryIcon,
+  },
+] as const;
