@@ -1,5 +1,5 @@
 import { storage } from "~/lib/storage";
-import { DEFAULT_BLOCKED_WEBSITES } from "~/shared/config";
+import { BlockedWebsite, DEFAULT_BLOCKED_WEBSITES } from "~/shared/config";
 
 let extensionId = "";
 
@@ -15,19 +15,19 @@ chrome.runtime.onInstalled.addListener(async () => {
 });
 
 chrome.action.onClicked.addListener(async (tab) => {
-  console.log("🚀 ~ chrome.action.onClicked.addListener ~ tab:", tab)
-  console.log("clicked");
   if (!tab.id) return;
-  chrome.tabs.sendMessage(tab.id, { type: "TOGGLE_POPUP" });
+  chrome.runtime.openOptionsPage();
 });
 
-chrome.webNavigation.onBeforeNavigate.addListener((details) => {
-  const blockedSites = ["tiktok.com"];
-  const url = new URL(details.url);
+chrome.webNavigation.onBeforeNavigate.addListener(async (details) => {
+  const blockedSites = await storage.local.get<BlockedWebsite[]>(
+    "blocked_websites"
+  );
+  const myUrl = new URL(details.url);
 
-  if (blockedSites.some((site) => url.hostname.includes(site))) {
+  if (blockedSites.some((site) => myUrl.origin.startsWith(new URL(site.url).origin))) {
     chrome.tabs.update(details.tabId, {
-      url: `chrome://newtab?blockedSite=${url.hostname}`,
+      url: `chrome://newtab?blockedSite=${myUrl.hostname}`,
     });
   }
 });
