@@ -1,10 +1,15 @@
 import React from "react";
+import CustomizationSection from "~/components/customization-section";
 
 import { Button } from "~/components/ui/button";
 import useChromeStorage from "~/hooks/use-chrome-storage";
 import { storage } from "~/lib/storage";
 import { isValidUrl } from "~/lib/utils";
-import { BlockedWebsite, DEFAULT_BLOCKED_WEBSITES } from "~/shared/config";
+import {
+  BlockedWebsite,
+  DEFAULT_BLOCKED_WEBSITES,
+  FACEBOOK_CUSTOMIZATIONS,
+} from "~/shared/config";
 import {
   BlushBrushIcon,
   FacebookIcon,
@@ -296,7 +301,11 @@ function SchedulesTab() {
 }
 
 function FacebookCustomizationsTab() {
-  return <div>Facebook Customizations</div>;
+  return (
+    <div className="p-8">
+      <CustomizationSection customizations={FACEBOOK_CUSTOMIZATIONS} />
+    </div>
+  );
 }
 
 function InstagramCustomizationsTab() {
