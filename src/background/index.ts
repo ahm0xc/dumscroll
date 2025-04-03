@@ -44,3 +44,19 @@ chrome.webNavigation.onBeforeNavigate.addListener(async (details) => {
     });
   }
 });
+
+chrome.webNavigation.onBeforeNavigate.addListener(async (details) => {
+  const url = new URL(details.url);
+  if (url.hostname === "www.facebook.com" && url.pathname.includes("watch")) {
+    const isWatchBlocked = await storage.local.get<boolean>(
+      `cs-facebook-remove-watch`,
+    );
+
+    if (!isWatchBlocked) return;
+
+    chrome.tabs.update(details.tabId, {
+      url: "https://www.facebook.com/",
+    });
+
+  }
+});
