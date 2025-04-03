@@ -1,5 +1,8 @@
-import {
+import type {
   IconProps,
+} from "./icons";
+
+import {
   NewsIcon,
   ReelIcon,
   UserStoryIcon,
@@ -17,14 +20,14 @@ export const DEFAULT_BLOCKED_WEBSITES: BlockedWebsite[] = [
   { url: "https://twitter.com", name: "Twitter" },
 ];
 
-export interface Customization {
+export type Customization = {
   id: string;
   name: string;
   description: string;
   defaultEnabled: boolean;
   icon?: (props: IconProps) => React.ReactNode;
   info?: string;
-}
+};
 
 export const FACEBOOK_CUSTOMIZATIONS: Customization[] = [
   {

@@ -1,11 +1,13 @@
+import type { BlockedWebsite } from "~/shared/config";
+
 import { storage } from "~/lib/storage";
-import { ALL_CUSTOMIZATIONS, BlockedWebsite, DEFAULT_BLOCKED_WEBSITES } from "~/shared/config";
+import { ALL_CUSTOMIZATIONS, DEFAULT_BLOCKED_WEBSITES } from "~/shared/config";
 
-let extensionId = "";
+// let extensionId = "";
 
-chrome.management.getSelf((info) => {
-  extensionId = info.id;
-});
+// chrome.management.getSelf((info) => {
+//   extensionId = info.id;
+// });
 
 chrome.runtime.onInstalled.addListener(async () => {
   const blockedWebsites = await storage.local.get("blocked_websites");
@@ -25,17 +27,18 @@ chrome.runtime.onStartup.addListener(async () => {
 });
 
 chrome.action.onClicked.addListener(async (tab) => {
-  if (!tab.id) return;
+  if (!tab.id)
+    return;
   chrome.runtime.openOptionsPage();
 });
 
 chrome.webNavigation.onBeforeNavigate.addListener(async (details) => {
   const blockedSites = await storage.local.get<BlockedWebsite[]>(
-    "blocked_websites"
+    "blocked_websites",
   );
   const myUrl = new URL(details.url);
 
-  if (blockedSites.some((site) => myUrl.origin.startsWith(new URL(site.url).origin))) {
+  if (blockedSites.some(site => myUrl.origin.startsWith(new URL(site.url).origin))) {
     chrome.tabs.update(details.tabId, {
       url: `chrome://newtab?blockedSite=${myUrl.hostname}`,
     });

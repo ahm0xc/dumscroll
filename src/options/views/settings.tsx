@@ -1,12 +1,12 @@
 import React from "react";
-import CustomizationSection from "~/components/customization-section";
 
+import type { BlockedWebsite } from "~/shared/config";
+
+import CustomizationSection from "~/components/customization-section";
 import { Button } from "~/components/ui/button";
 import useChromeStorage from "~/hooks/use-chrome-storage";
-import { storage } from "~/lib/storage";
 import { isValidUrl } from "~/lib/utils";
 import {
-  BlockedWebsite,
   DEFAULT_BLOCKED_WEBSITES,
   FACEBOOK_CUSTOMIZATIONS,
 } from "~/shared/config";
@@ -32,22 +32,20 @@ type SettingsTab =
   | "twitter-customizations";
 
 export default function SettingsView() {
-  const [activeTab, setActiveTab] =
-    React.useState<SettingsTab>("blocked-websites");
+  const [activeTab, setActiveTab]
+    = React.useState<SettingsTab>("blocked-websites");
 
   return (
     <div className="grid grid-cols-[280px_1fr] h-screen">
-      <SettingsSidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+      <SettingsSidebar setActiveTab={setActiveTab} />
       <SettingsContent activeTab={activeTab} />
     </div>
   );
 }
 
 function SettingsSidebar({
-  activeTab,
   setActiveTab,
 }: {
-  activeTab: SettingsTab;
   setActiveTab: (tab: SettingsTab) => void;
 }) {
   return (
@@ -138,7 +136,7 @@ function SettingsContent({ activeTab }: { activeTab: SettingsTab }) {
       title: "Blocked Websites",
       component: <BlockedWebsitesTab />,
     },
-    schedules: {
+    "schedules": {
       subtitle: "General",
       title: "Schedules",
       component: <SchedulesTab />,
@@ -195,22 +193,26 @@ function BlockedWebsitesTab() {
     e.preventDefault();
 
     let website = websiteInputRef.current?.value;
-    if (!website) return;
+    if (!website)
+      return;
 
     // TODO: add toast
-    if (!website.includes(".")) return;
-    if (!website.startsWith("http")) website = `https://${website}`;
+    if (!website.includes("."))
+      return;
+    if (!website.startsWith("http"))
+      website = `https://${website}`;
 
     // TODO: add toast
     const isValid = isValidUrl(website);
-    if (!isValid) return;
+    if (!isValid)
+      return;
 
     const myUrl = new URL(website);
     const domain = myUrl.hostname;
 
     // TODO: add toast
     if (
-      blockedWebsites.some((blockedWebsite) => blockedWebsite.url === website)
+      blockedWebsites.some(blockedWebsite => blockedWebsite.url === website)
     )
       return;
 
@@ -221,8 +223,8 @@ function BlockedWebsitesTab() {
   function handleRemoveWebsite(website: BlockedWebsite) {
     setBlockedWebsites(
       blockedWebsites.filter(
-        (blockedWebsite) => blockedWebsite.url !== website.url
-      )
+        blockedWebsite => blockedWebsite.url !== website.url,
+      ),
     );
   }
 

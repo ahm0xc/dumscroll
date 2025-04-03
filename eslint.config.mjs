@@ -22,6 +22,7 @@ export default antfu(
       "node/prefer-global/process": ["off"],
       "node/no-process-env": ["error"],
       "react-refresh/only-export-components": ["off"],
+      "no-new": ["off"],
       "perfectionist/sort-imports": [
         "error",
         {

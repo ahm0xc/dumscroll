@@ -1,4 +1,4 @@
-import { LucideProps } from "lucide-react";
+import type { LucideProps } from "lucide-react";
 
 export type IconProps = LucideProps;
 
@@ -9,8 +9,8 @@ export function SearchIcon(props: IconProps) {
       viewBox="0 0 24 24"
       width={24}
       height={24}
-      color={"currentColor"}
-      fill={"none"}
+      color="currentColor"
+      fill="none"
       {...props}
     >
       <path
@@ -38,8 +38,8 @@ export function CommandIcon(props: IconProps) {
       viewBox="0 0 24 24"
       width={24}
       height={24}
-      color={"currentColor"}
-      fill={"none"}
+      color="currentColor"
+      fill="none"
       {...props}
     >
       <path d="M15 9V15H9V9H15Z" stroke="currentColor" strokeWidth="1.5" />
@@ -74,8 +74,8 @@ export function HomeIcon(props: IconProps) {
       viewBox="0 0 24 24"
       width={24}
       height={24}
-      color={"currentColor"}
-      fill={"none"}
+      color="currentColor"
+      fill="none"
       {...props}
     >
       <path
@@ -101,8 +101,8 @@ export function SettingsIcon(props: IconProps) {
       viewBox="0 0 24 24"
       width={24}
       height={24}
-      color={"currentColor"}
-      fill={"none"}
+      color="currentColor"
+      fill="none"
       {...props}
     >
       <path
@@ -127,8 +127,8 @@ export function HelpIcon(props: IconProps) {
       viewBox="0 0 24 24"
       width={24}
       height={24}
-      color={"currentColor"}
-      fill={"none"}
+      color="currentColor"
+      fill="none"
       {...props}
     >
       <path
@@ -166,8 +166,8 @@ export function UserCircleSparkleIcon(props: IconProps) {
       viewBox="0 0 24 24"
       width={24}
       height={24}
-      color={"currentColor"}
-      fill={"none"}
+      color="currentColor"
+      fill="none"
       {...props}
     >
       <path
@@ -209,8 +209,8 @@ export function ToolsIcon(props: IconProps) {
       viewBox="0 0 24 24"
       width={24}
       height={24}
-      color={"currentColor"}
-      fill={"none"}
+      color="currentColor"
+      fill="none"
       {...props}
     >
       <path
@@ -238,8 +238,8 @@ export function PlazaIcon(props: IconProps) {
       viewBox="0 0 24 24"
       width={24}
       height={24}
-      color={"currentColor"}
-      fill={"none"}
+      color="currentColor"
+      fill="none"
       {...props}
     >
       <path
@@ -281,8 +281,8 @@ export function SecurityBlockedIcon(props: IconProps) {
       viewBox="0 0 24 24"
       width={24}
       height={24}
-      color={"currentColor"}
-      fill={"none"}
+      color="currentColor"
+      fill="none"
       {...props}
     >
       <path
@@ -309,8 +309,8 @@ export function TimeQuarterIcon(props: IconProps) {
       viewBox="0 0 24 24"
       width={24}
       height={24}
-      color={"currentColor"}
-      fill={"none"}
+      color="currentColor"
+      fill="none"
       {...props}
     >
       <path
@@ -345,8 +345,8 @@ export function BlushBrushIcon(props: IconProps) {
       viewBox="0 0 24 24"
       width={24}
       height={24}
-      color={"currentColor"}
-      fill={"none"}
+      color="currentColor"
+      fill="none"
       {...props}
     >
       <path
@@ -373,8 +373,8 @@ export function FacebookIcon(props: IconProps) {
       viewBox="0 0 24 24"
       width={24}
       height={24}
-      color={"currentColor"}
-      fill={"none"}
+      color="currentColor"
+      fill="none"
       {...props}
     >
       <path
@@ -397,8 +397,8 @@ export function InstagramIcon(props: IconProps) {
       viewBox="0 0 24 24"
       width={24}
       height={24}
-      color={"currentColor"}
-      fill={"none"}
+      color="currentColor"
+      fill="none"
       {...props}
     >
       <path
@@ -427,8 +427,8 @@ export function TwitterIcon(props: IconProps) {
       viewBox="0 0 24 24"
       width={24}
       height={24}
-      color={"currentColor"}
-      fill={"none"}
+      color="currentColor"
+      fill="none"
       {...props}
     >
       <path
@@ -451,8 +451,8 @@ export function PlusIcon(props: IconProps) {
       viewBox="0 0 24 24"
       width={24}
       height={24}
-      color={"currentColor"}
-      fill={"none"}
+      color="currentColor"
+      fill="none"
       {...props}
     >
       <path
@@ -473,8 +473,8 @@ export function TrashIcon(props: IconProps) {
       viewBox="0 0 24 24"
       width={24}
       height={24}
-      color={"currentColor"}
-      fill={"none"}
+      color="currentColor"
+      fill="none"
       {...props}
     >
       <path
@@ -512,8 +512,8 @@ export function RedoIcon(props: IconProps) {
       viewBox="0 0 24 24"
       width={24}
       height={24}
-      color={"currentColor"}
-      fill={"none"}
+      color="currentColor"
+      fill="none"
       {...props}
     >
       <path
@@ -534,8 +534,8 @@ export function WatchStarIcon(props: IconProps) {
       viewBox="0 0 24 24"
       width={24}
       height={24}
-      color={"currentColor"}
-      fill={"none"}
+      color="currentColor"
+      fill="none"
       {...props}
     >
       <path
@@ -567,8 +567,8 @@ export function UserStoryIcon(props: IconProps) {
       viewBox="0 0 24 24"
       width={24}
       height={24}
-      color={"currentColor"}
-      fill={"none"}
+      color="currentColor"
+      fill="none"
       {...props}
     >
       <path
@@ -603,8 +603,8 @@ export function NewsIcon(props: IconProps) {
       viewBox="0 0 24 24"
       width={24}
       height={24}
-      color={"currentColor"}
-      fill={"none"}
+      color="currentColor"
+      fill="none"
       {...props}
     >
       <path
@@ -639,8 +639,8 @@ export function ReelIcon(props: IconProps) {
       viewBox="0 0 24 24"
       width={24}
       height={24}
-      color={"currentColor"}
-      fill={"none"}
+      color="currentColor"
+      fill="none"
       {...props}
     >
       <path

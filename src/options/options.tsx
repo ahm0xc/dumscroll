@@ -10,9 +10,12 @@ import {
   SettingsIcon,
   UserCircleSparkleIcon,
 } from "~/shared/icons";
-import { useOptionsStore, View } from "./options.store";
-import SettingsView from "./views/settings";
+
+import type { View } from "./options.store";
+
+import { useOptionsStore } from "./options.store";
 import HomeView from "./views/home";
+import SettingsView from "./views/settings";
 
 export default function Options() {
   return (

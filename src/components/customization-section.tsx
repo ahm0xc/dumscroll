@@ -1,13 +1,14 @@
-import { Customization } from "~/shared/config";
-import { Switch } from "~/components/ui/switch";
-import { storage } from "~/lib/storage";
 import React from "react";
+
+import type { Customization } from "~/shared/config";
+
+import { Switch } from "~/components/ui/switch";
 import useChromeStorage from "~/hooks/use-chrome-storage";
 import { SearchIcon } from "~/shared/icons";
 
-interface CustomizationSectionProps {
+type CustomizationSectionProps = {
   customizations: Customization[];
-}
+};
 
 export default function CustomizationSection({
   customizations,
@@ -15,15 +16,15 @@ export default function CustomizationSection({
   const [searchQuery, setSearchQuery] = React.useState("");
 
   const sortedCustomizations = customizations.sort((a, b) =>
-    a.name.localeCompare(b.name)
+    a.name.localeCompare(b.name),
   );
 
   const filteredCustomizations = sortedCustomizations.filter(
-    (customization) =>
-      customization.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      customization.description
+    customization =>
+      customization.name.toLowerCase().includes(searchQuery.toLowerCase())
+      || customization.description
         .toLowerCase()
-        .includes(searchQuery.toLowerCase())
+        .includes(searchQuery.toLowerCase()),
   );
 
   return (
@@ -36,13 +37,13 @@ export default function CustomizationSection({
             className="bg-transparent outline-none rounded-[inherit] w-full px-1 rounded-l-none"
             placeholder="Search"
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={e => setSearchQuery(e.target.value)}
           />
         </div>
       </div>
       <section>
         <div className="w-full grid grid-cols-2 xl:grid-cols-3 gap-4">
-          {filteredCustomizations.map((customization) => (
+          {filteredCustomizations.map(customization => (
             <CustomizationCard
               key={customization.id}
               customization={customization}
@@ -61,7 +62,7 @@ function CustomizationCard({
 }) {
   const [isEnabled, setIsEnabled] = useChromeStorage(
     `cs-${customization.id}`,
-    customization.defaultEnabled
+    customization.defaultEnabled,
   );
 
   async function handleSwitchChange(checked: boolean) {
