@@ -1,5 +1,5 @@
 import { storage } from "~/lib/storage";
-import { BlockedWebsite, DEFAULT_BLOCKED_WEBSITES } from "~/shared/config";
+import { ALL_CUSTOMIZATIONS, BlockedWebsite, DEFAULT_BLOCKED_WEBSITES } from "~/shared/config";
 
 let extensionId = "";
 
@@ -11,6 +11,16 @@ chrome.runtime.onInstalled.addListener(async () => {
   const blockedWebsites = await storage.local.get("blocked_websites");
   if (!blockedWebsites) {
     await storage.local.set("blocked_websites", DEFAULT_BLOCKED_WEBSITES);
+  }
+});
+
+chrome.runtime.onStartup.addListener(async () => {
+  for (const customization of ALL_CUSTOMIZATIONS) {
+    const storageKey = `cs-${customization.id}`;
+    const hasValue = await storage.local.has(storageKey);
+    if (!hasValue) {
+      await storage.local.set(storageKey, customization.defaultEnabled);
+    }
   }
 });
 

@@ -59,7 +59,10 @@ function CustomizationCard({
 }: {
   customization: Customization;
 }) {
-  const [isEnabled, setIsEnabled] = useChromeStorage(customization.id, false);
+  const [isEnabled, setIsEnabled] = useChromeStorage(
+    `cs-${customization.id}`,
+    customization.defaultEnabled
+  );
 
   async function handleSwitchChange(checked: boolean) {
     setIsEnabled(checked);

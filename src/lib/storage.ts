@@ -10,6 +10,10 @@ export const storage = {
         remove: async (key: string) => {
             await chrome.storage.local.remove(key);
         },
+        has: async (key: string) => {
+            const value = await chrome.storage.local.get(key);
+            return value[key] !== undefined;
+        },
         clear: async () => {
             await chrome.storage.local.clear();
         },

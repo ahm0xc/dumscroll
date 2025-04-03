@@ -595,3 +595,75 @@ export function UserStoryIcon(props: IconProps) {
     </svg>
   );
 }
+
+export function NewsIcon(props: IconProps) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      width={24}
+      height={24}
+      color={"currentColor"}
+      fill={"none"}
+      {...props}
+    >
+      <path
+        d="M17.5 8V5C17.5 3.89543 16.6046 3 15.5 3H4.5C3.39543 3 2.5 3.89543 2.5 5V19C2.5 20.1046 3.39543 21 4.5 21H19.5"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M6.5 8H13.5M6.5 12L13.5 12M6.5 16H9.5"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M17.5 8H19.5C20.6046 8 21.5 8.89543 21.5 10V19C21.5 20.1046 20.6046 21 19.5 21C18.3954 21 17.5 20.1046 17.5 19V8Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function ReelIcon(props: IconProps) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      width={24}
+      height={24}
+      color={"currentColor"}
+      fill={"none"}
+      {...props}
+    >
+      <path
+        d="M9 21C7.89543 21 7 20.1046 7 19L7 5.00264C7 3.89704 7.89704 3.00118 9.00264 3.00264L15.0026 3.01055C16.1062 3.01201 17 3.90701 17 5.01055L17 19C17 20.1046 16.1046 21 15 21H9Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M22 7L21.1056 7.44721C20.428 7.786 20 8.47852 20 9.23607V14.7639C20 15.5215 20.428 16.214 21.1056 16.5528L22 17"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M2 7L2.89443 7.44721C3.572 7.786 4 8.47852 4 9.23607V14.7639C4 15.5215 3.572 16.214 2.89443 16.5528L2 17"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}

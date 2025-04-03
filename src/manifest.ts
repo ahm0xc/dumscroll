@@ -30,6 +30,11 @@ export default defineManifest({
       js: ["src/content-script/index.ts"],
       run_at: "document_end",
     },
+    {
+      matches: ["https://www.facebook.com/*"],
+      js: ["src/content-script/customizations/facebook.ts"],
+      run_at: "document_start",
+    },
   ],
   web_accessible_resources: [
     {
