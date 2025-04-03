@@ -66,18 +66,34 @@ listenForChanges("cs-facebook-remove-feed", (newValue) => {
 });
 
 listenForChanges("cs-facebook-remove-reels", (newValue) => {
+    function blockArrowKeys(event: KeyboardEvent) {
+        if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+
+    }
     if (newValue) {
         const style = document.createElement("style");
         style.id = "cs-facebook-remove-reels";
         style.textContent = `
         div.x1lliihq:has(div[aria-label="Reels"]) {
             display: none;
-        }`;
+        }
+        div[aria-label="Previous Card"] {
+            display: none;
+        }
+        div[aria-label="Next Card"] {
+            display: none;
+        }
+        `;
         document.head.appendChild(style);
+        document.addEventListener("keydown", blockArrowKeys, true);
     } else {
         const style = document.getElementById("cs-facebook-remove-reels");
         if (style) {
             style.remove();
         }
+        document.removeEventListener("keydown", blockArrowKeys, true);
     }
 });
