@@ -35,6 +35,11 @@ export default defineManifest({
       js: ["src/content-script/customizations/facebook.ts"],
       run_at: "document_start",
     },
+    {
+      matches: ["https://www.x.com/*", "https://x.com/*"],
+      js: ["src/content-script/customizations/twitter.ts"],
+      run_at: "document_start",
+    },
   ],
   web_accessible_resources: [
     {

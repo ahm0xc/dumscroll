@@ -9,6 +9,7 @@ import { isValidUrl } from "~/lib/utils";
 import {
   DEFAULT_BLOCKED_WEBSITES,
   FACEBOOK_CUSTOMIZATIONS,
+  TWITTER_CUSTOMIZATIONS,
 } from "~/shared/config";
 import {
   BlushBrushIcon,
@@ -315,5 +316,9 @@ function InstagramCustomizationsTab() {
 }
 
 function TwitterCustomizationsTab() {
-  return <div>Twitter Customizations</div>;
+  return (
+    <div className="p-8">
+      <CustomizationSection customizations={TWITTER_CUSTOMIZATIONS} />
+    </div>
+  );
 }

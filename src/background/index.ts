@@ -45,6 +45,7 @@ chrome.webNavigation.onBeforeNavigate.addListener(async (details) => {
   }
 });
 
+// ** handles facebook customizations
 chrome.webNavigation.onBeforeNavigate.addListener(async (details) => {
   const url = new URL(details.url);
   if (url.hostname === "www.facebook.com" && url.pathname.includes("watch")) {
@@ -52,11 +53,11 @@ chrome.webNavigation.onBeforeNavigate.addListener(async (details) => {
       `cs-facebook-remove-watch`,
     );
 
-    if (!isWatchBlocked) return;
+    if (!isWatchBlocked)
+      return;
 
     chrome.tabs.update(details.tabId, {
       url: "https://www.facebook.com/",
     });
-
   }
 });

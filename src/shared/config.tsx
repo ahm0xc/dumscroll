@@ -1,13 +1,6 @@
-import type {
-  IconProps,
-} from "./icons";
+import type { IconProps } from "./icons";
 
-import {
-  NewsIcon,
-  ReelIcon,
-  UserStoryIcon,
-  WatchStarIcon,
-} from "./icons";
+import { NewsIcon, ReelIcon, UserStoryIcon, WatchStarIcon } from "./icons";
 
 export type BlockedWebsite = {
   url: string;
@@ -60,4 +53,17 @@ export const FACEBOOK_CUSTOMIZATIONS: Customization[] = [
   },
 ] as const;
 
-export const ALL_CUSTOMIZATIONS = [...FACEBOOK_CUSTOMIZATIONS] as const;
+export const TWITTER_CUSTOMIZATIONS: Customization[] = [
+  {
+    id: "twitter-remove-feed",
+    name: "Remove Feed",
+    description: "Completely remove the feed",
+    defaultEnabled: true,
+    icon: NewsIcon,
+  },
+] as const;
+
+export const ALL_CUSTOMIZATIONS = [
+  ...FACEBOOK_CUSTOMIZATIONS,
+  ...TWITTER_CUSTOMIZATIONS,
+] as const;
