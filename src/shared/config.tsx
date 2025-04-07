@@ -1,6 +1,6 @@
 import type { IconProps } from "./icons";
 
-import { NewsIcon, ReelIcon, UserStoryIcon, WatchStarIcon } from "./icons";
+import { ColorsIcon, ExploreIcon, NewsIcon, ReelIcon, UserStoryIcon, WatchStarIcon } from "./icons";
 
 export type BlockedWebsite = {
   url: string;
@@ -63,7 +63,46 @@ export const TWITTER_CUSTOMIZATIONS: Customization[] = [
   },
 ] as const;
 
+export const INSTAGRAM_CUSTOMIZATIONS: Customization[] = [
+  {
+    id: "instagram-remove-feed",
+    name: "Remove Feed",
+    description: "Completely remove the feed",
+    defaultEnabled: false,
+    icon: NewsIcon,
+  },
+  {
+    id: "instagram-remove-stories",
+    name: "Remove Stories",
+    description: "Remove the stories section",
+    defaultEnabled: false,
+    icon: UserStoryIcon,
+  },
+  {
+    id: "instagram-filter-grayscale",
+    name: "Filter Grayscale",
+    description: "Filter the images in grayscale",
+    defaultEnabled: false,
+    icon: ColorsIcon,
+  },
+  {
+    id: "instagram-block-reels",
+    name: "Block Reels",
+    description: "Completely remove reels page",
+    defaultEnabled: true,
+    icon: ReelIcon,
+  },
+  {
+    id: "instagram-block-explore",
+    name: "Block Explore",
+    description: "Completely remove explore page",
+    defaultEnabled: true,
+    icon: ExploreIcon,
+  },
+] as const;
+
 export const ALL_CUSTOMIZATIONS = [
   ...FACEBOOK_CUSTOMIZATIONS,
   ...TWITTER_CUSTOMIZATIONS,
+  ...INSTAGRAM_CUSTOMIZATIONS,
 ] as const;

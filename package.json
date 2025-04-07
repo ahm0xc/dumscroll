@@ -16,7 +16,7 @@
     "zip": "npm run build && node src/zip.js",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "build:watch": "nodemon --watch 'src/**/*.{ts,tsx}' --exec 'npm run build'",
+    "build:dev": "npx nodemon --watch src --ext ts,tsx,css,json,js,jsx --exec 'pnpm build'",
     "prepare": "husky"
   },
   "dependencies": {

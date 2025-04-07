@@ -23,6 +23,7 @@ export default antfu(
       "node/no-process-env": ["error"],
       "react-refresh/only-export-components": ["off"],
       "no-new": ["off"],
+      "style/quote-props": "off",
       "perfectionist/sort-imports": [
         "error",
         {

@@ -40,6 +40,11 @@ export default defineManifest({
       js: ["src/content-script/customizations/twitter.ts"],
       run_at: "document_start",
     },
+    {
+      matches: ["https://www.instagram.com/*"],
+      js: ["src/content-script/customizations/instagram.ts"],
+      run_at: "document_start",
+    },
   ],
   web_accessible_resources: [
     {

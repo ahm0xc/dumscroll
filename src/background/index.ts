@@ -61,3 +61,32 @@ chrome.webNavigation.onBeforeNavigate.addListener(async (details) => {
     });
   }
 });
+
+// ** handles instagram customizations
+chrome.webNavigation.onBeforeNavigate.addListener(async (details) => {
+  const url = new URL(details.url);
+  if (url.hostname === "www.instagram.com" && url.pathname.includes("reels")) {
+    const isReelsBlocked = await storage.local.get<boolean>(
+      `cs-instagram-block-reels`,
+    );
+
+    if (!isReelsBlocked)
+      return;
+
+    chrome.tabs.update(details.tabId, {
+      url: "https://www.instagram.com/",
+    });
+  }
+  if (url.hostname === "www.instagram.com" && url.pathname.includes("explore")) {
+    const isExploreBlocked = await storage.local.get<boolean>(
+      `cs-instagram-block-explore`,
+    );
+
+    if (!isExploreBlocked)
+      return;
+
+    chrome.tabs.update(details.tabId, {
+      url: "https://www.instagram.com/",
+    });
+  }
+});

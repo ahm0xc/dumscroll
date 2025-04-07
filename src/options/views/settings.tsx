@@ -9,6 +9,7 @@ import { isValidUrl } from "~/lib/utils";
 import {
   DEFAULT_BLOCKED_WEBSITES,
   FACEBOOK_CUSTOMIZATIONS,
+  INSTAGRAM_CUSTOMIZATIONS,
   TWITTER_CUSTOMIZATIONS,
 } from "~/shared/config";
 import {
@@ -137,7 +138,7 @@ function SettingsContent({ activeTab }: { activeTab: SettingsTab }) {
       title: "Blocked Websites",
       component: <BlockedWebsitesTab />,
     },
-    "schedules": {
+    schedules: {
       subtitle: "General",
       title: "Schedules",
       component: <SchedulesTab />,
@@ -312,7 +313,11 @@ function FacebookCustomizationsTab() {
 }
 
 function InstagramCustomizationsTab() {
-  return <div>Instagram Customizations</div>;
+  return (
+    <div className="p-8">
+      <CustomizationSection customizations={INSTAGRAM_CUSTOMIZATIONS} />
+    </div>
+  );
 }
 
 function TwitterCustomizationsTab() {
