@@ -37,10 +37,7 @@ chrome.webNavigation.onBeforeNavigate.addListener(async (details) => {
   const blockedSites = await storage.local.get<BlockedWebsite[]>(
     "blocked_websites",
   );
-  console.log("blockedSites", blockedSites);
-  const myUrl = new URL(details.url);
-  console.log("myUrl", myUrl);
-  if (blockedSites.some(site => getDomainNameFromUrl(myUrl.origin) === getDomainNameFromUrl(site.url))) {
+  if (blockedSites.some(site => getDomainNameFromUrl(details.url) === getDomainNameFromUrl(site.url))) {
     chrome.tabs.update(details.tabId, {
       url: `chrome://newtab`,
     });
