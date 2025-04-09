@@ -8,6 +8,6 @@ type OptionsStore = {
 };
 
 export const useOptionsStore = create<OptionsStore>(set => ({
-  view: "settings",
+  view: "home",
   setView: view => set({ view }),
 }));

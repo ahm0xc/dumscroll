@@ -1,4 +1,7 @@
+import React, { useEffect } from "react";
+
 import logo from "~/assets/logo-128.png";
+import { useBlockedWebsiteModalStore } from "~/components/modals/blocked-website-modal.store";
 import ThemeSwitcher from "~/components/theme-switcher";
 import { Button } from "~/components/ui/button";
 import { cn } from "~/lib/utils";
@@ -24,6 +27,7 @@ export default function Options() {
         <Sidebar />
         <Main />
       </div>
+      <BlockedWebsiteModalHandler />
     </div>
   );
 }
@@ -136,4 +140,27 @@ function Main() {
   };
 
   return <main>{viewsMap[view]}</main>;
+}
+
+function BlockedWebsiteModalHandler() {
+  const { data, isOpen, open } = useBlockedWebsiteModalStore();
+
+  React.useEffect(() => {
+    // Check for URL parameters when component mounts
+    const params = new URLSearchParams(window.location.search);
+    const blockedSite = params.get("blockedSite");
+
+    if (blockedSite && !isOpen) {
+      open({ url: blockedSite });
+      window.history.replaceState({}, "", window.location.pathname);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isOpen) {
+      console.log(data);
+    }
+  }, [isOpen, data]);
+
+  return null;
 }

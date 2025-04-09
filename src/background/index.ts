@@ -4,11 +4,11 @@ import { storage } from "~/lib/storage";
 import { ALL_CUSTOMIZATIONS, DEFAULT_BLOCKED_WEBSITES } from "~/shared/config";
 import { getDomainNameFromUrl } from "~/shared/utils";
 
-// let extensionId = "";
+let extensionId = "";
 
-// chrome.management.getSelf((info) => {
-//   extensionId = info.id;
-// });
+chrome.management.getSelf((info) => {
+  extensionId = info.id;
+});
 
 chrome.runtime.onInstalled.addListener(async () => {
   const blockedWebsites = await storage.local.get("blocked_websites");
@@ -39,7 +39,7 @@ chrome.webNavigation.onBeforeNavigate.addListener(async (details) => {
   );
   if (blockedSites.some(site => getDomainNameFromUrl(details.url) === getDomainNameFromUrl(site.url))) {
     chrome.tabs.update(details.tabId, {
-      url: `chrome://newtab`,
+      url: `chrome-extension://${extensionId}/options.html?blockedSite=${details.url}`,
     });
   }
 });
