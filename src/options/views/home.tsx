@@ -23,7 +23,7 @@ import {
   SelectValue,
 } from "~/components/ui/select";
 import { cn } from "~/lib/utils";
-import { getTopWebsiteUses, getWebsiteNameFromUrl, truncateString } from "~/shared/utils";
+import { getTopWebsiteUses, getTotalTimeSpent, getWebsiteNameFromUrl, truncateString } from "~/shared/utils";
 
 export default function HomeView() {
   return (
@@ -36,6 +36,9 @@ export default function HomeView() {
       </header>
       <div className="p-6 grid grid-cols-1 gap-6 lg:grid-cols-3">
         <TopWebsiteUsesChartCard className="col-span-2" />
+        <section>
+          <TotalTimeSpentCard />
+        </section>
       </div>
     </div>
   );
@@ -176,5 +179,57 @@ function TopWebsiteUsesChartCard({ className }: { className?: string }) {
         </CardContent>
       </Card>
     </section>
+  );
+}
+
+function TotalTimeSpentCard() {
+  const [totalTimeSpent, setTotalTimeSpent] = React.useState<number>(0);
+  const [selectedPeriod, setSelectedPeriod] = React.useState<TimePeriodOption>(TIME_PERIOD_OPTIONS[0]);
+
+  function formatTimeSpent(timeSpent: number) {
+    const hours = Math.floor(timeSpent / 3600); // Convert seconds to hours
+    const minutes = Math.round((timeSpent % 3600) / 60); // Get remaining minutes
+    return `${hours}h ${minutes}m`;
+  }
+
+  React.useEffect(() => {
+    getTotalTimeSpent({
+      timeframe: selectedPeriod.value,
+    }).then((results) => {
+      setTotalTimeSpent(results);
+    });
+  }, [selectedPeriod]);
+
+  return (
+    <Card>
+      <CardHeader className="flex flex-row items-center justify-between">
+        <div>
+          <CardTitle>Total Time Spent</CardTitle>
+          <CardDescription>Total time spent on websites</CardDescription>
+        </div>
+        <Select
+          value={selectedPeriod.id}
+          onValueChange={(value) => {
+            setSelectedPeriod(TIME_PERIOD_OPTIONS.find(option => option.id === value) || TIME_PERIOD_OPTIONS[2]);
+          }}
+        >
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Select time period" />
+          </SelectTrigger>
+          <SelectContent>
+            {TIME_PERIOD_OPTIONS.map(option => (
+              <SelectItem key={option.id} value={option.id}>
+                {option.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </CardHeader>
+      <CardContent>
+        <p className="text-2xl font-bold">
+          {formatTimeSpent(totalTimeSpent)}
+        </p>
+      </CardContent>
+    </Card>
   );
 }
