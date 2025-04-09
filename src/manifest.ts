@@ -58,5 +58,5 @@ export default defineManifest({
     },
   ],
   host_permissions: ["http://*/*", "https://*/*"],
-  permissions: ["storage", "webNavigation", "tabs"],
+  permissions: ["storage", "webNavigation", "tabs", "history"],
 });
