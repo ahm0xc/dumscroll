@@ -53,8 +53,6 @@ const TIME_PERIOD_OPTIONS: TimePeriodOption[] = [
   { id: "7d", label: "Last 7 days", value: { days: 7 } },
   { id: "30d", label: "Last 30 days", value: { days: 30 } },
   { id: "3m", label: "Last 3 months", value: { months: 3 } },
-  { id: "6m", label: "Last 6 months", value: { months: 6 } },
-  { id: "1y", label: "Last 1 year", value: { months: 12 } },
 ];
 
 function TopWebsiteUsesChartCard({ className }: { className?: string }) {
