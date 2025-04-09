@@ -15,6 +15,13 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "~/components/ui/chart";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "~/components/ui/select";
 import { cn } from "~/lib/utils";
 import { getTopWebsiteUses, getWebsiteNameFromUrl, truncateString } from "~/shared/utils";
 
@@ -34,11 +41,33 @@ export default function HomeView() {
   );
 }
 
+// Time period options
+type TimePeriodOption = {
+  id: string;
+  label: string;
+  value: { days?: number; months?: number };
+};
+
+const TIME_PERIOD_OPTIONS: TimePeriodOption[] = [
+  { id: "today", label: "Today", value: { days: 0 } },
+  { id: "7d", label: "Last 7 days", value: { days: 7 } },
+  { id: "30d", label: "Last 30 days", value: { days: 30 } },
+  { id: "3m", label: "Last 3 months", value: { months: 3 } },
+  { id: "6m", label: "Last 6 months", value: { months: 6 } },
+  { id: "1y", label: "Last 1 year", value: { months: 12 } },
+];
+
 function TopWebsiteUsesChartCard({ className }: { className?: string }) {
   const [chartData, setChartData] = React.useState<Array<{ url: string; uses: number; fill: string }>>([]);
+  const [selectedPeriodId, setSelectedPeriodId] = React.useState<string>("today");
+
+  const selectedPeriod = React.useMemo(() =>
+    TIME_PERIOD_OPTIONS.find(option => option.id === selectedPeriodId) || TIME_PERIOD_OPTIONS[2], [selectedPeriodId]);
 
   React.useEffect(() => {
-    getTopWebsiteUses().then((results) => {
+    getTopWebsiteUses({
+      timeframe: selectedPeriod.value,
+    }).then((results) => {
       // Chart colors array for cycling through different colors
       const chartColors = [
         "hsl(var(--chart-1))",
@@ -62,7 +91,7 @@ function TopWebsiteUsesChartCard({ className }: { className?: string }) {
 
       setChartData(formattedResults);
     });
-  }, []);
+  }, [selectedPeriod]);
 
   // Dynamically create chart config from chartData
   const chartConfig = React.useMemo(() => {
@@ -81,9 +110,26 @@ function TopWebsiteUsesChartCard({ className }: { className?: string }) {
   return (
     <section className={cn(className)}>
       <Card>
-        <CardHeader>
-          <CardTitle>Website Usage</CardTitle>
-          <CardDescription>Top websites usage stats</CardDescription>
+        <CardHeader className="flex flex-row items-center justify-between">
+          <div>
+            <CardTitle>Website Usage</CardTitle>
+            <CardDescription>Top websites usage stats</CardDescription>
+          </div>
+          <Select
+            value={selectedPeriodId}
+            onValueChange={setSelectedPeriodId}
+          >
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Select time period" />
+            </SelectTrigger>
+            <SelectContent>
+              {TIME_PERIOD_OPTIONS.map(option => (
+                <SelectItem key={option.id} value={option.id}>
+                  {option.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </CardHeader>
         <CardContent>
           <ChartContainer config={chartConfig}>

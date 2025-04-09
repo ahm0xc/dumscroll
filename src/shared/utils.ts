@@ -31,20 +31,35 @@ export function truncateString(str: string, maxLength: number, suffix = "...") {
 
 export async function getTopWebsiteUses({
   limit = 10,
-  months = 1,
+  timeframe = { months: 1 },
 }: {
   limit?: number;
-  months?: number;
+  timeframe?: { days?: number; months?: number };
 } = {}): Promise<Array<{ url: string; uses: number }>> {
-  // Get browsing history from the specified months ago
+  // Get browsing history from the specified period ago
   const startDate = new Date();
-  startDate.setMonth(startDate.getMonth() - months);
+
+  if (timeframe.days === 0) {
+    // For "Today" option: set to start of current day
+    startDate.setHours(0, 0, 0, 0);
+  }
+  else {
+    // Apply months if specified
+    if (timeframe.months) {
+      startDate.setMonth(startDate.getMonth() - timeframe.months);
+    }
+
+    // Apply days if specified
+    if (timeframe.days) {
+      startDate.setDate(startDate.getDate() - timeframe.days);
+    }
+  }
 
   return new Promise((resolve) => {
     chrome.history.search({
       text: "",
       startTime: startDate.getTime(),
-      maxResults: 9999,
+      maxResults: 1_00_00_000, // 100 million
     }, (historyItems) => {
       // Create a map to track domains and their visit data
       const domainMap = new Map<string, { url: string; visitCount: number; visitTime: number }>();
