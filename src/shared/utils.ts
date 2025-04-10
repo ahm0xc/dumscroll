@@ -334,3 +334,27 @@ export async function getTotalTimeSpent({
   // Return the total time in seconds
   return totalTimeSpent / 1000;
 }
+
+export async function getDailyAverageTimeSpent({
+  timeframe = { months: 1 },
+}: {
+  timeframe?: { days?: number; months?: number };
+}): Promise<number> {
+  const { startDate, allVisits, constants } = await processBrowsingHistory({ timeframe });
+
+  // Calculate total time spent
+  const domainTimeMap = calculateTimeSpent(allVisits, constants);
+
+  // Sum up all domain times
+  let totalTimeSpent = 0;
+  for (const timeSpent of domainTimeMap.values()) {
+    totalTimeSpent += timeSpent;
+  }
+
+  // Calculate number of days in the timeframe
+  const now = new Date();
+  const daysDifference = Math.max(1, Math.ceil((now.getTime() - startDate.getTime()) / (24 * 60 * 60 * 1000)));
+
+  // Return the daily average in seconds
+  return (totalTimeSpent / daysDifference) / 1000;
+}

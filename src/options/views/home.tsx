@@ -23,7 +23,7 @@ import {
   SelectValue,
 } from "~/components/ui/select";
 import { cn } from "~/lib/utils";
-import { getTopWebsiteUses, getTotalTimeSpent, getWebsiteNameFromUrl, truncateString } from "~/shared/utils";
+import { getDailyAverageTimeSpent, getTopWebsiteUses, getTotalTimeSpent, getWebsiteNameFromUrl, truncateString } from "~/shared/utils";
 
 export default function HomeView() {
   return (
@@ -36,8 +36,9 @@ export default function HomeView() {
       </header>
       <div className="p-6 grid grid-cols-1 gap-6 lg:grid-cols-3">
         <TopWebsiteUsesChartCard className="col-span-2" />
-        <section>
+        <section className="space-y-6">
           <TotalTimeSpentCard />
+          <DailyAverageTimeSpentCard />
         </section>
       </div>
     </div>
@@ -227,6 +228,38 @@ function TotalTimeSpentCard() {
       <CardContent>
         <p className="text-2xl font-bold">
           {formatTimeSpent(totalTimeSpent)}
+        </p>
+      </CardContent>
+    </Card>
+  );
+}
+
+function DailyAverageTimeSpentCard() {
+  const [dailyAverageTimeSpent, setDailyAverageTimeSpent] = React.useState<number>(0);
+
+  function formatTimeSpent(timeSpent: number) {
+    const hours = Math.floor(timeSpent / 3600); // Convert seconds to hours
+    const minutes = Math.round((timeSpent % 3600) / 60); // Get remaining minutes
+    return `${hours}h ${minutes}m`;
+  }
+
+  React.useEffect(() => {
+    getDailyAverageTimeSpent({}).then((results) => {
+      setDailyAverageTimeSpent(results);
+    });
+  }, []);
+
+  return (
+    <Card>
+      <CardHeader className="flex flex-row items-center justify-between">
+        <div>
+          <CardTitle>Daily Average Time Spent</CardTitle>
+          <CardDescription>Daily average time spent on websites</CardDescription>
+        </div>
+      </CardHeader>
+      <CardContent>
+        <p className="text-2xl font-bold">
+          {formatTimeSpent(dailyAverageTimeSpent)}
         </p>
       </CardContent>
     </Card>
