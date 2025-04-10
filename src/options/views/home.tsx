@@ -155,9 +155,8 @@ function TopWebsiteUsesChartCard({ className }: { className?: string }) {
                   <ChartTooltipContent
                     formatter={(value, _name, _entry) => {
                       const hours = Number(value);
-
                       // Format based on the value size
-                      if (hours < 0.1) {
+                      if (hours < 1) {
                         // For very small values, convert to minutes
                         const minutes = Math.round(hours * 60);
                         return `${minutes} min${minutes === 1 ? "" : "s"}`;

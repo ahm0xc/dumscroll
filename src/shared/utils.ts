@@ -29,13 +29,32 @@ export function truncateString(str: string, maxLength: number, suffix = "...") {
   return str.slice(0, maxLength) + suffix;
 }
 
-export async function getTopWebsiteUses({
-  limit = 10,
+/**
+ * Constants for time calculations with reasonable defaults
+ */
+const BROWSING_CONSTANTS = {
+  // Maximum time between visits considered as continuous browsing (30 min)
+  MAX_INACTIVE_TIME: 30 * 60 * 1000,
+  // Minimum time to attribute to any visit (5 sec)
+  MIN_VISIT_TIME: 5 * 1000,
+  // Default time for the last recorded visit (30 sec)
+  DEFAULT_LAST_VISIT_TIME: 30 * 1000,
+  // Maximum results to fetch from history API
+  MAX_HISTORY_RESULTS: 10000,
+  // Threshold for rapid navigation (visits less than 2 seconds apart)
+  RAPID_NAVIGATION_THRESHOLD: 2 * 1000,
+};
+
+/**
+ * Helper function that processes browser history data with common logic
+ */
+async function processBrowsingHistory({
   timeframe = { months: 1 },
+  constants = BROWSING_CONSTANTS,
 }: {
-  limit?: number;
   timeframe?: { days?: number; months?: number };
-} = {}): Promise<Array<{ url: string; uses: number }>> {
+  constants?: typeof BROWSING_CONSTANTS;
+} = {}) {
   // Get browsing history from the specified period ago
   const startDate = new Date();
 
@@ -55,123 +74,178 @@ export async function getTopWebsiteUses({
     }
   }
 
-  // Step 1: Get all history items in the time range
-  const historyItems = await new Promise<chrome.history.HistoryItem[]>((resolve) => {
-    chrome.history.search({
-      text: "",
-      startTime: startDate.getTime(),
-      maxResults: 10000, // Reasonable limit
-    }, items => resolve(items));
-  });
+  try {
+    // Step 1: Get all history items in the time range
+    const historyItems = await new Promise<chrome.history.HistoryItem[]>((resolve, reject) => {
+      try {
+        chrome.history.search({
+          text: "",
+          startTime: startDate.getTime(),
+          maxResults: constants.MAX_HISTORY_RESULTS,
+        }, (items) => {
+          if (chrome.runtime.lastError) {
+            reject(new Error(`History search error: ${chrome.runtime.lastError.message}`));
+          }
+          else {
+            resolve(items);
+          }
+        });
+      }
+      catch (error) {
+        reject(new Error(`Failed to search history: ${error}`));
+      }
+    });
 
-  // Create a map to track domains and their URLs
-  const domainUrlMap = new Map<string, Set<string>>();
+    // Create a map to track domains and their URLs
+    const domainUrlMap = new Map<string, Set<string>>();
 
-  // Process history items to get unique URLs per domain
-  for (const item of historyItems) {
-    if (!item.url)
-      continue;
-
-    try {
-      // Skip browser-specific URLs directly
-      if (item.url.startsWith("chrome://")
-        || item.url.startsWith("chrome-extension://")
-        || item.url.startsWith("chrome-search://")
-        || item.url.startsWith("edge://")
-        || item.url.startsWith("brave://")
-        || item.url.startsWith("about:")
-        || item.url.startsWith("devtools://")
-        || item.url.includes("/newtab")) {
+    // Process history items to get unique URLs per domain
+    for (const item of historyItems) {
+      if (!item.url)
         continue;
+
+      try {
+        // Skip browser-specific URLs directly
+        if (item.url.startsWith("chrome://")
+          || item.url.startsWith("chrome-extension://")
+          || item.url.startsWith("chrome-search://")
+          || item.url.startsWith("edge://")
+          || item.url.startsWith("brave://")
+          || item.url.startsWith("about:")
+          || item.url.startsWith("devtools://")
+          || item.url.includes("/newtab")) {
+          continue;
+        }
+
+        const domain = getDomainNameFromUrl(item.url);
+
+        // Skip browser domains
+        if (domain.includes("chrome.")
+          || domain.includes("chrome-extension")
+          || domain.includes("chrome-search")
+          || domain.includes("newtab")
+          || domain.includes("edge.")
+          || domain.includes("brave.")
+          || domain.includes("chromewebstore.")
+          || domain.includes("chromium.")) {
+          continue;
+        }
+
+        if (!domainUrlMap.has(domain)) {
+          domainUrlMap.set(domain, new Set());
+        }
+
+        domainUrlMap.get(domain)!.add(item.url);
+      }
+      catch (error) {
+        console.error("Error processing URL:", item.url, error);
+      }
+    }
+
+    // Step 2: Get all visits for all domains
+    const domainVisits = new Map<string, { visitTime: number; representativeUrl: string }>();
+    const allVisits: { timestamp: number; domain: string; url?: string; transition?: string }[] = [];
+
+    // Process each domain and its URLs
+    for (const [domain, urls] of domainUrlMap.entries()) {
+      if (!domainVisits.has(domain)) {
+        domainVisits.set(domain, { visitTime: 0, representativeUrl: "" });
       }
 
-      const domain = getDomainNameFromUrl(item.url);
+      let maxVisitCount = 0;
+      let mostVisitedUrl = "";
 
-      // Skip browser domains
-      if (domain.includes("chrome.")
-        || domain.includes("chrome-extension")
-        || domain.includes("chrome-search")
-        || domain.includes("newtab")
-        || domain.includes("edge.")
-        || domain.includes("brave.")
-        || domain.includes("chromewebstore.")
-        || domain.includes("chromium.")) {
-        continue;
-      }
+      // Get visits for each URL in the domain
+      for (const url of urls) {
+        const visits = await new Promise<chrome.history.VisitItem[]>((resolve, reject) => {
+          try {
+            chrome.history.getVisits({ url }, (visitItems) => {
+              if (chrome.runtime.lastError) {
+                reject(new Error(`Get visits error: ${chrome.runtime.lastError.message}`));
+              }
+              else {
+                resolve(visitItems);
+              }
+            });
+          }
+          catch (error) {
+            reject(new Error(`Failed to get visits: ${error}`));
+          }
+        });
 
-      if (!domainUrlMap.has(domain)) {
-        domainUrlMap.set(domain, new Set());
-      }
+        // Filter visits within our time range
+        const filteredVisits = visits.filter(visit =>
+          visit.visitTime && visit.visitTime >= startDate.getTime(),
+        );
 
-      domainUrlMap.get(domain)!.add(item.url);
-    }
-    catch (error) {
-      console.error("Error processing URL:", item.url, error);
-    }
-  }
+        // Add domain visits to our sorted list
+        for (const visit of filteredVisits) {
+          if (visit.visitTime) {
+            allVisits.push({
+              timestamp: visit.visitTime,
+              domain,
+              url,
+              transition: visit.transition,
+            });
+          }
+        }
 
-  // Step 2: Get all visits for all domains
-  const domainVisits = new Map<string, { visitTime: number; representativeUrl: string }>();
-  const allVisits: { timestamp: number; domain: string }[] = [];
-
-  // Process each domain and its URLs
-  for (const [domain, urls] of domainUrlMap.entries()) {
-    if (!domainVisits.has(domain)) {
-      domainVisits.set(domain, { visitTime: 0, representativeUrl: "" });
-    }
-
-    let maxVisitCount = 0;
-    let mostVisitedUrl = "";
-
-    // Get visits for each URL in the domain
-    for (const url of urls) {
-      const visits = await new Promise<chrome.history.VisitItem[]>((resolve) => {
-        chrome.history.getVisits({ url }, visitItems => resolve(visitItems));
-      });
-
-      // Filter visits within our time range
-      const filteredVisits = visits.filter(visit =>
-        visit.visitTime && visit.visitTime >= startDate.getTime(),
-      );
-
-      // Add domain visits to our sorted list
-      for (const visit of filteredVisits) {
-        if (visit.visitTime) {
-          allVisits.push({
-            timestamp: visit.visitTime,
-            domain,
-          });
+        // Track the most visited URL for this domain
+        if (filteredVisits.length > maxVisitCount) {
+          maxVisitCount = filteredVisits.length;
+          mostVisitedUrl = url;
         }
       }
 
-      // Track the most visited URL for this domain
-      if (filteredVisits.length > maxVisitCount) {
-        maxVisitCount = filteredVisits.length;
-        mostVisitedUrl = url;
+      // Store the most representative URL for this domain
+      if (mostVisitedUrl) {
+        domainVisits.get(domain)!.representativeUrl = mostVisitedUrl;
+      }
+      else if (urls.size > 0) {
+        // Fallback to first URL
+        domainVisits.get(domain)!.representativeUrl = [...urls][0];
       }
     }
 
-    // Store the most representative URL for this domain
-    if (mostVisitedUrl) {
-      domainVisits.get(domain)!.representativeUrl = mostVisitedUrl;
-    }
-    else if (urls.size > 0) {
-      // Fallback to first URL
-      domainVisits.get(domain)!.representativeUrl = [...urls][0];
-    }
+    // Step 3: Sort all visits chronologically
+    allVisits.sort((a, b) => a.timestamp - b.timestamp);
+
+    return {
+      startDate,
+      domainUrlMap,
+      domainVisits,
+      allVisits,
+      constants,
+    };
   }
+  catch (error) {
+    console.error("Error processing browsing history:", error);
+    // Return empty data structures in case of error
+    return {
+      startDate,
+      domainUrlMap: new Map(),
+      domainVisits: new Map(),
+      allVisits: [],
+      constants,
+    };
+  }
+}
 
-  // Step 3: Sort all visits chronologically
-  allVisits.sort((a, b) => a.timestamp - b.timestamp);
+/**
+ * Calculate time spent on websites based on visit timestamps
+ * Accounts for different browsing patterns and transitions
+ */
+function calculateTimeSpent(visits: { timestamp: number; domain: string; transition?: string }[], constants: typeof BROWSING_CONSTANTS) {
+  const domainTimeMap = new Map<string, number>();
 
-  // Step 4: Calculate time spent on each domain
-  const MAX_INACTIVE_TIME = 30 * 60 * 1000; // 30 minutes in milliseconds
-  const MIN_VISIT_TIME = 5 * 1000; // 5 seconds minimum
-  const DEFAULT_LAST_VISIT_TIME = 30 * 1000; // 30 seconds for last visit
+  for (let i = 0; i < visits.length; i++) {
+    const currentVisit = visits[i];
+    const nextVisit = i < visits.length - 1 ? visits[i + 1] : null;
 
-  for (let i = 0; i < allVisits.length; i++) {
-    const currentVisit = allVisits[i];
-    const nextVisit = i < allVisits.length - 1 ? allVisits[i + 1] : null;
+    // Skip certain transition types that don't represent active browsing
+    if (currentVisit.transition === "auto_subframe" || currentVisit.transition === "reload") {
+      continue;
+    }
 
     // Calculate time spent on this visit
     let timeSpent = 0;
@@ -180,25 +254,52 @@ export async function getTopWebsiteUses({
       // Time until next visit
       const timeDiff = nextVisit.timestamp - currentVisit.timestamp;
 
-      // If the next visit is too far in the future, cap the time
-      timeSpent = Math.min(timeDiff, MAX_INACTIVE_TIME);
+      // Handle rapid navigation
+      if (timeDiff < constants.RAPID_NAVIGATION_THRESHOLD) {
+        timeSpent = constants.MIN_VISIT_TIME;
+      }
+      else {
+        // If the next visit is too far in the future, cap the time
+        timeSpent = Math.min(timeDiff, constants.MAX_INACTIVE_TIME);
+      }
     }
     else {
       // For the last visit, assign a default time
-      timeSpent = DEFAULT_LAST_VISIT_TIME;
+      timeSpent = constants.DEFAULT_LAST_VISIT_TIME;
     }
 
     // Ensure at least minimum time
-    timeSpent = Math.max(timeSpent, MIN_VISIT_TIME);
+    timeSpent = Math.max(timeSpent, constants.MIN_VISIT_TIME);
 
-    // Add to the domain's total time
-    const domainData = domainVisits.get(currentVisit.domain);
+    // Add to domain's total time
+    const domain = currentVisit.domain;
+    domainTimeMap.set(domain, (domainTimeMap.get(domain) || 0) + timeSpent);
+  }
+
+  return domainTimeMap;
+}
+
+export async function getTopWebsiteUses({
+  limit = 10,
+  timeframe = { months: 1 },
+}: {
+  limit?: number;
+  timeframe?: { days?: number; months?: number };
+} = {}): Promise<Array<{ url: string; uses: number }>> {
+  const { domainVisits, allVisits, constants } = await processBrowsingHistory({ timeframe });
+
+  // Use the enhanced calculation function
+  const domainTimeMap = calculateTimeSpent(allVisits, constants);
+
+  // Update the domain visit times
+  for (const [domain, timeSpent] of domainTimeMap.entries()) {
+    const domainData = domainVisits.get(domain);
     if (domainData) {
-      domainData.visitTime += timeSpent;
+      domainData.visitTime = timeSpent;
     }
   }
 
-  // Step 5: Convert to array, sort, and take top sites
+  // Convert to array, sort, and take top sites
   const topSites = Array.from(domainVisits.entries())
     .map(([domain, data]) => ({
       domain,
@@ -219,143 +320,14 @@ export async function getTotalTimeSpent({
 }: {
   timeframe?: { days?: number; months?: number };
 }): Promise<number> {
-  // Get browsing history from the specified period ago
-  const startDate = new Date();
+  const { allVisits, constants } = await processBrowsingHistory({ timeframe });
 
-  if (timeframe.days === 0) {
-    // For "Today" option: set to midnight (12:00 AM) of the current day
-    startDate.setHours(0, 0, 0, 0);
-  }
-  else {
-    // Apply months if specified
-    if (timeframe.months) {
-      startDate.setMonth(startDate.getMonth() - timeframe.months);
-    }
+  // Use the enhanced calculation function to get all domain times
+  const domainTimeMap = calculateTimeSpent(allVisits, constants);
 
-    // Apply days if specified
-    if (timeframe.days) {
-      startDate.setDate(startDate.getDate() - timeframe.days);
-    }
-  }
-
-  // Step 1: Get all history items in the time range
-  const historyItems = await new Promise<chrome.history.HistoryItem[]>((resolve) => {
-    chrome.history.search({
-      text: "",
-      startTime: startDate.getTime(),
-      maxResults: 10000, // Reasonable limit
-    }, items => resolve(items));
-  });
-
-  // Create a map to track domains and their URLs
-  const domainUrlMap = new Map<string, Set<string>>();
-
-  // Process history items to get unique URLs per domain
-  for (const item of historyItems) {
-    if (!item.url)
-      continue;
-
-    try {
-      // Skip browser-specific URLs directly
-      if (item.url.startsWith("chrome://")
-        || item.url.startsWith("chrome-extension://")
-        || item.url.startsWith("chrome-search://")
-        || item.url.startsWith("edge://")
-        || item.url.startsWith("brave://")
-        || item.url.startsWith("about:")
-        || item.url.startsWith("devtools://")
-        || item.url.includes("/newtab")) {
-        continue;
-      }
-
-      const domain = getDomainNameFromUrl(item.url);
-
-      // Skip browser domains
-      if (domain.includes("chrome.")
-        || domain.includes("chrome-extension")
-        || domain.includes("chrome-search")
-        || domain.includes("newtab")
-        || domain.includes("edge.")
-        || domain.includes("brave.")
-        || domain.includes("chromewebstore.")
-        || domain.includes("chromium.")) {
-        continue;
-      }
-
-      if (!domainUrlMap.has(domain)) {
-        domainUrlMap.set(domain, new Set());
-      }
-
-      domainUrlMap.get(domain)!.add(item.url);
-    }
-    catch (error) {
-      console.error("Error processing URL:", item.url, error);
-    }
-  }
-
-  // Step 2: Get all visits for all domains
-  const allVisits: {
-    timestamp: number;
-    domain: string;
-    url: string;
-  }[] = [];
-
-  // Process each domain and its URLs
-  for (const [domain, urls] of domainUrlMap.entries()) {
-    // Get visits for each URL in the domain
-    for (const url of urls) {
-      const visits = await new Promise<chrome.history.VisitItem[]>((resolve) => {
-        chrome.history.getVisits({ url }, visitItems => resolve(visitItems));
-      });
-
-      // Filter visits within our time range
-      const filteredVisits = visits.filter(visit =>
-        visit.visitTime && visit.visitTime >= startDate.getTime(),
-      );
-
-      // Add domain visits to our sorted list
-      for (const visit of filteredVisits) {
-        if (visit.visitTime) {
-          allVisits.push({
-            timestamp: visit.visitTime,
-            domain,
-            url,
-          });
-        }
-      }
-    }
-  }
-
-  // Step 3: Sort all visits chronologically
-  allVisits.sort((a, b) => a.timestamp - b.timestamp);
-
-  // Step 4: Calculate total time spent using actual time between visits
-  const MAX_INACTIVE_TIME = 30 * 60 * 1000; // 30 minutes in milliseconds
-  const DEFAULT_LAST_VISIT_TIME = 30 * 1000; // 30 seconds for last visit
-
+  // Sum up all domain times
   let totalTimeSpent = 0;
-
-  for (let i = 0; i < allVisits.length; i++) {
-    const currentVisit = allVisits[i];
-    const nextVisit = i < allVisits.length - 1 ? allVisits[i + 1] : null;
-
-    // Calculate time spent on this visit
-    let timeSpent = 0;
-
-    if (nextVisit) {
-      // Time until next visit
-      const timeDiff = nextVisit.timestamp - currentVisit.timestamp;
-
-      // If the next visit is too far in the future, cap the time
-      // This could indicate user inactivity or closed the browser
-      timeSpent = Math.min(timeDiff, MAX_INACTIVE_TIME);
-    }
-    else {
-      // For the last visit, assign a default time
-      timeSpent = DEFAULT_LAST_VISIT_TIME;
-    }
-
-    // Add to the total time spent
+  for (const timeSpent of domainTimeMap.values()) {
     totalTimeSpent += timeSpent;
   }
 
