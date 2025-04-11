@@ -5,7 +5,7 @@ import type { BlockedWebsite } from "~/shared/config";
 import CustomizationSection from "~/components/customization-section";
 import { Button } from "~/components/ui/button";
 import useChromeStorage from "~/hooks/use-chrome-storage";
-import { isValidUrl } from "~/lib/utils";
+import { cn, isValidUrl } from "~/lib/utils";
 import {
   DEFAULT_BLOCKED_WEBSITES,
   FACEBOOK_CUSTOMIZATIONS,
@@ -39,15 +39,17 @@ export default function SettingsView() {
 
   return (
     <div className="grid grid-cols-[280px_1fr] h-screen">
-      <SettingsSidebar setActiveTab={setActiveTab} />
+      <SettingsSidebar activeTab={activeTab} setActiveTab={setActiveTab} />
       <SettingsContent activeTab={activeTab} />
     </div>
   );
 }
 
 function SettingsSidebar({
+  activeTab,
   setActiveTab,
 }: {
+  activeTab: SettingsTab;
   setActiveTab: (tab: SettingsTab) => void;
 }) {
   return (
@@ -62,11 +64,13 @@ function SettingsSidebar({
             title="Blocked Websites"
             icon={<SecurityBlockedIcon />}
             onClick={() => setActiveTab("blocked-websites")}
+            isActive={activeTab === "blocked-websites"}
           />
           <SidebarItem
             title="Schedules"
             icon={<TimeQuarterIcon />}
             onClick={() => setActiveTab("schedules")}
+            isActive={activeTab === "schedules"}
           />
         </div>
         <SidebarGroupHeader title="Customizations" icon={<BlushBrushIcon />} />
@@ -75,16 +79,19 @@ function SettingsSidebar({
             title="Facebook"
             icon={<FacebookIcon />}
             onClick={() => setActiveTab("facebook-customizations")}
+            isActive={activeTab === "facebook-customizations"}
           />
           <SidebarItem
             title="Instagram"
             icon={<InstagramIcon />}
             onClick={() => setActiveTab("instagram-customizations")}
+            isActive={activeTab === "instagram-customizations"}
           />
           <SidebarItem
             title="Twitter"
             icon={<TwitterIcon />}
             onClick={() => setActiveTab("twitter-customizations")}
+            isActive={activeTab === "twitter-customizations"}
           />
         </div>
       </div>
@@ -111,16 +118,21 @@ function SidebarItem({
   title,
   icon,
   onClick,
+  isActive,
 }: {
   title: string;
   icon: React.ReactNode;
   onClick: () => void;
+  isActive: boolean;
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className="flex items-center gap-2 py-2 px-2 hover:bg-slate-200 dark:hover:bg-neutral-800 rounded-xl [&_svg]:size-4 duration-200 w-full text-sm"
+      className={cn(
+        "flex items-center gap-2 py-2 px-2 hover:bg-slate-200 dark:hover:bg-neutral-800 rounded-xl [&_svg]:size-4 duration-200 w-full text-sm",
+        isActive && "bg-slate-200 dark:bg-neutral-800",
+      )}
     >
       {icon}
       <span>{title}</span>

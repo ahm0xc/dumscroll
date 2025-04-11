@@ -33,7 +33,7 @@ export default function Options() {
 }
 
 function Sidebar() {
-  const { setView } = useOptionsStore();
+  const { view, setView } = useOptionsStore();
 
   return (
     <aside className="flex flex-col gap-4 p-4 bg-slate-50 border-r h-full dark:bg-neutral-900">
@@ -49,11 +49,13 @@ function Sidebar() {
           title="Home"
           icon={<HomeIcon />}
           onClick={() => setView("home")}
+          isActive={view === "home"}
         />
         <SidebarItem
           title="Settings"
           icon={<SettingsIcon />}
           onClick={() => setView("settings")}
+          isActive={view === "settings"}
         />
       </div>
       <footer
@@ -65,8 +67,14 @@ function Sidebar() {
             title="Invite Friends"
             icon={<UserCircleSparkleIcon />}
             onClick={() => {}}
+            isActive={false}
           />
-          <SidebarItem title="Help" icon={<HelpIcon />} onClick={() => {}} />
+          <SidebarItem
+            title="Help"
+            icon={<HelpIcon />}
+            onClick={() => {}}
+            isActive={false}
+          />
         </div>
         <SidebarFooter />
       </footer>
@@ -95,16 +103,21 @@ function SidebarItem({
   title,
   icon,
   onClick,
+  isActive,
 }: {
   title: string;
   icon: React.ReactNode;
   onClick: () => void;
+  isActive: boolean;
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className="flex items-center gap-2 py-2 px-2 hover:bg-slate-200 dark:hover:bg-neutral-800 rounded-xl [&_svg]:size-5 duration-200 w-full"
+      className={cn(
+        "flex items-center gap-2 py-2 px-2 hover:bg-slate-200 dark:hover:bg-neutral-800 rounded-xl [&_svg]:size-5 duration-200 w-full",
+        isActive && "bg-slate-200 dark:bg-neutral-800",
+      )}
     >
       {icon}
       <span>{title}</span>
