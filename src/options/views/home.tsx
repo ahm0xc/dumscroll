@@ -70,24 +70,14 @@ function TopWebsiteUsesChartCard({ className }: { className?: string }) {
     getTopWebsiteUses({
       timeframe: selectedPeriod.value,
     }).then((results) => {
-      // Chart colors array for cycling through different colors
-      const chartColors = [
-        "hsl(var(--chart-1))",
-        "hsl(var(--chart-2))",
-        "hsl(var(--chart-3))",
-        "hsl(var(--chart-4))",
-        "hsl(var(--chart-5))",
-      ];
-
       const formattedResults = results.map((item, index) => {
-        const colorIndex = index % chartColors.length;
         // Convert seconds to hours for display
         const hours = item.uses / 3600;
 
         return {
           url: item.url,
           uses: hours,
-          fill: chartColors[colorIndex],
+          fill: index === 0 ? "#4f46e5" : "#818cf8",
         };
       });
 
