@@ -1,9 +1,11 @@
 import React from "react";
 
 import type { BlockedWebsite } from "~/shared/config";
+import type { Schedule } from "~/shared/types";
 
 import CustomizationSection from "~/components/customization-section";
 import { Button } from "~/components/ui/button";
+import { Switch } from "~/components/ui/switch";
 import useChromeStorage from "~/hooks/use-chrome-storage";
 import { cn, isValidUrl } from "~/lib/utils";
 import {
@@ -291,7 +293,7 @@ function BlockedWebsitesTab() {
               <img
                 src={`https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${website.url}&size=32`}
                 alt=""
-                className="size-4 rounded-full"
+                className="size-4"
               />
               <span>{domain}</span>
               <div className="flex items-center gap-2 ml-auto">
@@ -313,7 +315,131 @@ function BlockedWebsitesTab() {
 }
 
 function SchedulesTab() {
-  return <div>Schedules</div>;
+  const [schedules, setSchedules] = useChromeStorage<Schedule[]>("schedules", []);
+  const scheduleInputRef = React.useRef<HTMLInputElement>(null);
+  const startInputRef = React.useRef<HTMLInputElement>(null);
+  const endInputRef = React.useRef<HTMLInputElement>(null);
+
+  const handleAddSchedule = () => {
+    let url = scheduleInputRef.current?.value;
+    if (!url) {
+      // TODO: add toast
+      console.log("No URL provided");
+      return;
+    }
+
+    if (!url.startsWith("http")) {
+      console.log("Adding https:// to URL");
+      url = `https://${url}`;
+    }
+
+    if (!isValidUrl(url)) {
+      // TODO: add toast
+      console.log("Invalid URL");
+      return;
+    }
+
+    const start = startInputRef.current?.value;
+    if (!start) {
+      // TODO: add toast
+      console.log("No start time provided");
+      return;
+    }
+
+    const end = endInputRef.current?.value;
+    if (!end) {
+      // TODO: add toast
+      console.log("No end time provided");
+      return;
+    }
+
+    const startTime = new Date(`1970-01-01T${start}`);
+    const endTime = new Date(`1970-01-01T${end}`);
+
+    if (endTime <= startTime) {
+      // TODO: add toast
+      console.log("End time is before start time");
+      return;
+    }
+
+    const myUrl = new URL(url);
+
+    setSchedules([{ url: myUrl.origin, start, end, enabled: true }, ...schedules]);
+    scheduleInputRef.current!.value = "";
+  };
+
+  function handleRemoveSchedule(schedule: Schedule) {
+    setSchedules(schedules.filter(s => s.url !== schedule.url));
+  }
+
+  function handleToggleSchedule(schedule: Schedule) {
+    setSchedules(schedules.map(s => s.url === schedule.url ? { ...s, enabled: !s.enabled } : s));
+  }
+
+  return (
+    <div className="p-8">
+      <div className="flex items-end gap-4 border rounded-2xl p-2 w-fit bg-neutral-50 dark:bg-neutral-900">
+        <div>
+          <p className="text-muted-foreground text-sm mb-1">URL</p>
+          <div className="h-10 bg-secondary rounded-xl px-2 flex items-center gap-2 border" aria-label="input-container">
+            <PlusIcon className="size-4 text-muted-foreground" />
+            <input type="text" ref={scheduleInputRef} placeholder="facebook.com" className="bg-transparent outline-none w-[250px]" />
+          </div>
+        </div>
+        <div className="flex gap-1">
+          <div>
+            <p className="text-muted-foreground text-sm mb-1">Start</p>
+            <input
+              type="time"
+              ref={startInputRef}
+              defaultValue="20:00"
+              className="bg-secondary rounded-xl px-2 h-10 outline-none border"
+            />
+          </div>
+          <div>
+            <p className="text-muted-foreground text-sm mb-1">End</p>
+            <input type="time" ref={endInputRef} defaultValue="23:00" className="bg-secondary rounded-xl px-2 h-10 outline-none border" />
+          </div>
+        </div>
+        <Button size="sm" onClick={handleAddSchedule}>
+          <PlusIcon className="size-4" />
+          Add Schedule
+        </Button>
+      </div>
+      <div>
+        <div className="flex flex-col gap-2 mt-10 border rounded-2xl p-2 bg-neutral-50 dark:bg-neutral-900">
+          {schedules.length > 0 && schedules.map((schedule, index) => (
+            <div key={`schedule-${index}`} className="flex items-center gap-2 bg-secondary rounded-2xl py-2 px-4 justify-between">
+              <div className="flex items-center gap-2">
+                <img className="size-4" src={`https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${schedule.url}&size=32`} alt="" />
+                <p>{schedule.url}</p>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="flex gap-1 text-muted-foreground text-sm">
+                  <p>{new Date(`2000-01-01T${schedule.start}`).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })}</p>
+                  <span>-</span>
+                  <p>{new Date(`2000-01-01T${schedule.end}`).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })}</p>
+                </div>
+                <div>
+                  <Switch id={`schedule-${index}`} checked={schedule.enabled} onCheckedChange={() => handleToggleSchedule(schedule)} />
+                </div>
+                <div className="flex items-center gap-2">
+                  <Button size="icon" variant="ghost" className="hover:bg-destructive/10 h-8 w-8 rounded-full" onClick={() => handleRemoveSchedule(schedule)}>
+                    <TrashIcon className="size-4 text-destructive" />
+                  </Button>
+                </div>
+              </div>
+            </div>
+          ))}
+          {schedules.length === 0 && (
+            <div className="flex items-center justify-center h-[300px]">
+              <p className="text-muted-foreground text-sm">No schedules found</p>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 function FacebookCustomizationsTab() {

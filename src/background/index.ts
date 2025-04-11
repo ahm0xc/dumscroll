@@ -1,4 +1,5 @@
 import type { BlockedWebsite } from "~/shared/config";
+import type { Schedule } from "~/shared/types";
 
 import { storage } from "~/lib/storage";
 import { ALL_CUSTOMIZATIONS, DEFAULT_BLOCKED_WEBSITES } from "~/shared/config";
@@ -41,6 +42,46 @@ chrome.webNavigation.onBeforeNavigate.addListener(async (details) => {
     chrome.tabs.update(details.tabId, {
       url: `chrome-extension://${extensionId}/options.html?blockedSite=${details.url}`,
     });
+  }
+});
+
+chrome.webNavigation.onBeforeNavigate.addListener(async (details) => {
+  const schedules = await storage.local.get<Schedule[]>("schedules");
+  const schedule = schedules.find((schedule) => {
+    return getDomainNameFromUrl(schedule.url) === getDomainNameFromUrl(details.url);
+  });
+
+  if (!schedule || !schedule.enabled) {
+    console.log("no schedule or schedule is disabled");
+    return;
+  }
+
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+  // Parse start and end times
+  const [startHours, startMinutes] = schedule.start.split(":").map(Number);
+  const [endHours, endMinutes] = schedule.end.split(":").map(Number);
+
+  const startTime = new Date(today);
+  startTime.setHours(startHours, startMinutes, 0, 0);
+
+  const endTime = new Date(today);
+  endTime.setHours(endHours, endMinutes, 0, 0);
+
+  // Handle schedules that span across days (e.g., 23:00 to 01:00)
+  if (endTime <= startTime) {
+    endTime.setDate(endTime.getDate() + 1);
+  }
+
+  if (now >= startTime && now <= endTime) {
+    console.log("time to block");
+    chrome.tabs.update(details.tabId, {
+      url: `chrome-extension://${extensionId}/options.html?blockedSite=${details.url}`,
+    });
+  }
+  else {
+    console.log("time to not block");
   }
 });
 
