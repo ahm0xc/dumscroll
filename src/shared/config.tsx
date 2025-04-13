@@ -106,3 +106,255 @@ export const ALL_CUSTOMIZATIONS = [
   ...TWITTER_CUSTOMIZATIONS,
   ...INSTAGRAM_CUSTOMIZATIONS,
 ] as const;
+
+type Platform = {
+  id: string;
+  name: string;
+  url: string | string[];
+};
+
+export const SOCIAL_MEDIA_PLATFORMS: Platform[] = [
+  {
+    id: "facebook",
+    name: "Facebook",
+    url: "https://facebook.com",
+  },
+  {
+    id: "instagram",
+    name: "Instagram",
+    url: "https://instagram.com",
+  },
+  {
+    id: "twitter",
+    name: "Twitter",
+    url: "https://twitter.com",
+  },
+  {
+    id: "snapchat",
+    name: "Snapchat",
+    url: "https://snapchat.com",
+  },
+  {
+    id: "tiktok",
+    name: "TikTok",
+    url: "https://tiktok.com",
+  },
+  {
+    id: "linkedin",
+    name: "LinkedIn",
+    url: "https://linkedin.com",
+  },
+  {
+    id: "angellist",
+    name: "AngelList",
+    url: "https://angellist.com",
+  },
+  {
+    id: "github",
+    name: "GitHub",
+    url: "https://github.com",
+  },
+  {
+    id: "medium",
+    name: "Medium",
+    url: "https://medium.com",
+  },
+  {
+    id: "discord",
+    name: "Discord",
+    url: "https://discord.com",
+  },
+  {
+    id: "vrchat",
+    name: "VRChat",
+    url: "https://vrchat.com",
+  },
+  {
+    id: "roblox",
+    name: "Roblox",
+    url: "https://roblox.com",
+  },
+  {
+    id: "pinterest",
+    name: "Pinterest",
+    url: "https://pinterest.com",
+  },
+  {
+    id: "reddit",
+    name: "Reddit",
+    url: "https://reddit.com",
+  },
+  {
+    id: "steam",
+    name: "Steam",
+    url: "https://steam.com",
+  },
+  {
+    id: "deviantart",
+    name: "DeviantArt",
+    url: "https://deviantart.com",
+  },
+  {
+    id: "rumble",
+    name: "Rumble",
+    url: "https://rumble.com",
+  },
+  {
+    id: "behance",
+    name: "Behance",
+    url: "https://behance.net",
+  },
+  {
+    id: "dribbble",
+    name: "Dribbble",
+    url: "https://dribbble.com",
+  },
+  {
+    id: "vimeo",
+    name: "Vimeo",
+    url: "https://vimeo.com",
+  },
+  {
+    id: "telegram",
+    name: "Telegram",
+    url: ["https://telegram.com", "https://web.telegram.com"],
+  },
+  {
+    id: "whatsapp",
+    name: "WhatsApp",
+    url: ["https://web.whatsapp.com", "https://whatsapp.com"],
+  },
+  {
+    id: "wechat",
+    name: "WeChat",
+    url: ["https://web.wechat.com", "https://wechat.com"],
+  },
+  {
+    id: "kakao",
+    name: "Kakao",
+    url: ["https://web.kakao.com", "https://kakao.com"],
+  },
+] as const;
+
+export const STREAMING_PLATFORMS: Platform[] = [
+  {
+    id: "youtube",
+    name: "YouTube",
+    url: "https://youtube.com",
+  },
+  {
+    id: "twitch",
+    name: "Twitch",
+    url: "https://twitch.com",
+  },
+  {
+    id: "netflix",
+    name: "Netflix",
+    url: "https://netflix.com",
+  },
+  {
+    id: "disney",
+    name: "Disney+",
+    url: "https://disneyplus.com",
+  },
+  {
+    id: "hulu",
+    name: "Hulu",
+    url: "https://hulu.com",
+  },
+  {
+    id: "amazon-prime",
+    name: "Amazon Prime",
+    url: "https://amazonprime.com",
+  },
+  {
+    id: "apple-tv",
+    name: "Apple TV",
+    url: "https://appletv.com",
+  },
+  {
+    id: "apple-music",
+    name: "Apple Music",
+    url: "https://applemusic.com",
+  },
+  {
+    id: "peacock",
+    name: "Peacock",
+    url: "https://peacock.com",
+  },
+  {
+    id: "sony-liv",
+    name: "Sony Liv",
+    url: "https://sonyliv.com",
+  },
+  {
+    id: "tubi",
+    name: "Tubi",
+    url: "https://tubi.com",
+  },
+  {
+    id: "fubo",
+    name: "Fubo",
+    url: "https://fubo.com",
+  },
+  {
+    id: "viaplay",
+    name: "Viaplay",
+    url: "https://viaplay.com",
+  },
+  {
+    id: "hotstar",
+    name: "Hotstar",
+    url: "https://hotstar.com",
+  },
+  {
+    id: "spotify",
+    name: "Spotify",
+    url: "https://spotify.com",
+  },
+  {
+    id: "youtube-music",
+    name: "YouTube Music",
+    url: "https://youtube.com/music",
+  },
+  {
+    id: "masterclass",
+    name: "Masterclass",
+    url: "https://masterclass.com",
+  },
+  {
+    id: "curiositystream",
+    name: "CuriosityStream",
+    url: "https://curiositystream.com",
+  },
+  {
+    id: "nebulabox",
+    name: "NebulaBox",
+    url: "https://nebula.tv",
+  },
+  {
+    id: "khan-academy",
+    name: "Khan Academy",
+    url: ["https://khanacademy.org", "https://*.khanacademy.org"],
+  },
+  {
+    id: "coursera",
+    name: "Coursera",
+    url: "https://coursera.org",
+  },
+  {
+    id: "udemy",
+    name: "Udemy",
+    url: "https://udemy.com",
+  },
+  {
+    id: "skillshare",
+    name: "Skillshare",
+    url: "https://skillshare.com",
+  },
+] as const;
+
+export const ALL_PLATFORMS = [
+  ...SOCIAL_MEDIA_PLATFORMS,
+  ...STREAMING_PLATFORMS,
+] as const;

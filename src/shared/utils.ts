@@ -279,6 +279,33 @@ function calculateTimeSpent(visits: { timestamp: number; domain: string; transit
   return domainTimeMap;
 }
 
+export async function getUses({
+  timeframe = { months: 1 },
+}: {
+  timeframe?: { days?: number; months?: number };
+} = {}): Promise<Array<{ url: string; timeSpent: number }>> {
+  const { domainVisits, allVisits, constants } = await processBrowsingHistory({ timeframe });
+
+  // Use the enhanced calculation function
+  const domainTimeMap = calculateTimeSpent(allVisits, constants);
+
+  // Update the domain visit times
+  for (const [domain, timeSpent] of domainTimeMap.entries()) {
+    const domainData = domainVisits.get(domain);
+    if (domainData) {
+      domainData.visitTime = timeSpent;
+    }
+  }
+
+  // Convert to array and sort by time spent
+  return Array.from(domainVisits.entries())
+    .map(([, data]) => ({
+      url: data.representativeUrl,
+      timeSpent: data.visitTime / 1000, // Convert to seconds
+    }))
+    .sort((a, b) => b.timeSpent - a.timeSpent);
+}
+
 export async function getTopWebsiteUses({
   limit = 10,
   timeframe = { months: 1 },
