@@ -1,6 +1,8 @@
+import { BoxesIcon, ListMusicIcon } from "lucide-react";
+
 import type { IconProps } from "./icons";
 
-import { ColorsIcon, ExploreIcon, NewsIcon, ReelIcon, UserStoryIcon, WatchStarIcon } from "./icons";
+import { ColorsIcon, ExploreIcon, EyeSlashIcon, NewsIcon, ReelIcon, UserStoryIcon, WatchStarIcon } from "./icons";
 
 export type BlockedWebsite = {
   url: string;
@@ -101,10 +103,36 @@ export const INSTAGRAM_CUSTOMIZATIONS: Customization[] = [
   },
 ] as const;
 
+export const YOUTUBE_CUSTOMIZATIONS: Customization[] = [
+  {
+    id: "youtube-home-page-hide-suggestions-category",
+    name: "Hide Suggestions Category",
+    description: "Hide the suggestions category on the home page",
+    defaultEnabled: false,
+    icon: BoxesIcon,
+  },
+  {
+    id: "youtube-home-page-hide-watched-videos",
+    name: "Hide Watched Videos",
+    description: "Hide the watched videos on the home page",
+    defaultEnabled: false,
+    icon: EyeSlashIcon,
+  },
+  {
+    id: "youtube-home-page-hide-playlist-and-mixes",
+    name: "Hide Playlist and Mixes",
+    description: "Hide the playlist and mixes on the home page",
+    defaultEnabled: false,
+    icon: ListMusicIcon,
+  },
+
+] as const;
+
 export const ALL_CUSTOMIZATIONS = [
   ...FACEBOOK_CUSTOMIZATIONS,
   ...TWITTER_CUSTOMIZATIONS,
   ...INSTAGRAM_CUSTOMIZATIONS,
+  ...YOUTUBE_CUSTOMIZATIONS,
 ] as const;
 
 type Platform = {

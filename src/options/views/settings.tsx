@@ -13,6 +13,7 @@ import {
   FACEBOOK_CUSTOMIZATIONS,
   INSTAGRAM_CUSTOMIZATIONS,
   TWITTER_CUSTOMIZATIONS,
+  YOUTUBE_CUSTOMIZATIONS,
 } from "~/shared/config";
 import {
   BlushBrushIcon,
@@ -26,6 +27,7 @@ import {
   TimeQuarterIcon,
   TrashIcon,
   TwitterIcon,
+  YouTubeIcon,
 } from "~/shared/icons";
 
 type SettingsTab =
@@ -33,11 +35,12 @@ type SettingsTab =
   | "schedules"
   | "facebook-customizations"
   | "instagram-customizations"
-  | "twitter-customizations";
+  | "twitter-customizations"
+  | "youtube-customizations";
 
 export default function SettingsView() {
   const [activeTab, setActiveTab]
-    = React.useState<SettingsTab>("blocked-websites");
+    = React.useState<SettingsTab>("youtube-customizations");
 
   return (
     <div className="grid grid-cols-[280px_1fr] h-screen">
@@ -94,6 +97,12 @@ function SettingsSidebar({
             icon={<TwitterIcon />}
             onClick={() => setActiveTab("twitter-customizations")}
             isActive={activeTab === "twitter-customizations"}
+          />
+          <SidebarItem
+            title="YouTube"
+            icon={<YouTubeIcon />}
+            onClick={() => setActiveTab("youtube-customizations")}
+            isActive={activeTab === "youtube-customizations"}
           />
         </div>
       </div>
@@ -171,6 +180,11 @@ function SettingsContent({ activeTab }: { activeTab: SettingsTab }) {
       subtitle: "Customizations",
       title: "Twitter Customizations",
       component: <TwitterCustomizationsTab />,
+    },
+    "youtube-customizations": {
+      subtitle: "Customizations",
+      title: "YouTube Customizations",
+      component: <YouTubeCustomizationsTab />,
     },
   };
   return (
@@ -462,6 +476,14 @@ function TwitterCustomizationsTab() {
   return (
     <div className="p-8">
       <CustomizationSection customizations={TWITTER_CUSTOMIZATIONS} />
+    </div>
+  );
+}
+
+function YouTubeCustomizationsTab() {
+  return (
+    <div className="p-8">
+      <CustomizationSection customizations={YOUTUBE_CUSTOMIZATIONS} />
     </div>
   );
 }

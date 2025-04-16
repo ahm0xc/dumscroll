@@ -45,6 +45,11 @@ export default defineManifest({
       js: ["src/content-script/customizations/instagram.ts"],
       run_at: "document_start",
     },
+    {
+      matches: ["https://www.youtube.com/*", "https://youtube.com/*"],
+      js: ["src/content-script/customizations/youtube.ts"],
+      run_at: "document_start",
+    },
   ],
   web_accessible_resources: [
     {
