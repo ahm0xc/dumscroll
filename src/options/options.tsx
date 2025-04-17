@@ -152,7 +152,7 @@ function Main() {
     settings: <SettingsView />,
   };
 
-  return <main>{viewsMap[view]}</main>;
+  return <main className="h-screen overflow-auto">{viewsMap[view]}</main>;
 }
 
 function BlockedWebsiteModalHandler() {
