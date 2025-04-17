@@ -99,7 +99,6 @@ function isDefaultBrowserUrl(url: string): boolean {
   return defaultPatterns.some(pattern => pattern.test(url));
 }
 
-// Reverted to history-based calculation for pre-installation data
 export function getUses(options: GetUsesOptions = {}): Promise<UsageType> {
   return new Promise((resolve) => {
     // Set default values and normalize dates
