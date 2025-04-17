@@ -4,6 +4,9 @@ export function getDomainNameFromUrl(url: string) {
 }
 
 export function getUrlFromDomainName(domainName: string) {
+  if (domainName.startsWith("http")) {
+    return domainName;
+  }
   return `https://${domainName}`;
 }
 
@@ -33,19 +36,23 @@ export function truncateString(str: string, maxLength: number, suffix = "...") {
   return str.slice(0, maxLength) + suffix;
 }
 
+export function getFaviconUrl(domainName: string, options: { size?: number } = {}) {
+  return `https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${domainName}&size=${options.size || 32}`;
+}
+
 type GetUsesOptions = {
   startDate?: Date;
   endDate?: Date;
   maxResults?: number;
 };
 
-type UsageStats = {
+export type UsageStats = {
   totalDuration: number; // Duration in seconds
   viewCount: number;
   lastVisited: number; // Timestamp in milliseconds
 };
 
-type UsageType = {
+export type UsageType = {
   [origin: string]: UsageStats;
 };
 
