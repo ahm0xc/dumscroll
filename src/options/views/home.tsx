@@ -34,9 +34,43 @@ export default function HomeView() {
 function TopWebsitesCard() {
   const [chartData, setChartData] = React.useState<any[]>([]);
   const [chartConfig, setChartConfig] = React.useState<any>({});
+  const [currentDate, setCurrentDate] = React.useState<Date>(new Date());
+
+  const goToPreviousDay = React.useCallback(() => {
+    setCurrentDate((prevDate) => {
+      const newDate = new Date(prevDate);
+      newDate.setDate(newDate.getDate() - 1);
+      return newDate;
+    });
+  }, []);
+
+  const goToNextDay = React.useCallback(() => {
+    setCurrentDate((prevDate) => {
+      const newDate = new Date(prevDate);
+      newDate.setDate(newDate.getDate() + 1);
+      return newDate;
+    });
+  }, []);
+
+  const formatDateForDisplay = React.useCallback((date: Date) => {
+    const today = new Date();
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
+
+    if (date.toDateString() === today.toDateString()) {
+      return "Today";
+    }
+    else if (date.toDateString() === yesterday.toDateString()) {
+      return "Yesterday";
+    }
+    else {
+      return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+    }
+  }, []);
 
   React.useEffect(() => {
-    getUses()
+    currentDate.setHours(0, 0, 0, 0);
+    getUses({ startDate: currentDate })
       .then((data) => {
         const INTERNAL__topWebsites = Object.entries(data)
           .sort(([, a], [, b]) => b.totalDuration - a.totalDuration)
@@ -54,7 +88,7 @@ function TopWebsitesCard() {
           ...Object.fromEntries(INTERNAL__topWebsites.map(([identifier], index) => ([
             identifier,
             {
-              label: getWebsiteNameFromUrl(getUrlFromDomainName(identifier)),
+              label: identifier,
               color: CHART_COLORS[index % CHART_COLORS.length],
             },
           ]))),
@@ -63,7 +97,7 @@ function TopWebsitesCard() {
         setChartData(INTERNAL__chartData);
         setChartConfig(INTERNAL__chartConfig);
       });
-  }, []);
+  }, [currentDate]);
 
   return (
     <div aria-label="top-websites-card" className="bg-neutral-50 dark:bg-neutral-900 rounded-xl border">
@@ -75,13 +109,21 @@ function TopWebsitesCard() {
           </p>
         </div>
         <div className="flex gap-2 items-center">
-          <button type="button" className="h-7 w-7 rounded-sm flex items-center justify-center hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
+          <button
+            type="button"
+            className="h-7 w-7 rounded-sm flex items-center justify-center hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+            onClick={goToPreviousDay}
+          >
             <ChevronLeftIcon className="w-4 h-4 text-muted-foreground" />
           </button>
-          <span className="text-sm font-medium text-muted-foreground h-7 flex items-center justify-center">
-            Today
+          <span className="text-sm font-medium text-muted-foreground h-7 flex items-center justify-center w-[75px] font-mono">
+            {formatDateForDisplay(currentDate)}
           </span>
-          <button type="button" className="h-7 w-7 rounded-sm flex items-center justify-center hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
+          <button
+            type="button"
+            className="h-7 w-7 rounded-sm flex items-center justify-center hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+            onClick={goToNextDay}
+          >
             <ChevronRightIcon className="w-4 h-4 text-muted-foreground" />
           </button>
         </div>
@@ -104,7 +146,7 @@ function TopWebsitesCard() {
               axisLine={false}
               tickFormatter={(value) => {
                 const label = chartConfig[value as keyof typeof chartConfig]?.label;
-                return label ? truncateString(label, 5, "..") : value;
+                return label ? truncateString(getWebsiteNameFromUrl(getUrlFromDomainName(label)), 5, "..") : value;
               }}
             />
             <XAxis dataKey="duration" type="number" hide />
