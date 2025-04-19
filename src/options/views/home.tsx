@@ -3,6 +3,7 @@ import React from "react";
 import type { UsageStats } from "~/shared/utils";
 
 import { cn } from "~/lib/utils";
+import { BrainIcon } from "~/shared/icons";
 import { getFaviconUrl, getUrlFromDomainName, getUses, getWebsiteNameFromUrl } from "~/shared/utils";
 
 const CHART_COLORS = [
@@ -16,21 +17,21 @@ const CHART_COLORS = [
 export default function HomeView() {
   return (
     <div>
-      <header className="h-20 border-b border-border bg-zinc-50 dark:bg-neutral-900 w-full px-6 flex flex-col justify-center gap-0.5">
+      <header className="p-6">
+        <h2 className="text-xl font-semibold">Dashboard</h2>
         <p className="text-sm font-medium text-muted-foreground">
-          Dashboard
+          View your most visited websites and focus mode statistics
         </p>
-        <h2 className="text-lg font-semibold">Uses Overview</h2>
       </header>
-      <div className="p-6 grid grid-cols-1 gap-6 lg:grid-cols-3 max-w-7xl">
-        <TopWebsitesCard />
-        {/* <UsesRadarChartCard /> */}
+      <div className="p-6 grid grid-cols-1 gap-6 lg:grid-cols-6 max-w-7xl">
+        <TopWebsitesCard className="lg:col-span-2" />
+        <FocusModeCard />
       </div>
     </div>
   );
 }
 
-function TopWebsitesCard() {
+function TopWebsitesCard({ className }: { className?: string }) {
   const [timeRange, setTimeRange] = React.useState<"today" | "yesterday">("today");
   const [usesData, setUsesData] = React.useState<(UsageStats & { url: string; percent: number })[]>([]);
 
@@ -69,7 +70,7 @@ function TopWebsitesCard() {
   }, [usesData]);
 
   return (
-    <div aria-label="top-websites-card" className="rounded-2xl border">
+    <div aria-label="top-websites-card" className={cn("rounded-2xl border", className)}>
       <div aria-label="card-header" className="flex items-center justify-between px-4 py-4">
         <div className="flex gap-2 items-center">
           {/* <StarIcon className="size-5" /> */}
@@ -84,7 +85,7 @@ function TopWebsitesCard() {
       </div>
       <div className="px-4">
         <p className="text-5xl font-semibold">
-          {formatDuration(totalDuration).split(/([hms])/).map((part, i) => 
+          {formatDuration(totalDuration).split(/([hms])/).map((part, i) =>
             /[hms]/.test(part) ? <span key={i} className="text-lg">{part}</span> : part
           )}
         </p>
@@ -110,6 +111,21 @@ function TopWebsitesCard() {
       </div>
     </div>
   );
+}
+
+function FocusModeCard({ className }: { className?: string }) {
+  return (
+    <div aria-label="focus-mode-card" className={cn("rounded-2xl border p-4 space-y-4 h-fit", className)}>
+      <div aria-label="card-header" className="flex justify-center items-center">
+        <p className="text-lg font-medium">Quick Actions</p>
+      </div>
+      <div aria-label="card-content" className="flex flex-col gap-4">
+        <button type="button" className="w-[80%] aspect-square h-auto rounded-full mx-auto flex items-center justify-center border-2 border-orange-600 hover:bg-orange-50 dark:hover:bg-orange-950 transition-colors">
+          <BrainIcon className="size-20 text-orange-600" />
+        </button>
+      </div>
+    </div >
+  )
 }
 
 // function UsesChartCard({ className }: { className?: string }) {
