@@ -17,7 +17,7 @@ import {
 } from "~/components/ui/select";
 import useLocalStorage from "~/hooks/use-local-storage";
 import { cn } from "~/lib/utils";
-import { BingIcon, DuckDuckGoIcon, GoogleIcon, YahooIcon } from "~/shared/icons";
+import { BingIcon, DuckDuckGoIcon, GoogleIcon, SearchIcon, YahooIcon } from "~/shared/icons";
 import { convertToCelsius, getSearchUrl } from "~/shared/utils";
 
 export default function NewTab() {
@@ -203,14 +203,14 @@ function SearchBar() {
   }
 
   return (
-    <form className="bg-background rounded-full border px-2 py-1 flex items-center gap-2 max-w-full w-ful" onSubmit={handleSearch}>
+    <form className="bg-background dark:bg-background/10 dark:backdrop-blur-lg dark:backdrop-saturate-150 rounded-full border p-1 flex items-center gap-2 max-w-full w-ful" onSubmit={handleSearch}>
       <Select defaultValue={searchEngineId} onValueChange={handleSearchEngineChange}>
         <SelectTrigger className="w-[150px] rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors duration-200">
           <SelectValue placeholder="search-engine" />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent className="dark:bg-background/10 dark:backdrop-blur-lg dark:backdrop-saturate-150">
           {SEARCH_ENGINES.map(engine => (
-            <SelectItem key={engine.id} value={engine.id}>
+            <SelectItem key={engine.id} value={engine.id} className="dark:hover:bg-white/20 dark:hover:backdrop-blur-lg dark:hover:backdrop-saturate-150">
               <div className="flex items-center gap-2">
                 <span className="[&_svg]:size-4">
                   {engine.icon}
@@ -224,6 +224,9 @@ function SearchBar() {
         </SelectContent>
       </Select>
       <input ref={inputRef} type="text" placeholder={`Search ${SEARCH_ENGINES.find(engine => engine.id === searchEngineId)?.name}`} className="w-[300px] max-w-full h-10 px-2 bg-transparent border-none outline-none" />
+      <button type="submit" className="w-10 h-10 min-w-10 min-h-10 flex items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-200 [&_svg]:size-5 text-muted-foreground">
+        <SearchIcon />
+      </button>
     </form>
   );
 }
