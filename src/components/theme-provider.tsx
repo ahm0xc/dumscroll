@@ -1,7 +1,7 @@
 import React from "react";
 
 type Theme = "dark" | "light" | "system";
-
+type ResolvedTheme = "dark" | "light" | null;
 type ThemeProviderProps = {
   children: React.ReactNode;
   defaultTheme?: Theme;
@@ -11,11 +11,13 @@ type ThemeProviderProps = {
 type ThemeProviderState = {
   theme: Theme;
   setTheme: (theme: Theme) => void;
+  resolvedTheme: ResolvedTheme;
 };
 
 const initialState: ThemeProviderState = {
   theme: "system",
   setTheme: () => null,
+  resolvedTheme: null,
 };
 
 const ThemeProviderContext = React.createContext<ThemeProviderState>(initialState);
@@ -29,6 +31,7 @@ export function ThemeProvider({
   const [theme, setTheme] = React.useState<Theme>(
     () => (localStorage.getItem(storageKey) as Theme) || defaultTheme,
   );
+  const [resolvedTheme, setResolvedTheme] = React.useState<ResolvedTheme>(null);
 
   React.useEffect(() => {
     const root = window.document.documentElement;
@@ -42,10 +45,12 @@ export function ThemeProvider({
         : "light";
 
       root.classList.add(systemTheme);
+      setResolvedTheme(systemTheme);
       return;
     }
 
     root.classList.add(theme);
+    setResolvedTheme(theme);
   }, [theme]);
 
   const value = React.useMemo(
@@ -55,8 +60,9 @@ export function ThemeProvider({
         localStorage.setItem(storageKey, theme);
         setTheme(theme);
       },
+      resolvedTheme,
     }),
-    [theme, storageKey],
+    [theme, storageKey, resolvedTheme],
   );
 
   return (

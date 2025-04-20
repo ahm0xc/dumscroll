@@ -253,3 +253,28 @@ export function getUses(options: GetUsesOptions = {}): Promise<UsageType> {
     });
   });
 }
+
+type SearchEngine = "google" | "duckduckgo" | "bing" | "yahoo";
+
+export function getSearchUrl(query: string, engine: SearchEngine) {
+  switch (engine) {
+    case "google":
+      return `https://www.google.com/search?q=${query}`;
+    case "duckduckgo":
+      return `https://duckduckgo.com/?q=${query}`;
+    case "bing":
+      return `https://www.bing.com/search?q=${query}`;
+    case "yahoo":
+      return `https://search.yahoo.com/search?p=${query}`;
+    default:
+      return `https://www.google.com/search?q=${query}`;
+  }
+}
+
+export function convertToCelsius(fahrenheit: number) {
+  return (fahrenheit - 32) * (5 / 9);
+}
+
+export function convertToFahrenheit(celsius: number) {
+  return (celsius * (9 / 5)) + 32;
+}

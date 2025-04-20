@@ -19,7 +19,7 @@ export default defineManifest({
   action: {
     default_icon: "img/logo-48.png",
   },
-  options_page: "options.html",
+  // options_page: "options.html",
   background: {
     service_worker: "src/background/index.ts",
     type: "module",
@@ -64,4 +64,7 @@ export default defineManifest({
   ],
   host_permissions: ["http://*/*", "https://*/*"],
   permissions: ["storage", "webNavigation", "tabs", "history"],
+  chrome_url_overrides: {
+    newtab: "new-tab.html",
+  },
 });
