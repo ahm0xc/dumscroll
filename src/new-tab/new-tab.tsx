@@ -9,6 +9,14 @@ import type { WeatherDataType } from "~/shared/types";
 import ThemeSwitcher from "~/components/theme-switcher";
 import ThemedImage from "~/components/themed-image";
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "~/components/ui/dialog";
+import {
   Select,
   SelectContent,
   SelectItem,
@@ -49,7 +57,7 @@ export default function NewTab() {
 
         <div aria-label="bottom-right-corner" className="absolute bottom-6 right-6">
           <div className="flex items-center gap-2">
-            <IconButton icon={<CogIcon />} />
+            <SettingsButton />
           </div>
         </div>
       </div>
@@ -228,5 +236,112 @@ function SearchBar() {
         <SearchIcon />
       </button>
     </form>
+  );
+}
+
+function SettingsButton() {
+  return (
+    <SettingsDialog>
+      <IconButton icon={<CogIcon />} />
+    </SettingsDialog>
+  );
+}
+
+type SettingsView = {
+  id: string;
+  name: string;
+  icon: React.ReactNode;
+};
+
+const views = [
+  {
+    id: "general",
+    name: "General",
+    icon: <CogIcon />,
+  },
+  {
+    id: "dummy",
+    name: "Dummy",
+    icon: <CogIcon />,
+  },
+];
+
+function SettingsDialog({ children }: { children: React.ReactNode }) {
+  const [activeViewId, setActiveViewId] = React.useState(views[0].id);
+
+  const activeView = views.find(view => view.id === activeViewId) ?? views[0];
+
+  return (
+    <Dialog defaultOpen>
+      <DialogTrigger asChild>
+        {children}
+      </DialogTrigger>
+      <DialogContent className="border-none shadow-none max-w-3xl p-0" overlayClassName="bg-black/10 backdrop-blur-sm">
+        <div className="grid grid-cols-[250px_1fr] gap-4 rounded-[inherit] h-[70vh]">
+          <SettingsSidebar views={views} activeView={activeView} setActiveViewId={setActiveViewId} />
+          <SettingsContent activeView={activeView} />
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+function SettingsSidebar({ views, activeView, setActiveViewId }: { views: SettingsView[]; activeView: SettingsView; setActiveViewId: React.Dispatch<React.SetStateAction<string>> }) {
+  return (
+    <aside className="h-full bg-neutral-100 dark:bg-neutral-800 p-6 rounded-l-[inherit] border-r">
+      <DialogHeader>
+        <DialogTitle>Settings</DialogTitle>
+        <DialogDescription>
+          Manage your settings
+        </DialogDescription>
+      </DialogHeader>
+      <div className="mt-4 space-y-1">
+        {views.map(view => (
+          <button type="button" key={view.id} className={cn("flex items-center gap-2 h-8 px-2 rounded-md hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors duration-200 w-full opacity-80", activeView.id === view.id && "bg-neutral-200 dark:bg-neutral-700 opacity-100")} onClick={() => setActiveViewId(view.id)}>
+            <span className="[&_svg]:size-4">
+              {view.icon}
+            </span>
+            <p>
+              {view.name}
+            </p>
+          </button>
+        ))}
+      </div>
+    </aside>
+  );
+}
+
+function SettingsContent({ activeView }: { activeView: SettingsView }) {
+  const settingsContentMap: Record<string, React.ReactNode> = {
+    general: <GeneralSettings />,
+    dummy: <DummySettings />,
+  };
+
+  return (
+    <div className="p-4">
+      <div>
+        <h2 className="text-lg font-semibold">{activeView.name}</h2>
+        <hr className="my-2" />
+      </div>
+      <div>
+        {settingsContentMap[activeView.id]}
+      </div>
+    </div>
+  );
+}
+
+function GeneralSettings() {
+  return (
+    <div>
+      <h1>General Settings</h1>
+    </div>
+  );
+}
+
+function DummySettings() {
+  return (
+    <div>
+      <h1>Dummy Settings</h1>
+    </div>
   );
 }
