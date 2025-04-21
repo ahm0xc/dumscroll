@@ -272,7 +272,7 @@ function SettingsDialog({ children }: { children: React.ReactNode }) {
   const activeView = views.find(view => view.id === activeViewId) ?? views[0];
 
   return (
-    <Dialog defaultOpen>
+    <Dialog>
       <DialogTrigger asChild>
         {children}
       </DialogTrigger>
