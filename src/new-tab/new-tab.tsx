@@ -48,6 +48,10 @@ export default function NewTab() {
           <SearchBar />
         </div>
 
+        <div aria-label="bottom-center" className="absolute bottom-6 left-1/2 -translate-x-1/2">
+          <QuoteWidget />
+        </div>
+
         <div aria-label="top-right-corner" className="absolute top-6 right-6">
           <div className="flex items-start gap-4">
             <ClockWidget />
@@ -83,9 +87,7 @@ function WeatherWidget() {
     timestamp: number;
   } | null>("weather-cache", null);
 
-  const [weather, setWeather] = React.useState<WeatherDataType | null>(
-    weatherCache?.data || null,
-  );
+  const [weather, setWeather] = React.useState<WeatherDataType | null>(weatherCache?.data || null);
 
   React.useEffect(() => {
     async function fetchWeather() {
@@ -106,7 +108,6 @@ function WeatherWidget() {
     const currentTime = Date.now();
     const oneHour = 60 * 60 * 1000;
 
-    // Fetch new data if cache doesn't exist or is older than one hour
     if (!weatherCache || currentTime - weatherCache.timestamp > oneHour) {
       fetchWeather();
     }
@@ -150,6 +151,60 @@ function ClockWidget() {
       </p>
       <p className="text-sm font-medium">
         {time.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })}
+      </p>
+    </div>
+  );
+}
+
+function QuoteWidget() {
+  const [quoteCache, setQuoteCache] = useLocalStorage<{
+    data: {
+      id: string;
+      quote: string;
+      author: string;
+    };
+    timestamp: number;
+  } | null>("quote-cache", null);
+
+  const [quoteData, setQuoteData] = React.useState<{
+    id: string;
+    quote: string;
+    author: string;
+  } | null>(quoteCache?.data || null);
+
+  React.useEffect(() => {
+    const fetchQuote = async () => {
+      try {
+        const response = await fetch("https://dummyjson.com/quotes/random");
+        const data = await response.json();
+        setQuoteData(data);
+        setQuoteCache({
+          data,
+          timestamp: Date.now(),
+        });
+      }
+      catch (error) {
+        console.error(error);
+      }
+    };
+
+    const currentTime = Date.now();
+    const oneHour = 60 * 60 * 1000;
+
+    if (!quoteCache || currentTime - quoteCache.timestamp > oneHour) {
+      fetchQuote();
+    }
+  }, [quoteCache, setQuoteCache]);
+
+  if (!quoteData)
+    return null;
+
+  return (
+    <div className="max-w-lg text-sm">
+      <p className="text-center text-balance">{quoteData.quote}</p>
+      <p className="text-[12px] font-medium text-center opacity-80">
+        —
+        {quoteData.author}
       </p>
     </div>
   );
