@@ -30,42 +30,39 @@ import { convertToCelsius, getSearchUrl } from "~/shared/utils";
 
 export default function NewTab() {
   return (
-    <main className="text-black dark:text-white">
-      <div className="relative h-screen w-full">
-        <ThemedImage
-          src={{
-            light: "https://images.unsplash.com/photo-1743191771058-d06e793dda2d?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            dark: "https://images.unsplash.com/photo-1493673272479-a20888bcee10?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-          }}
-          className="absolute inset-0 w-full h-full object-cover object-center -z-10"
-          alt="logo"
-        />
-        <div className="blur-vignette" />
-
-        <ThemeSwitcher />
-
-        <div aria-label="center" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-          <SearchBar />
-        </div>
-
-        <div aria-label="bottom-center" className="absolute bottom-6 left-1/2 -translate-x-1/2">
-          <QuoteWidget />
-        </div>
-
-        <div aria-label="top-right-corner" className="absolute top-6 right-6">
-          <div className="flex items-start gap-4">
-            <ClockWidget />
-            <WeatherWidget />
+    <React.Fragment>
+      <main className="text-black dark:text-white">
+        <div className="relative h-screen w-full">
+          <ThemedImage
+            src={{
+              light: "https://images.unsplash.com/photo-1743191771058-d06e793dda2d?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+              dark: "https://images.unsplash.com/photo-1493673272479-a20888bcee10?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            }}
+            className="absolute inset-0 w-full h-full object-cover object-center -z-10"
+            alt="logo"
+          />
+          <div className="blur-vignette" />
+          <ThemeSwitcher />
+          <div aria-label="center" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            <SearchBar />
+          </div>
+          <div aria-label="bottom-center" className="absolute bottom-6 left-1/2 -translate-x-1/2">
+            <QuoteWidget />
+          </div>
+          <div aria-label="top-right-corner" className="absolute top-6 right-6">
+            <div className="flex items-start gap-4">
+              <ClockWidget />
+              <WeatherWidget />
+            </div>
+          </div>
+          <div aria-label="bottom-right-corner" className="absolute bottom-6 right-6">
+            <div className="flex items-center gap-2">
+              <SettingsButton />
+            </div>
           </div>
         </div>
-
-        <div aria-label="bottom-right-corner" className="absolute bottom-6 right-6">
-          <div className="flex items-center gap-2">
-            <SettingsButton />
-          </div>
-        </div>
-      </div>
-    </main>
+      </main>
+    </React.Fragment>
   );
 }
 
