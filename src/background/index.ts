@@ -31,7 +31,9 @@ chrome.runtime.onStartup.addListener(async () => {
 chrome.action.onClicked.addListener(async (tab) => {
   if (!tab.id)
     return;
-  chrome.runtime.openOptionsPage();
+  chrome.tabs.create({
+    url: `chrome-extension://${extensionId}/new-tab.html?source=action`,
+  });
 });
 
 chrome.webNavigation.onBeforeNavigate.addListener(async (details) => {
